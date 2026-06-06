@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+	--color-base: #080809;
+	--color-primary: #c84f0e;
+	--color-content: #dff2fe;
+	--color-neutral: #1e1f20;
+	--color-success: #68db62;
+	--color-warning: #dcb340;
+	--color-error: #f34949;
+
+	--font-fira: "Fira Code", monospace;
+	--font-chakra: "Chakra Petch", sans-serif;
+}
+
+@layer base {
+	* {
+		box-sizing: border-box;
+		color: var(--color-content);
+	}
+
+	body {
+		font-family: "Fira Code", monospace;
+		font-size: 16px;
+	}
+
+	h1 {
+		font-family: "Chakra Petch", sans-serif;
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+}
