@@ -3,6 +3,7 @@
 @theme {
 	--color-base: #080809;
 	--color-primary: #c84f0e;
+	--color-accent: #5a86e0;
 	--color-content: #dff2fe;
 	--color-neutral: #1e1f20;
 	--color-success: #68db62;
@@ -30,5 +31,12 @@
 
 	button:hover {
 		cursor: pointer;
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		outline: none;
+		border-color: transparent;
 	}
 }
