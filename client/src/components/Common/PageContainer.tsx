@@ -7,11 +7,11 @@ interface PageContainerProps {
 
 export const PageContainer = ({ children }: PageContainerProps) => {
 	return (
-		<div className="flex grow relative m-8">
+		<div className="flex grow relative m-(--page-container-margin-size)">
 			<div className="grow flex justify-center">
 				<div className="w-full max-w-360">{children}</div>
 			</div>
-			<div className="flex items-center max-h-screen sticky top-0">
+			<div className="flex items-center sticky top-(--sidenav-top) h-(--sidenav-height)">
 				<SideNav />
 			</div>
 		</div>

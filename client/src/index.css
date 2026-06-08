@@ -14,6 +14,12 @@
 	--font-chakra: "Chakra Petch", sans-serif;
 }
 
+:root {
+	--page-container-margin-size: 32px;
+	--sidenav-top: calc(var(--nav-height) + var(--page-container-margin-size));
+	--sidenav-height: calc(100vh - var(--nav-height) - 2 * var(--page-container-margin-size));
+}
+
 @layer base {
 	* {
 		box-sizing: border-box;
