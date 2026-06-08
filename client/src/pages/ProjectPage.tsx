@@ -3,6 +3,7 @@ import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { Link } from "react-router";
 import type { TProject } from "../types";
 import { ProjectPanel } from "../components/ProjectsPage/ProjectPanel";
+import { ProjectInformation } from "../components/ProjectsPage/ProjectInformation";
 
 export const ProjectPage = () => {
 	const projects: TProject[] = [
@@ -54,7 +55,7 @@ export const ProjectPage = () => {
 		},
 	];
 
-	const projectElements = projects.map((project) => <ProjectPanel project={project} />);
+	const projectElements = projects.map((project) => <ProjectPanel project={project} useCard />);
 
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
@@ -84,7 +85,10 @@ export const ProjectPage = () => {
 			</TerminalWindowPanel>
 
 			{/* Projects */}
-			<div className="grid grid-cols-3 gap-4">{projectElements}</div>
+			<div className="flex gap-4">
+				<div className="flex flex-col gap-4 items-start max-w-92">{projectElements}</div>
+				<ProjectInformation project={projects[0]} />
+			</div>
 		</div>
 	);
 };
