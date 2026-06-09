@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { NavButton } from "./NavButton";
+import { TypeAnimation } from "react-type-animation";
 
 export const NavBar = () => {
 	const navRef = useRef<HTMLElement>(null);
@@ -21,9 +22,8 @@ export const NavBar = () => {
 			<div className="flex justify-between items-center pb-2 border-b border-content/20">
 				<p className="font-semibold">
 					://
-					<span className="text-primary">
-						xutaogao.com<span className="ml-6 text-primary">&gt;_</span>
-					</span>
+					<TypeAnimation className="text-primary" sequence={["xutaogao.com"]} speed={30} />
+					<span className="ml-6 text-primary">&gt;_</span>
 				</p>
 				<div className="flex gap-8">
 					<NavButton to="/" text="HOME" />

@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
+@keyframes blink {
+	0%,
+	60% {
+		opacity: 1;
+	}
+	61%,
+	100% {
+		opacity: 0;
+	}
+}
+
 @theme {
+	--animate-blink: blink 1.5s step-end infinite;
 	--color-base: #080809;
 	--color-primary: #c84f0e;
 	--color-accent: #5a86e0;

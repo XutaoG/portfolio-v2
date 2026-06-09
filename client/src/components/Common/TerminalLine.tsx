@@ -1,11 +1,24 @@
+import { CheckCircleIcon } from "@phosphor-icons/react";
+import { useState } from "react";
+import { TypeAnimation } from "react-type-animation";
+
 interface TerminalLineProps {
-	children: string;
+	sequence: (string | number)[];
+	onAnimationComplete?: () => void;
 }
 
-export const TerminalLine = ({ children }: TerminalLineProps) => {
+export const TerminalLine = ({ onAnimationComplete, sequence }: TerminalLineProps) => {
+	const [isTypingFinished, setIsTypingFinsihed] = useState(false);
+
 	return (
-		<p className="text-content/80 font-medium">
-			<span className="text-primary">$</span> {children}
-		</p>
+		<div className="text-content/80 font-medium flex items-center gap-2">
+			<span className="text-primary">$</span>
+			<TypeAnimation
+				sequence={[...sequence, onAnimationComplete ?? (() => {}), () => setIsTypingFinsihed(true)]}
+				cursor={false}
+				speed={70}
+			/>
+			{isTypingFinished && <CheckCircleIcon size={18} weight="bold" color="var(--color-success)" />}
+		</div>
 	);
 };

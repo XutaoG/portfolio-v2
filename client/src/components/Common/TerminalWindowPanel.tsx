@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
+import { TerminalLine } from "./TerminalLine";
 
 interface TerminalWindowPanelProps {
 	title: string;
@@ -23,9 +24,7 @@ export const TerminalWindowPanel = ({ className, children, command, title }: Ter
 				<p className="font-semibold text-primary">&gt;_ {title}</p>
 			</div>
 			<div className="p-6 flex flex-col gap-6 overflow-scroll">
-				<p>
-					<span className="text-primary">$</span> {command}
-				</p>
+				<TerminalLine sequence={[command]} />
 				{children}
 			</div>
 		</div>

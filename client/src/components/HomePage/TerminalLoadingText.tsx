@@ -1,14 +1,38 @@
+import { useState } from "react";
 import { TerminalLine } from "../Common/TerminalLine";
 
 export const TerminalLoadingText = () => {
+	const [linesCompleted, setLinesCompleted] = useState(0);
+
+	const terminalLines = [
+		["initializing...", 100, "initializing"],
+		["loading assets...", 100, "loading assets"],
+		["compiling ideas...", 100, "compiling ideas"],
+		["starting services...", 100, "starting services"],
+		["system ready, welcome to my world"],
+	];
+
+	const terminalLinesElements = terminalLines.map((line, i) => {
+		return (
+			<div key={i} className="h-6">
+				{linesCompleted >= i && (
+					<TerminalLine
+						sequence={line}
+						onAnimationComplete={() => {
+							setLinesCompleted(i + 1);
+						}}
+					/>
+				)}
+			</div>
+		);
+	});
+
 	return (
-		<div className="flex flex-col gap-2">
-			<TerminalLine>initializing...</TerminalLine>
-			<TerminalLine>loading assets...</TerminalLine>
-			<TerminalLine>compiling ideas...</TerminalLine>
-			<TerminalLine>starting services...</TerminalLine>
-			<TerminalLine>system ready, welcome to my world</TerminalLine>
-			<div className="mt-1 h-6 w-2 bg-primary" />
+		<div className="flex flex-col gap-2 items-start">
+			{terminalLinesElements}
+			<div className="h-6 mt-1">
+				{linesCompleted >= terminalLines.length && <div className="h-full w-2 bg-primary animate-blink" />}
+			</div>
 		</div>
 	);
 };
