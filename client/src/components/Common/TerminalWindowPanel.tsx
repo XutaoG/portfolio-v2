@@ -17,9 +17,9 @@ export const TerminalWindowPanel = ({ className, children, command, title }: Ter
 				<div className="absolute -bottom-8 -right-8 size-32 rounded-full bg-content/20 blur-[96px]" />
 
 				<div className="flex gap-3">
-					<div className="size-3 rounded-full bg-error" />
-					<div className="size-3 rounded-full bg-warning" />
-					<div className="size-3 rounded-full bg-success" />
+					<div className="size-3.5 rounded-full bg-radial-[at_25%_25%] from-red-300 to-red-600 to-75%" />
+					<div className="size-3.5 rounded-full bg-radial-[at_25%_25%] from-yellow-300 to-yellow-600 to-75%" />
+					<div className="size-3.5 rounded-full bg-radial-[at_25%_25%] from-green-300 to-green-600 to-75%" />
 				</div>
 				<p className="font-semibold text-primary">&gt;_ {title}</p>
 			</div>
