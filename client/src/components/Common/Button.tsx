@@ -6,21 +6,23 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: string;
 }
 
-export const Button = ({ className, children, ...rest }: ButtonProps) => {
+export const Button = ({ className, children, disabled, ...rest }: ButtonProps) => {
 	const [isMouseHover, setIsMouseHover] = useState(false);
 
 	return (
 		<button
-			className={`relative ${className}`}
+			className={`relative transiton-transform duration-300 disabled:cursor-not-allowed 
+			${disabled || "active:translate-y-1"} ${className}`}
 			onMouseEnter={() => setIsMouseHover(true)}
 			onMouseLeave={() => setIsMouseHover(false)}
+			disabled={disabled}
 			{...rest}
 		>
 			<div className="absolute inset-0 rounded-sm bg-primary/20" />
 			<div
 				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base
 				font-semibold flex items-center relative overflow-hidden transition-transform duration-300
-				z-10 ${isMouseHover && "-translate-1.5"}`)}
+				z-10 ${disabled && "border-primary/40"} ${isMouseHover && "-translate-1.5"}`)}
 			>
 				<div
 					className={twMerge(
@@ -34,7 +36,7 @@ export const Button = ({ className, children, ...rest }: ButtonProps) => {
 				>
 					$
 				</span>
-				<span className="z-20">{children}</span>
+				<span className={`z-20 ${disabled && "text-content/40"}`}>{children}</span>
 			</div>
 		</button>
 	);
