@@ -18,29 +18,30 @@ export const QuickSocial = () => {
 		timeoutRef.current = setTimeout(() => setHasCopiedEmail(false), 5000);
 	};
 
+	const linkClassNames =
+		"rounded-sm border border-primary/40 flex justify-center items-center p-3 hover:-translate-y-1.5 hover:border-primary/60 transition-all duration-300 relative overflow-hidden group";
+
+	const gradientElement = (
+		<div className="z-0 absolute bg-primary/40 size-12 -bottom-6 -right-6 rounded-full blur-xl group-hover:bg-primary/80" />
+	);
+
 	return (
 		<div className="flex gap-1">
-			<Link
-				to="https://www.google.com"
-				target="_blank"
-				rel="noreferrer"
-				className="rounded-sm border border-primary/40 flex justify-center items-center p-3"
-			>
-				<GithubLogoIcon size={24} weight="bold" />
+			<Link to="https://www.google.com" target="_blank" rel="noreferrer" className={linkClassNames}>
+				{gradientElement}
+				<GithubLogoIcon size={24} weight="bold" className="z-10" />
 			</Link>
-			<Link
-				to="https://www.google.com"
-				target="_blank"
-				rel="noreferrer"
-				className="rounded-sm border border-primary/40 flex justify-center items-center p-3"
-			>
+			<Link to="https://www.google.com" target="_blank" rel="noreferrer" className={linkClassNames}>
+				{gradientElement}
 				<LinkedinLogoIcon size={24} weight="bold" />
 			</Link>
 			<div
-				className="rounded-sm border border-primary/40 flex justify-center items-center"
+				className="rounded-sm border border-primary/40 flex justify-center items-center 
+				relative overflow-hidden group hover:border-primary/60 transition-all duration-300"
 				onMouseEnter={() => setIsHoverEmailButton(true)}
 				onMouseLeave={() => setIsHoverEmailButton(false)}
 			>
+				{gradientElement}
 				<div className="p-3">
 					<EnvelopeIcon size={24} weight="bold" />
 				</div>
@@ -51,7 +52,7 @@ export const QuickSocial = () => {
 					<p>{myEmail}</p>
 					<button onClick={copyEmail}>
 						{hasCopidEmail ? (
-							<CheckCircleIcon size={24} color="var(--color-primary)" weight="fill" />
+							<CheckCircleIcon size={24} color="var(--color-success)" weight="fill" />
 						) : (
 							<CopyIcon size={24} weight="bold" />
 						)}

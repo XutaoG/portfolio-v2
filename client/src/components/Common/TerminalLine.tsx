@@ -18,7 +18,7 @@ export const TerminalLine = ({ onAnimationComplete, sequence }: TerminalLineProp
 				cursor={false}
 				speed={70}
 			/>
-			{isTypingFinished && <CheckCircleIcon size={18} weight="bold" color="var(--color-success)" />}
+			{isTypingFinished && <CheckCircleIcon size={18} weight="fill" color="var(--color-success)" />}
 		</div>
 	);
 };
