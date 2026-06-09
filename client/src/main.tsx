@@ -8,6 +8,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { SkillsPage } from "./pages/SkillsPage";
 import { ProjectPage } from "./pages/ProjectPage";
 import { ContactPage } from "./pages/ContactPage";
+import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
 
 const router = createBrowserRouter([
 	{
@@ -17,7 +18,16 @@ const router = createBrowserRouter([
 			{ index: true, Component: HomePage },
 			{ path: "about", Component: AboutPage },
 			{ path: "skills", Component: SkillsPage },
-			{ path: "projects", Component: ProjectPage },
+			{
+				path: "projects",
+				Component: ProjectPage,
+				children: [
+					{
+						path: ":projectId",
+						Component: ProjectInformation,
+					},
+				],
+			},
 			{ path: "contact", Component: ContactPage },
 		],
 	},

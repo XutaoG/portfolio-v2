@@ -1,61 +1,17 @@
 import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
-import { Link } from "react-router";
-import type { TProject } from "../types";
+import { Link, Outlet, useParams } from "react-router";
 import { ProjectPanel } from "../components/ProjectsPage/ProjectPanel";
-import { ProjectInformation } from "../components/ProjectsPage/ProjectInformation";
+import { mockProjects } from "../data/projects";
+import { twMerge } from "tailwind-merge";
 
 export const ProjectPage = () => {
-	const projects: TProject[] = [
-		{
-			name: "Project 1",
-			type: "Full-Stack",
-			description:
-				"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam neque in commodi minus, fuga iure.",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 2",
-			type: "Full-Stack",
-			description:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem optio inventore a esse nisi eos voluptates ad obcaecati!",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 3",
-			type: "Unity Simulation",
-			description:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam explicabo iste at illo odio!",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 4",
-			type: "Simulation",
-			description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic nihil molestias repellendus?",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 5",
-			type: "Full-Stack",
-			description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, dolorum!",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 6",
-			type: "API",
-			description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit animi est sunt.",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-		{
-			name: "Project 7",
-			type: "Full-Stack",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora ut doloribus ipsa magnam, ratione molestias.	",
-			tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
-		},
-	];
+	const { projectId } = useParams();
+	const isAnyProjectSelected = projectId != null;
 
-	const projectElements = projects.map((project) => <ProjectPanel project={project} useCard />);
+	const projectElements = mockProjects.map((project) => (
+		<ProjectPanel key={project.id} project={project} useCard={isAnyProjectSelected} />
+	));
 
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
@@ -86,8 +42,13 @@ export const ProjectPage = () => {
 
 			{/* Projects */}
 			<div className="flex gap-4">
-				<div className="flex flex-col gap-4 items-start max-w-92">{projectElements}</div>
-				<ProjectInformation project={projects[0]} />
+				<div
+					className={twMerge(`grid gap-4 items-start transition-[max-width] duration-300
+						${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-3 max-w-full"}`)}
+				>
+					{projectElements}
+				</div>
+				<Outlet />
 			</div>
 		</div>
 	);

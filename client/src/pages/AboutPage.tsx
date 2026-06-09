@@ -14,8 +14,8 @@ import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 export const AboutPage = () => {
 	const focuses = ["Focus 1", "Focus 2", "Focus 3", "Focus 4", "Focus 5", "Focus 6"];
 
-	const focusElements = focuses.map((focus) => (
-		<div className="flex items-center gap-3 ml-2">
+	const focusElements = focuses.map((focus, i) => (
+		<div key={i} className="flex items-center gap-3 ml-2">
 			<TargetIcon size={24} color="var(--color-primary)" />
 			{focus}
 		</div>

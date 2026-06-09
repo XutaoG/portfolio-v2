@@ -1,14 +1,26 @@
 import { AppWindowIcon, ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import type { TProject } from "../../types";
 import { twMerge } from "tailwind-merge";
+import { useNavigate, useParams } from "react-router";
 
 interface ProjectPanelProps {
 	project: TProject;
 	useCard?: boolean;
-	isSelected?: boolean;
 }
 
-export const ProjectPanel = ({ useCard, project, isSelected }: ProjectPanelProps) => {
+export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
+	const { projectId } = useParams();
+	const navigate = useNavigate();
+
+	const isSelected = projectId != null && project.id === Number(projectId);
+	const selectProject = (newProjectId: number) => {
+		if (projectId != null && Number(projectId) === newProjectId) {
+			navigate("/projects");
+		} else {
+			navigate(`/projects/${newProjectId}`);
+		}
+	};
+
 	const iconElement = (
 		<div
 			className={`p-1 rounded-lg bg-base border border-content/20
@@ -26,9 +38,13 @@ export const ProjectPanel = ({ useCard, project, isSelected }: ProjectPanelProps
 	const projectDescriptionElement = <p className="font-sm text-content/60 line-clamp-2">{project.description}</p>;
 
 	if (useCard) {
+		// Return card style
 		return (
-			<div className={twMerge(`flex gap-4 items-start p-6 rounded-lg border border-content/20 bg-base/80 
-				backdrop-blur-xs relative overflow-hidden ${isSelected && "border-primary/60"}`)}>
+			<div
+				className={twMerge(`flex gap-4 items-start p-6 rounded-lg border border-content/20 bg-base/80 
+				backdrop-blur-xs relative overflow-hidden hover:cursor-pointer ${isSelected && "border-primary/60"}`)}
+				onClick={() => selectProject(project.id)}
+			>
 				<div className="absolute -bottom-8 -right-8 size-32 rounded-full bg-content/10 blur-3xl" />
 				{iconElement}
 				<div className="flex flex-col gap-2 items-start grow">
@@ -44,12 +60,18 @@ export const ProjectPanel = ({ useCard, project, isSelected }: ProjectPanelProps
 		);
 	}
 
-	const tagsElement = project.tags.map((tag) => (
-		<div className="rounded-sm px-1 py-0.5 border border-content/20 bg-base">{tag}</div>
+	const tagsElement = project.tags.map((tag, i) => (
+		<div key={i} className="rounded-sm px-1 py-0.5 border border-content/20 bg-base">
+			{tag}
+		</div>
 	));
 
 	return (
-		<div className="flex flex-col p-6 gap-4 rounded-lg border border-content/20 bg-base/80 backdrop-blur-xs relative overflow-hidden">
+		<div
+			className="flex flex-col p-6 gap-4 rounded-lg border border-content/20 bg-base/80 
+			backdrop-blur-xs relative overflow-hidden hover:cursor-pointer"
+			onClick={() => selectProject(project.id)}
+		>
 			<div className="absolute -top-8 -left-8 size-64 rounded-full bg-content/10 blur-[96px]" />
 			<div className="absolute -bottom-8 -right-8 size-32 rounded-full bg-content/10 blur-[96px]" />
 

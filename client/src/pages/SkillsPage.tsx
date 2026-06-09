@@ -44,8 +44,8 @@ export const SkillsPage = () => {
 		},
 	];
 
-	const skillElements = skills.map((skill) => (
-		<PrimaryPanel className="gap-4">
+	const skillElements = skills.map((skill, i) => (
+		<PrimaryPanel className="gap-4" key={i}>
 			<div className="flex items-center gap-4 text-primary font-semibold">
 				{skill.icon}
 				{skill.title}
@@ -53,8 +53,8 @@ export const SkillsPage = () => {
 			<p className="text-content/80">{skill.description}</p>
 			<div className="h-px bg-content/60" />
 			<div className="flex flex-col gap-3">
-				{skill.items.map((item) => (
-					<div className="flex items-center gap-2">
+				{skill.items.map((item, j) => (
+					<div className="flex items-center gap-2" key={j}>
 						<DiamondIcon size={16} weight="bold" color="var(--color-primary)" />
 						{item}
 					</div>
@@ -94,7 +94,7 @@ export const SkillsPage = () => {
 		const logoImageHeightStyle = certification.type === "AWS" ? "h-20" : "h-8";
 
 		return (
-			<Fragment>
+			<Fragment key={i}>
 				<div className="border border-primary/80 rounded-lg p-8 flex flex-col justify-between items-center gap-6 grow basis-0">
 					<div className="h-20 flex items-center">
 						<img src={logoImageSrc} className={`${logoImageHeightStyle}`} />
