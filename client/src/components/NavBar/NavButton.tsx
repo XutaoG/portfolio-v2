@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { Fragment } from "react/jsx-runtime";
+import { twMerge } from "tailwind-merge";
 
 interface NavButtonProps {
 	text: string;
@@ -11,13 +12,23 @@ export const NavButton = ({ text, to }: NavButtonProps) => {
 		<NavLink
 			to={to}
 			className={({ isActive }) =>
-				["flex flex-col items-center gap-1 font-medium", isActive ? "text-primary" : ""].join(" ")
+				twMerge(
+					[
+						"flex flex-col items-center gap-1 font-medium transition-colors duration-300",
+						isActive ? "text-primary" : "",
+					].join(" "),
+				)
 			}
 		>
 			{({ isActive }) => (
 				<Fragment>
 					{text}
-					{isActive && <div className="h-1 aspect-square rounded-full bg-primary" />}
+					<div className="flex justify-center items-center h-1.5 aspect-square">
+						<div
+							className={twMerge(`h-0 aspect-square rounded-full transition-[height] duration-300 
+							bg-primary ${isActive && "h-1.5"}`)}
+						/>
+					</div>
 				</Fragment>
 			)}
 		</NavLink>

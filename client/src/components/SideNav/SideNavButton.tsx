@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { Fragment } from "react/jsx-runtime";
+import { twMerge } from "tailwind-merge";
 
 interface SideNavButtonProps {
 	number: string;
@@ -15,28 +16,38 @@ export const SideNavButton = ({ number, to, text, isLast }: SideNavButtonProps) 
 				<Fragment>
 					<div className="flex flex-col items-center">
 						{/* Circle */}
-						<div
-							className={`w-6 aspect-square rounded-full border-2 p-1.5 bg-base 
-								${isActive ? "border-primary" : "border-content/40"}`}
-						>
+						<div className="size-6 flex justify-center items-center">
 							<div
-								className={`size-full rounded-full 
-									${isActive ? "bg-primary" : "bg-content/40"}`}
-							/>
+								className={twMerge(`w-5 aspect-square rounded-xl border-2 p-1 bg-base rotate-0
+								transition-all duration-300 border-content/40 
+								${isActive && "border-primary rounded-sm p-1.5 w-6 rotate-45"}`)}
+							>
+								<div
+									className={`size-full rounded-xl ${isActive ? "bg-primary rounded-xs" : "bg-content/40"}`}
+								/>
+							</div>
 						</div>
 						{/* Vertical dashed line */}
 						{isLast || (
 							<div
-								className={`h-28 border-l border-dashed 
-									${isActive ? "border-primary" : "border-content/40"}`}
+								className={`h-28 w-0.5 transition-colors duration-300
+								bg-linear-to-b ${isActive ? "from-primary to-content/40" : "from-content/40 to-content/40"}`}
 							/>
 						)}
 					</div>
 
 					{/* Number + Text (ex: 01 HOME) */}
 					<div className="flex flex-col items-start font-semibold -translate-y-3">
-						<p className={isActive ? "text-primary" : "text-content/40"}>{number}</p>
-						<p className={isActive ? "text-content" : "text-content/40"}>{text}</p>
+						<p
+							className={`transition-colors duration-300 ${isActive ? "text-primary" : "text-content/40"}`}
+						>
+							{number}
+						</p>
+						<p
+							className={`transition-colors duration-300 ${isActive ? "text-content" : "text-content/40"}`}
+						>
+							{text}
+						</p>
 					</div>
 				</Fragment>
 			)}
