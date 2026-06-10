@@ -109,7 +109,7 @@ export const AboutPage = () => {
 
 			<div className="grid grid-cols-2 gap-8 max-h-96">
 				{/* My story */}
-				<TerminalWindowPanel title="My String" command="whoami">
+				<TerminalWindowPanel title="My Story" command="whoami">
 					<p className="text-content/80">
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi, labore quaerat nostrum accusamus
 						laborum quas beatae quasi quae officiis tempore.

@@ -10,6 +10,19 @@ import {
 import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { Fragment, type ReactNode } from "react";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
+import { motion, stagger } from "framer-motion";
+
+const containerVariant = {
+	initial: { opacity: 0 },
+	animate: { opacity: 1, transition: { delayChildren: stagger(0.2) } },
+	transition: { duration: 0.3, ease: "easeOut" },
+};
+
+const skillItemVariant = {
+	initial: { opacity: 0, x: "-100%" },
+	animate: { opacity: 1, x: 0 },
+	transition: { duration: 0.3, ease: "easeOut" },
+};
 
 export const SkillsPage = () => {
 	const skills: {
@@ -52,14 +65,20 @@ export const SkillsPage = () => {
 			</div>
 			<p className="text-content/80">{skill.description}</p>
 			<div className="h-px bg-content/60" />
-			<div className="flex flex-col gap-3">
+			<motion.div
+				className="flex flex-col gap-3"
+				variants={containerVariant}
+				initial="initial"
+				animate="animate"
+				transition={{ duration: 0.3, ease: "easeOut" }}
+			>
 				{skill.items.map((item, j) => (
-					<div className="flex items-center gap-2" key={j}>
+					<motion.div className="flex items-center gap-2" key={j} variants={skillItemVariant}>
 						<DiamondIcon size={16} weight="bold" color="var(--color-primary)" />
 						{item}
-					</div>
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
 		</PrimaryPanel>
 	));
 
@@ -95,12 +114,19 @@ export const SkillsPage = () => {
 
 		return (
 			<Fragment key={i}>
-				<div className="border border-primary/80 rounded-lg p-8 flex flex-col justify-between items-center gap-6 grow basis-0">
-					<div className="h-20 flex items-center">
+				<div
+					className="relative overflow-hidden border border-content/20 rounded-lg p-6
+					flex flex-col justify-between items-center gap-4 grow basis-0"
+				>
+					<div className="z-0 absolute -bottom-8 -right-8 w-2/3 aspect-square rounded-full bg-accent/20 blur-3xl" />
+					<div className="z-10 h-20 flex items-center">
 						<img src={logoImageSrc} className={`${logoImageHeightStyle}`} />
 					</div>
-					<p className="grow font-medium text-center max-w-60">{certification.name}</p>
-					<p className="text-sm font-medium">
+					<p className="z-10 grow font-medium text-center max-w-60 text-content/80 flex items-center">
+						{certification.name}
+					</p>
+					<div className="h-px bg-content/20 w-full" />
+					<p className="z-10 text-sm font-medium">
 						Valid thru: <span className="text-primary">{certification.validThru}</span>
 					</p>
 				</div>
@@ -155,7 +181,7 @@ export const SkillsPage = () => {
 						<div className="h-24 flex items-center">
 							<img src="src/assets/cert-logos/aws-logo.svg" className="h-24" />
 						</div>
-						<p className="grow font-medium text-center max-w-60">
+						<p className="grow font-medium text-center max-w-60 text-content/80">
 							AWS Certified DevOps Engineer Professional
 						</p>
 						<p className="text-sm font-medium">
