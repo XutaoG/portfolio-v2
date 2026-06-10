@@ -43,7 +43,7 @@ export const ProjectPage = () => {
 			{/* Projects */}
 			<div className="flex gap-4">
 				<div
-					className={twMerge(`grid gap-4 items-start transition-[max-width] duration-300
+					className={twMerge(`grid gap-4 content-start transition-[max-width] duration-300
 						${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-3 max-w-full"}`)}
 				>
 					{projectElements}

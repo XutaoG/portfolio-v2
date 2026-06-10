@@ -13,20 +13,14 @@ import {
 } from "@phosphor-icons/react";
 import { ProjectInfoPanel } from "./ProjectInfoPanel";
 import { ListItem } from "../Common/ListItem";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { twMerge } from "tailwind-merge";
 import { mockProjects } from "../../data/projects";
+import { motion } from "framer-motion";
 
 export const ProjectInformation = () => {
 	const navigate = useNavigate();
-	const [isVisible, setIsVisible] = useState(false);
 	const { projectId } = useParams();
-
-	useEffect(() => {
-		const frame = requestAnimationFrame(() => setIsVisible(true));
-		return () => cancelAnimationFrame(frame);
-	}, []);
 
 	useEffect(() => {
 		const selectedProject = mockProjects.find((project) => project.id === Number(projectId));
@@ -36,16 +30,15 @@ export const ProjectInformation = () => {
 	}, [navigate, projectId]);
 
 	const handleClose = () => {
-		setIsVisible(false);
 		navigate("/projects");
 	};
 
 	return (
-		<div
-			className={twMerge(
-				"flex-1 overflow-hidden transition-[max-width] duration-300",
-				isVisible ? "max-w-full" : "max-w-0",
-			)}
+		<motion.div
+			initial={{ width: 0, height: 0, opacity: 0 }}
+			animate={{ width: "100%", height: "100%", opacity: 1 }}
+			transition={{ duration: 0.3, ease: "easeOut" }}
+			className="flex-1 overflow-hidden flex justify-end"
 		>
 			<div className="w-full flex flex-col border border-content/20 rounded-xl bg-base min-w-0">
 				<div className="p-8 pb-6 flex items-start gap-4">
@@ -198,6 +191,6 @@ export const ProjectInformation = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
