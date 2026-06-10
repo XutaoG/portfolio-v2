@@ -9,7 +9,7 @@ export const App = () => {
 	const topLevelPath = location.pathname.split("/")[1];
 
 	return (
-		<div className="flex flex-col w-screen min-h-screen bg-base relative overflow-x-hidden">
+		<div className="flex flex-col w-screen min-h-screen bg-base relative overflow-x-clip">
 			<NavBar />
 			<PageContainer>
 				<AnimatePresence mode="wait">
