@@ -1,6 +1,5 @@
 import { Button } from "../components/Common/Button";
 import { QuickSocial } from "../components/HomePage/QuickSocial";
-import { QuickWorkStatus } from "../components/HomePage/QuickWorkStatus";
 import { TerminalLoadingText } from "../components/HomePage/TerminalLoadingText";
 
 export const HomePage = () => {
@@ -28,11 +27,10 @@ export const HomePage = () => {
 			<div className="absolute bottom-0 left-0">
 				<QuickSocial />
 			</div>
-
 			{/* Work Status */}
-			<div className="absolute bottom-0 right-0">
+			{/* <div className="absolute bottom-0 right-0">
 				<QuickWorkStatus />
-			</div>
+			</div> */}
 		</div>
 	);
 };

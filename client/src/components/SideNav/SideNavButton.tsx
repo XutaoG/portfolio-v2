@@ -11,7 +11,13 @@ interface SideNavButtonProps {
 
 export const SideNavButton = ({ number, to, text, isLast }: SideNavButtonProps) => {
 	return (
-		<NavLink to={to} className="flex gap-3">
+		<NavLink
+			to={to}
+			className="flex gap-3"
+			onClick={(e) => {
+				if (e.currentTarget.classList.contains("active")) e.preventDefault();
+			}}
+		>
 			{({ isActive }) => (
 				<Fragment>
 					<div className="flex flex-col items-center">

@@ -13,6 +13,7 @@
 
 @theme {
 	--animate-blink: blink 1.5s step-end infinite;
+	--default-transition-timing-function: ease-out;
 	--color-base: #080809;
 	--color-primary: #c84f0e;
 	--color-accent: #5a86e0;
