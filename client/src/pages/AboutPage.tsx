@@ -10,6 +10,8 @@ import { Button } from "../components/Common/Button";
 import { Link } from "react-router";
 import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
+import { SKILLS_ROUTE } from "../routes";
+import { PageTransitionLink } from "../components/Common/PageTransitionLink";
 
 export const AboutPage = () => {
 	const focuses = ["Focus 1", "Focus 2", "Focus 3", "Focus 4", "Focus 5", "Focus 6"];
@@ -135,6 +137,8 @@ export const AboutPage = () => {
 					</div>
 				</TerminalWindowPanel>
 			</div>
+
+			<PageTransitionLink to={`/${SKILLS_ROUTE}`} message="Exploring the tools behind the work." />
 		</div>
 	);
 };

@@ -8,7 +8,7 @@ interface PrimaryPanelProps {
 
 export const PrimaryPanel = ({ children, className }: PrimaryPanelProps) => {
 	return (
-		<div className="relative group">
+		<div className="relative group mt-2 ml-2">
 			<div className="absolute inset-0 bg-primary/20 rounded-lg blur-[1px] z-0" />
 			<div
 				className={twMerge(`size-full border border-primary/60 p-6 rounded-lg flex flex-col gap-6 

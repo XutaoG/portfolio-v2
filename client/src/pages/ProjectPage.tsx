@@ -4,6 +4,8 @@ import { Link, Outlet, useParams } from "react-router";
 import { ProjectPanel } from "../components/ProjectsPage/ProjectPanel";
 import { mockProjects } from "../data/projects";
 import { twMerge } from "tailwind-merge";
+import { CONTACT_ROUTE } from "../routes";
+import { PageTransitionLink } from "../components/Common/PageTransitionLink";
 
 export const ProjectPage = () => {
 	const { projectId } = useParams();
@@ -50,6 +52,8 @@ export const ProjectPage = () => {
 				</div>
 				<Outlet />
 			</div>
+
+			<PageTransitionLink to={`/${CONTACT_ROUTE}`} message="Interested? Let's talk!" />
 		</div>
 	);
 };

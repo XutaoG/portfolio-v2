@@ -9,6 +9,7 @@ import { SkillsPage } from "./pages/SkillsPage";
 import { ProjectPage } from "./pages/ProjectPage";
 import { ContactPage } from "./pages/ContactPage";
 import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
+import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 
 const router = createBrowserRouter([
 	{
@@ -16,10 +17,10 @@ const router = createBrowserRouter([
 		Component: App,
 		children: [
 			{ index: true, Component: HomePage },
-			{ path: "about", Component: AboutPage },
-			{ path: "skills", Component: SkillsPage },
+			{ path: ABOUT_ROUTE, Component: AboutPage },
+			{ path: SKILLS_ROUTE, Component: SkillsPage },
 			{
-				path: "projects",
+				path: PROJECTS_ROUTE,
 				Component: ProjectPage,
 				children: [
 					{
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
 					},
 				],
 			},
-			{ path: "contact", Component: ContactPage },
+			{ path: CONTACT_ROUTE, Component: ContactPage },
 		],
 	},
 ]);

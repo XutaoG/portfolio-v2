@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { NavButton } from "./NavButton";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "../../routes";
 
 export const NavBar = () => {
 	const navRef = useRef<HTMLElement>(null);
@@ -33,11 +34,11 @@ export const NavBar = () => {
 					<span className="ml-6 text-primary">&gt;_</span>
 				</p>
 				<div className="flex gap-8">
-					<NavButton to="/" text="HOME" />
-					<NavButton to="/about" text="ABOUT" />
-					<NavButton to="/skills" text="SKILLS" />
-					<NavButton to="/projects" text="PROJECTS" />
-					<NavButton to="/contact" text="CONTACT" />
+					<NavButton to={`/${HOME_ROUTE}`} text="HOME" />
+					<NavButton to={`/${ABOUT_ROUTE}`} text="ABOUT" />
+					<NavButton to={`/${SKILLS_ROUTE}`} text="SKILLS" />
+					<NavButton to={`/${PROJECTS_ROUTE}`} text="PROJECTS" />
+					<NavButton to={`/${CONTACT_ROUTE}`} text="CONTACT" />
 				</div>
 			</div>
 		</motion.nav>

@@ -2,6 +2,7 @@ import { AppWindowIcon, ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-ico
 import type { TProject } from "../../types";
 import { twMerge } from "tailwind-merge";
 import { useNavigate, useParams } from "react-router";
+import { PROJECTS_ROUTE } from "../../routes";
 
 interface ProjectPanelProps {
 	project: TProject;
@@ -15,9 +16,9 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const isSelected = projectId != null && project.id === Number(projectId);
 	const selectProject = (newProjectId: number) => {
 		if (projectId != null && Number(projectId) === newProjectId) {
-			navigate("/projects");
+			navigate(`/${PROJECTS_ROUTE}`);
 		} else {
-			navigate(`/projects/${newProjectId}`);
+			navigate(`/${PROJECTS_ROUTE}/${newProjectId}`);
 		}
 	};
 

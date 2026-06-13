@@ -11,6 +11,8 @@ import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { Fragment, type ReactNode } from "react";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { motion, stagger } from "framer-motion";
+import { PageTransitionLink } from "../components/Common/PageTransitionLink";
+import { PROJECTS_ROUTE } from "../routes";
 
 const containerVariant = {
 	initial: { opacity: 0 },
@@ -190,6 +192,8 @@ export const SkillsPage = () => {
 					</div>
 				</TerminalWindowPanel>
 			</div>
+
+			<PageTransitionLink to={`/${PROJECTS_ROUTE}`} message="Find where the tools meet the work." />
 		</div>
 	);
 };

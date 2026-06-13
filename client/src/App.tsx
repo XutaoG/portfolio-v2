@@ -4,8 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PageContainer } from "./components/Common/PageContainer";
 import { NavBar } from "./components/NavBar/NavBar";
 import { useState } from "react";
+import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 
-const navOrder = ["", "about", "skills", "projects", "contact"];
+const navOrder = [HOME_ROUTE, ABOUT_ROUTE, SKILLS_ROUTE, PROJECTS_ROUTE, CONTACT_ROUTE];
 
 const pageVariants = {
 	initial: (direction: number) => ({

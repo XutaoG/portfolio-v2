@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { SideNavButton } from "./SideNavButton";
+import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "../../routes";
 
 export const SideNav = () => {
 	return (
@@ -9,11 +10,11 @@ export const SideNav = () => {
 			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.3, ease: "easeOut" }}
 		>
-			<SideNavButton to="/" number="01" text="HOME" />
-			<SideNavButton to="/about" number="02" text="ABOUT" />
-			<SideNavButton to="/skills" number="03" text="SKILLS" />
-			<SideNavButton to="/projects" number="04" text="PROJECTS" />
-			<SideNavButton to="/contact" number="05" text="CONTACT" isLast />
+			<SideNavButton to={`/${HOME_ROUTE}`} number="01" text="HOME" />
+			<SideNavButton to={`/${ABOUT_ROUTE}`} number="02" text="ABOUT" />
+			<SideNavButton to={`/${SKILLS_ROUTE}`} number="03" text="SKILLS" />
+			<SideNavButton to={`/${PROJECTS_ROUTE}`} number="04" text="PROJECTS" />
+			<SideNavButton to={`/${CONTACT_ROUTE}`} number="05" text="CONTACT" isLast />
 		</motion.div>
 	);
 };

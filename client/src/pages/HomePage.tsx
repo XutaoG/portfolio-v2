@@ -1,6 +1,8 @@
+import { Link } from "react-router";
 import { Button } from "../components/Common/Button";
 import { QuickSocial } from "../components/HomePage/QuickSocial";
 import { TerminalLoadingText } from "../components/HomePage/TerminalLoadingText";
+import { ABOUT_ROUTE } from "../routes";
 
 export const HomePage = () => {
 	return (
@@ -20,7 +22,9 @@ export const HomePage = () => {
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti possimus laborum vel at nulla
 					quae, illo odio? Quia, architecto iusto?
 				</p>
-				<Button>EXPLORE</Button>
+				<Link to={`/${ABOUT_ROUTE}`}>
+					<Button>ABOUT ME</Button>
+				</Link>
 			</div>
 
 			{/* Socials */}

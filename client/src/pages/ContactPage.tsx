@@ -88,8 +88,8 @@ export const ContactPage = () => {
 			</div>
 
 			<p>
-				<span className="text-primary font-semibold">&lt;</span> Thanks for stopping by! I appreciate you taking the time to
-				reach out. <span className="text-primary font-semibold tracking-widest">&gt;</span>;
+				<span className="text-primary font-semibold">&lt;</span> Thanks for stopping by! I appreciate you taking
+				the time to reach out. <span className="text-primary font-semibold tracking-widest">&gt;</span>
 			</p>
 		</div>
 	);
