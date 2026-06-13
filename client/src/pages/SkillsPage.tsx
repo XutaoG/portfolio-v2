@@ -118,7 +118,7 @@ export const SkillsPage = () => {
 			<Fragment key={i}>
 				<div
 					className="relative overflow-hidden border border-content/20 rounded-lg p-6
-					flex flex-col justify-between items-center gap-4 grow basis-0"
+					bg-base/80 backdrop-blur-xs flex flex-col justify-between items-center gap-4 grow basis-0"
 				>
 					<div className="z-0 absolute -bottom-8 -right-8 w-2/3 aspect-square rounded-full bg-accent/20 blur-3xl" />
 					<div className="z-10 h-20 flex items-center">
@@ -146,10 +146,10 @@ export const SkillsPage = () => {
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
 			{/* Introduction */}
-			<div className="flex flex-col gap-6 items-start self-end">
+			<div className="flex flex-col gap-6 items-start self-end bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ SKILLS</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl">
+					<h1 className="font-medium text-5xl text-shadow-lg">
 						My Technical <span className="font-bold text-primary">Toolkit_</span>
 					</h1>
 				</div>

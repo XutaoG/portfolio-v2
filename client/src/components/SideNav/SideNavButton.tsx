@@ -24,7 +24,7 @@ export const SideNavButton = ({ number, to, text, isLast }: SideNavButtonProps) 
 						{/* Circle */}
 						<div className="size-6 flex justify-center items-center">
 							<div
-								className={twMerge(`w-5 aspect-square rounded-xl border-2 p-1 bg-base rotate-0
+								className={twMerge(`w-5 aspect-square rounded-xl border-2 p-1 rotate-0
 								transition-all duration-300 border-content/40 
 								${isActive && "border-primary rounded-sm p-1.5 w-6 rotate-45"}`)}
 							>

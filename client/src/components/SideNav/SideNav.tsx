@@ -5,7 +5,7 @@ import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } 
 export const SideNav = () => {
 	return (
 		<motion.div
-			className="flex flex-col"
+			className="flex flex-col bg-base/20 backdrop-blur-sm pt-4 pl-1"
 			initial={{ opacity: 0, x: "100%" }}
 			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.3, ease: "easeOut" }}

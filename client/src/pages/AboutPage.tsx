@@ -26,10 +26,10 @@ export const AboutPage = () => {
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
 			{/* Introduction */}
-			<div className="flex flex-col gap-6 items-start">
+			<div className="self-start flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ ABOUT ME</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl">
+					<h1 className="font-medium text-5xl text-shadow-lg">
 						Hey, I'm <span className="font-bold text-primary">Xutao_</span>
 					</h1>
 					<p className="text-content/60 font-medium">(Pronunced Shu-tao)</p>

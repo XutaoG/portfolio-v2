@@ -3,8 +3,12 @@ import { Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { PageContainer } from "./components/Common/PageContainer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
+import { RoomScene } from "./components/RoomScene/RoomScene";
+import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
+import { RoomLoader } from "./components/RoomScene/RoomLoader";
 
 const navOrder = [HOME_ROUTE, ABOUT_ROUTE, SKILLS_ROUTE, PROJECTS_ROUTE, CONTACT_ROUTE];
 
@@ -36,7 +40,7 @@ export const App = () => {
 	}
 
 	return (
-		<div className="flex flex-col w-screen min-h-screen bg-base relative overflow-x-clip">
+		<div className="flex flex-col w-screen min-h-screen relative overflow-x-clip">
 			<NavBar />
 			<PageContainer>
 				<AnimatePresence mode="wait" custom={navState.direction}>
@@ -54,6 +58,20 @@ export const App = () => {
 					</motion.div>
 				</AnimatePresence>
 			</PageContainer>
+			<div className="absolute inset-0 bg-base -z-10" id="canvas-container">
+				<Canvas
+					shadows={{ type: THREE.PCFShadowMap }}
+					gl={{
+						toneMapping: THREE.ACESFilmicToneMapping,
+						toneMappingExposure: 1,
+						outputColorSpace: THREE.SRGBColorSpace,
+					}}
+				>
+					<Suspense fallback={<RoomLoader />}>
+						<RoomScene />
+					</Suspense>
+				</Canvas>
+			</div>
 		</div>
 	);
 };

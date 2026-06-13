@@ -18,10 +18,10 @@ export const ProjectPage = () => {
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
 			{/* Introduction */}
-			<div className="flex flex-col gap-6 items-start">
+			<div className="self-start flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ PROJECTS</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl">
+					<h1 className="font-medium text-5xl text-shadow-lg">
 						Things I've <span className="font-bold text-primary">Built_</span>
 					</h1>
 				</div>

@@ -15,7 +15,7 @@
 	--animate-blink: blink 1.5s step-end infinite;
 	--default-transition-timing-function: ease-out;
 	--color-base: #080809;
-	--color-primary: #9966e8;
+	--color-primary: #C84F0E;
 	--color-accent: #5a86e0;
 	--color-content: #dff2fe;
 	--color-neutral: #1e1f20;
@@ -57,5 +57,15 @@
 	select:focus {
 		outline: none;
 		border-color: transparent;
+	}
+
+	.diagonal-stripe-pattern {
+		background: repeating-linear-gradient(
+			60deg,
+			var(--color-primary) 0px,
+			var(--color-primary) 1px,
+			transparent 2px,
+			transparent 8px
+		);
 	}
 }

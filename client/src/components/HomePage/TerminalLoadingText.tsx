@@ -28,7 +28,7 @@ export const TerminalLoadingText = () => {
 	});
 
 	return (
-		<div className="flex flex-col gap-2 items-start">
+		<div className="flex flex-col gap-2 items-start bg-base/20 backdrop-blur-xs">
 			{terminalLinesElements}
 			<div className="h-6 mt-1">
 				{linesCompleted >= terminalLines.length && <div className="h-full w-2 bg-primary animate-blink" />}
