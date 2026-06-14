@@ -1,12 +1,14 @@
-import { Fragment, useRef } from "react";
-import { Environment, OrbitControls, OrthographicCamera, useGLTF } from "@react-three/drei";
+import { type ComponentRef, Fragment, useCallback, useMemo, useRef } from "react";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { degToRad } from "three/src/math/MathUtils.js";
+import { useLocation } from "react-router";
+import { HOME_ROUTE } from "../../routes";
 
-const wallNames: { [key: string]: string } = {
+const WALL_NAMES: { [key: string]: string } = {
 	bedWall: "Bed_Wall",
 	closetWall: "Closet_Wall",
 	windowWall: "Window_Wall",
@@ -15,48 +17,54 @@ const wallNames: { [key: string]: string } = {
 
 type WallFadeState = { meshes: THREE.Mesh[]; opacity: number; targetOpacity: number };
 
+const FRUSTUM_SHIFT_FACTOR = 500;
+const ZOOM_FACTOR = 30;
+const ORBIT_TARGET = new THREE.Vector3(0, 7, 0);
+
 export const RoomScene = () => {
 	const { scene } = useGLTF("/isometric-room.glb");
-	const cameraRef = useRef<THREE.OrthographicCamera>(null);
 	const modelQuadrantRef = useRef(-1);
 	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
+	const orbitControlRef = useRef<ComponentRef<typeof OrbitControls> | null>(null);
+	const location = useLocation();
+	const topLevelPath = location.pathname.split("/")[1];
 
-	const roomPosition = new THREE.Vector3(0, 0, 0);
-	const orbitTarget = new THREE.Vector3(0, 7, 0);
+	const getQuadrant = useCallback((angleRad: number): number => {
+		if (angleRad >= 0 && angleRad < Math.PI / 2) return 0;
+		if (angleRad >= Math.PI / 2 && angleRad < Math.PI) return 1;
+		if (angleRad <= -Math.PI / 2 && angleRad > -Math.PI) return 2;
+		return 3;
+	}, []);
 
-	useEffect(() => {
-		const cam = cameraRef.current;
-		if (cam) {
-			const fultrumShift = 2;
-			cam.left -= fultrumShift;
-			cam.right -= fultrumShift;
-			cam.updateProjectionMatrix();
-		}
+	const wallShouldBeVisible = useCallback((wallName: string, quadrant: number): boolean => {
+		if (quadrant === 0 && (wallName === WALL_NAMES.bedWall || wallName === WALL_NAMES.closetWall)) return false;
+		if (quadrant === 1 && (wallName === WALL_NAMES.bedWall || wallName === WALL_NAMES.windowWall)) return false;
+		if (quadrant === 2 && (wallName === WALL_NAMES.windowWall || wallName === WALL_NAMES.deskWall)) return false;
+		if (quadrant === 3 && (wallName === WALL_NAMES.deskWall || wallName === WALL_NAMES.closetWall)) return false;
+		return true;
 	}, []);
 
 	useEffect(() => {
+		// Disable orbit control if route isn't the home route
+		if (orbitControlRef.current) {
+			orbitControlRef.current.enabled = topLevelPath === HOME_ROUTE;
+		}
+	}, [topLevelPath]);
+
+	useEffect(() => {
 		scene.traverse((obj) => {
-			// Enable shadow for all objects
 			obj.castShadow = true;
 			obj.receiveShadow = true;
 
-			const setNotVisible = obj.name === wallNames.bedWall || obj.name === wallNames.closetWall;
-
-			// Populate wall fade objects
-			if (Object.values(wallNames).includes(obj.name)) {
+			if (Object.values(WALL_NAMES).includes(obj.name)) {
 				const meshes: THREE.Mesh[] = [];
+
 				obj.traverse((child) => {
 					if (child instanceof THREE.Mesh) {
 						const mats = Array.isArray(child.material) ? child.material : [child.material];
 						const cloned = mats.map((mat: THREE.Material) => {
 							const clonedMat = mat.clone();
 							clonedMat.transparent = true;
-
-							if (setNotVisible) {
-								child.visible = false;
-								clonedMat.opacity = 0;
-							}
-
 							return clonedMat;
 						});
 						child.material = Array.isArray(child.material) ? cloned : cloned[0];
@@ -64,58 +72,53 @@ export const RoomScene = () => {
 					}
 				});
 
-				if (setNotVisible) {
-					wallFadeRef.current.set(obj.name, { meshes, opacity: 0, targetOpacity: 0 });
-				} else {
-					wallFadeRef.current.set(obj.name, { meshes, opacity: 1, targetOpacity: 1 });
-				}
+				wallFadeRef.current.set(obj.name, { meshes, opacity: 1, targetOpacity: 1 });
 			}
 		});
 	}, [scene]);
 
-	useFrame(({ camera }, delta) => {
-		const offset = new THREE.Vector3().subVectors(camera.position, orbitTarget);
-		const angle = Math.atan2(offset.x, offset.z);
-
-		const getCurrentQuadrant = (angleRad: number): number => {
-			if (angleRad >= 0 && angleRad < Math.PI / 2) {
-				return 0;
-			} else if (angleRad >= Math.PI / 2 && angleRad < Math.PI) {
-				return 1;
-			} else if (angleRad <= -Math.PI / 2 && angleRad > -Math.PI) {
-				return 2;
-			} else {
-				return 3;
+	useFrame(({ camera, size }, delta) => {
+		// Update camera frustum and zoom based on size
+		if (camera instanceof THREE.OrthographicCamera) {
+			const halfWidth = size.width / 2;
+			const halfHeight = size.height / 2;
+			const frustumShift = size.width / FRUSTUM_SHIFT_FACTOR;
+			const targetLeft = -halfWidth - frustumShift;
+			const targetRight = halfWidth - frustumShift;
+			const targetZoom = size.width / ZOOM_FACTOR;
+			if (
+				camera.left !== targetLeft ||
+				camera.right !== targetRight ||
+				camera.top !== halfHeight ||
+				camera.bottom !== -halfHeight ||
+				camera.zoom !== targetZoom
+			) {
+				camera.left = targetLeft;
+				camera.right = targetRight;
+				camera.top = halfHeight;
+				camera.bottom = -halfHeight;
+				camera.zoom = targetZoom;
+				camera.updateProjectionMatrix();
 			}
-		};
-
-		const updateWallVisibility = (quadrant: number) => {
-			wallFadeRef.current.forEach((entry, name) => {
-				let shouldBeVisible = true;
-				if (quadrant === 0 && (name === wallNames.bedWall || name === wallNames.closetWall))
-					shouldBeVisible = false;
-				else if (quadrant === 1 && (name === wallNames.bedWall || name === wallNames.windowWall))
-					shouldBeVisible = false;
-				else if (quadrant === 2 && (name === wallNames.windowWall || name === wallNames.deskWall))
-					shouldBeVisible = false;
-				else if (quadrant === 3 && (name === wallNames.deskWall || name === wallNames.closetWall))
-					shouldBeVisible = false;
-				entry.targetOpacity = shouldBeVisible ? 1 : 0;
-			});
-		};
-
-		const currentQuadrant = getCurrentQuadrant(angle);
-		if (currentQuadrant != modelQuadrantRef.current) {
-			modelQuadrantRef.current = currentQuadrant;
-			updateWallVisibility(currentQuadrant);
 		}
 
+		// Check if camera quadrant has changed
+		const offset = new THREE.Vector3().subVectors(camera.position, ORBIT_TARGET);
+		const currentQuadrant = getQuadrant(Math.atan2(offset.x, offset.z));
+		if (wallFadeRef.current.size !== 0 && currentQuadrant !== modelQuadrantRef.current) {
+			modelQuadrantRef.current = currentQuadrant;
+			wallFadeRef.current.forEach((entry, name) => {
+				entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
+			});
+		}
+
+		// Animate wall opacity changes
 		wallFadeRef.current.forEach((entry) => {
 			if (entry.opacity === entry.targetOpacity) {
 				return;
 			}
 
-			// Instantly hide mesh
+			// Instantly hide mesh if target opacity is 0
 			if (entry.targetOpacity === 0) {
 				entry.meshes.forEach((mesh) => {
 					mesh.visible = false;
@@ -137,45 +140,47 @@ export const RoomScene = () => {
 			entry.meshes.forEach((mesh) => {
 				mesh.visible = entry.opacity > 0.001;
 				const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-				mats.forEach((m) => (m.opacity = entry.opacity));
+				mats.forEach((mat) => (mat.opacity = entry.opacity));
 			});
 		});
 	});
 
-	const secondaryLightsPositions = [
-		new THREE.Vector3(10, 7, 0),
-		new THREE.Vector3(-10, 7, 0),
-		new THREE.Vector3(0, 7, 10),
-		new THREE.Vector3(0, 7, -10),
-	];
-	const secondaryLightsElements = secondaryLightsPositions.map((lightPos, i) => (
-		<pointLight
-			key={i}
-			intensity={20}
-			color="#e6994e"
-			position={lightPos}
-			castShadow
-			shadow-bias={-0.005}
-			shadow-mapSize={[2048, 2048]}
-			shadow-radius={20}
-		/>
-	));
+	const secondaryLightsElements = useMemo(() => {
+		const secondaryLightsPositions = [
+			new THREE.Vector3(10, 7, 0),
+			new THREE.Vector3(-10, 7, 0),
+			new THREE.Vector3(0, 7, 10),
+			new THREE.Vector3(0, 7, -10),
+		];
+
+		return secondaryLightsPositions.map((lightPos, i) => (
+			<pointLight
+				key={i}
+				intensity={20}
+				color="#e6994e"
+				position={lightPos}
+				castShadow
+				shadow-bias={-0.005}
+				shadow-mapSize={[2048, 2048]}
+				shadow-radius={20}
+			/>
+		));
+	}, []);
 
 	return (
 		<Fragment>
-			<primitive object={scene} position={roomPosition} />
-			<OrthographicCamera ref={cameraRef} makeDefault position={[20, 20, 20]} zoom={50} />
+			<primitive object={scene} position={[0, 0, 0]} />
 			<OrbitControls
+				ref={(instance) => {
+					orbitControlRef.current = instance;
+				}}
 				enablePan={false}
+				enableZoom={false}
 				minPolarAngle={degToRad(10)}
 				maxPolarAngle={degToRad(80)}
-				minZoom={30}
-				maxZoom={70}
-				target={orbitTarget}
+				target={ORBIT_TARGET}
 				domElement={document.body}
 			/>
-			<Environment preset="studio" backgroundIntensity={0.2} environmentIntensity={0.2} />
-			{/* <ambientLight intensity={0.5} color="white" /> */}
 			{/* Primary light */}
 			<pointLight
 				intensity={100}
@@ -186,6 +191,7 @@ export const RoomScene = () => {
 				shadow-mapSize={[2048, 2048]}
 				shadow-radius={20}
 			/>
+
 			{/* Secondary lights */}
 			{secondaryLightsElements}
 
