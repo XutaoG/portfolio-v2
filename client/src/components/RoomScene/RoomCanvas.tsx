@@ -20,12 +20,12 @@ export const RoomCanvas = () => {
 				}}
 			>
 				<Environment preset="studio" backgroundIntensity={0.2} environmentIntensity={0.2} />
-				<Suspense fallback={<RoomLoader />}>
+				<Suspense fallback={null}>
 					<CameraControl />
 					<RoomScene />
 				</Suspense>
 			</Canvas>
-			<div></div>
+			<RoomLoader />
 		</Fragment>
 	);
 };
