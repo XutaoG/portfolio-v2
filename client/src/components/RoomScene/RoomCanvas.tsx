@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Fragment, Suspense } from "react";
-import { RoomLoader } from "./RoomLoader";
+import { CanvasLoader } from "./CanvasLoader";
 import { RoomScene } from "./RoomScene";
 import * as THREE from "three";
 import { CAMERA_INITIAL_POSITION } from "../../data/constants";
@@ -25,7 +25,7 @@ export const RoomCanvas = () => {
 					<RoomScene />
 				</Suspense>
 			</Canvas>
-			<RoomLoader />
+			<CanvasLoader />
 		</Fragment>
 	);
 };
