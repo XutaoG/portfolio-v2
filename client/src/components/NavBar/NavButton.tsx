@@ -14,8 +14,8 @@ export const NavButton = ({ text, to }: NavButtonProps) => {
 			className={({ isActive }) =>
 				twMerge(
 					[
-						"flex flex-col items-center gap-1 font-medium transition-colors duration-300",
-						isActive ? "text-primary active" : "",
+						"flex flex-col items-center gap-1 font-medium transition-colors duration-300 group",
+						isActive ? "text-primary active" : "hover:text-primary",
 					].join(" "),
 				)
 			}
@@ -26,10 +26,10 @@ export const NavButton = ({ text, to }: NavButtonProps) => {
 			{({ isActive }) => (
 				<Fragment>
 					{text}
-					<div className="flex justify-center items-center h-1.5 aspect-square">
+					<div className="flex justify-center items-center h-1 aspect-square w-full">
 						<div
-							className={twMerge(`h-0 aspect-square rounded-full transition-[height] duration-300
-							bg-primary ${isActive && "h-1.5"}`)}
+							className={twMerge(`h-0 w-0 rounded-full transition-all duration-300 bg-primary 
+							${isActive ? "h-1 w-full aspect-auto rounded-none" : "group-hover:h-1 group-hover:w-1"}`)}
 						/>
 					</div>
 				</Fragment>

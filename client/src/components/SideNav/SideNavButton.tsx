@@ -13,7 +13,7 @@ export const SideNavButton = ({ number, to, text, isLast }: SideNavButtonProps) 
 	return (
 		<NavLink
 			to={to}
-			className="flex gap-3"
+			className="flex gap-3 group"
 			onClick={(e) => {
 				if (e.currentTarget.classList.contains("active")) e.preventDefault();
 			}}
@@ -25,11 +25,12 @@ export const SideNavButton = ({ number, to, text, isLast }: SideNavButtonProps) 
 						<div className="size-6 flex justify-center items-center">
 							<div
 								className={twMerge(`w-5 aspect-square rounded-xl border-2 p-1 rotate-0
-								transition-all duration-300 border-content/40 
+								transition-all duration-300 border-content/40 group-hover:border-primary
 								${isActive && "border-primary rounded-sm p-1.5 w-6 rotate-45"}`)}
 							>
 								<div
-									className={`size-full rounded-xl ${isActive ? "bg-primary rounded-xs" : "bg-content/40"}`}
+									className={`size-full rounded-xl group-hover:bg-primary transition-color duration-300
+									${isActive ? "bg-primary rounded-xs" : "bg-content/40"}`}
 								/>
 							</div>
 						</div>
