@@ -1,12 +1,10 @@
-import { type ComponentRef, Fragment, useCallback, useMemo, useRef } from "react";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Fragment, useCallback, useMemo, useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { degToRad } from "three/src/math/MathUtils.js";
-import { useLocation } from "react-router";
-import { HOME_ROUTE } from "../../routes";
+import { ORBIT_TARGET } from "../../data/constants";
 
 const WALL_NAMES: { [key: string]: string } = {
 	bedWall: "Bed_Wall",
@@ -17,17 +15,10 @@ const WALL_NAMES: { [key: string]: string } = {
 
 type WallFadeState = { meshes: THREE.Mesh[]; opacity: number; targetOpacity: number };
 
-const FRUSTUM_SHIFT_FACTOR = 500;
-const ZOOM_FACTOR = 30;
-const ORBIT_TARGET = new THREE.Vector3(0, 7, 0);
-
 export const RoomScene = () => {
 	const { scene } = useGLTF("/isometric-room.glb");
 	const modelQuadrantRef = useRef(-1);
 	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
-	const orbitControlRef = useRef<ComponentRef<typeof OrbitControls> | null>(null);
-	const location = useLocation();
-	const topLevelPath = location.pathname.split("/")[1];
 
 	const getQuadrant = useCallback((angleRad: number): number => {
 		if (angleRad >= 0 && angleRad < Math.PI / 2) return 0;
@@ -45,17 +36,12 @@ export const RoomScene = () => {
 	}, []);
 
 	useEffect(() => {
-		// Disable orbit control if route isn't the home route
-		if (orbitControlRef.current) {
-			orbitControlRef.current.enabled = topLevelPath === HOME_ROUTE;
-		}
-	}, [topLevelPath]);
-
-	useEffect(() => {
 		scene.traverse((obj) => {
+			// Enable shadow for all meshes
 			obj.castShadow = true;
 			obj.receiveShadow = true;
 
+			// For all meshes associated with a wall, clone its material and add to wallFadeRef
 			if (Object.values(WALL_NAMES).includes(obj.name)) {
 				const meshes: THREE.Mesh[] = [];
 
@@ -77,31 +63,7 @@ export const RoomScene = () => {
 		});
 	}, [scene]);
 
-	useFrame(({ camera, size }, delta) => {
-		// Update camera frustum and zoom based on size
-		if (camera instanceof THREE.OrthographicCamera) {
-			const halfWidth = size.width / 2;
-			const halfHeight = size.height / 2;
-			const frustumShift = size.width / FRUSTUM_SHIFT_FACTOR;
-			const targetLeft = -halfWidth - frustumShift;
-			const targetRight = halfWidth - frustumShift;
-			const targetZoom = size.width / ZOOM_FACTOR;
-			if (
-				camera.left !== targetLeft ||
-				camera.right !== targetRight ||
-				camera.top !== halfHeight ||
-				camera.bottom !== -halfHeight ||
-				camera.zoom !== targetZoom
-			) {
-				camera.left = targetLeft;
-				camera.right = targetRight;
-				camera.top = halfHeight;
-				camera.bottom = -halfHeight;
-				camera.zoom = targetZoom;
-				camera.updateProjectionMatrix();
-			}
-		}
-
+	useFrame(({ camera }, delta) => {
 		// Check if camera quadrant has changed
 		const offset = new THREE.Vector3().subVectors(camera.position, ORBIT_TARGET);
 		const currentQuadrant = getQuadrant(Math.atan2(offset.x, offset.z));
@@ -170,17 +132,6 @@ export const RoomScene = () => {
 	return (
 		<Fragment>
 			<primitive object={scene} position={[0, 0, 0]} />
-			<OrbitControls
-				ref={(instance) => {
-					orbitControlRef.current = instance;
-				}}
-				enablePan={false}
-				enableZoom={false}
-				minPolarAngle={degToRad(10)}
-				maxPolarAngle={degToRad(80)}
-				target={ORBIT_TARGET}
-				domElement={document.body}
-			/>
 			{/* Primary light */}
 			<pointLight
 				intensity={100}

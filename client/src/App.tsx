@@ -6,6 +6,7 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { useState } from "react";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 import { RoomCanvas } from "./components/RoomScene/RoomCanvas";
+import { CanvasBackgroundGradient } from "./components/RoomScene/CanvasBackgroundGradient";
 
 const navOrder = [HOME_ROUTE, ABOUT_ROUTE, SKILLS_ROUTE, PROJECTS_ROUTE, CONTACT_ROUTE];
 
@@ -55,8 +56,9 @@ export const App = () => {
 					</motion.div>
 				</AnimatePresence>
 			</PageContainer>
-			<div className="absolute inset-0 bg-base -z-10" id="canvas-container">
+			<div className="fixed top-0 left-0 h-screen w-screen bg-base -z-10" id="canvas-container">
 				<RoomCanvas />
+				<CanvasBackgroundGradient />
 			</div>
 		</div>
 	);
