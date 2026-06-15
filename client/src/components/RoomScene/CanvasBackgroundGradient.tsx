@@ -15,11 +15,11 @@ export const CanvasBackgroundGradient = () => {
 			)}
 		>
 			<div className="relative size-full">
-				<div className="absolute inset-0 bg-base/10" />
-				<div className="absolute inset-0 bg-linear-to-r from-5% from-base to-35% to-transparent" />
-				<div className="absolute inset-0 bg-linear-to-l from-5% from-base to-35% to-transparent" />
-				<div className="absolute inset-0 bg-linear-to-b from-10% from-base to-35% to-transparent" />
-				<div className="absolute inset-0 bg-linear-to-t from-5% from-base to-35% to-transparent" />
+				<div className="absolute inset-0 bg-base/5" />
+				<div className="absolute inset-0 bg-linear-to-r from-5% from-base/90 to-35% to-transparent" />
+				<div className="absolute inset-0 bg-linear-to-l from-5% from-base/90 to-35% to-transparent" />
+				<div className="absolute inset-0 bg-linear-to-b from-10% from-base/90 to-35% to-transparent" />
+				<div className="absolute inset-0 bg-linear-to-t from-5% from-base/90 to-35% to-transparent" />
 			</div>
 		</div>
 	);
