@@ -19,6 +19,7 @@ export const RoomScene = () => {
 	const { scene } = useGLTF("/isometric-room.glb");
 	const modelQuadrantRef = useRef(-1);
 	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
+	const cameraInsideRoomRef = useRef(false);
 
 	const getQuadrant = useCallback((angleRad: number): number => {
 		if (angleRad >= 0 && angleRad < Math.PI / 2) return 0;
@@ -64,14 +65,33 @@ export const RoomScene = () => {
 	}, [scene]);
 
 	useFrame(({ camera }, delta) => {
-		// Check if camera quadrant has changed
-		const offset = new THREE.Vector3().subVectors(camera.position, ORBIT_TARGET);
-		const currentQuadrant = getQuadrant(Math.atan2(offset.x, offset.z));
-		if (wallFadeRef.current.size !== 0 && currentQuadrant !== modelQuadrantRef.current) {
-			modelQuadrantRef.current = currentQuadrant;
-			wallFadeRef.current.forEach((entry, name) => {
-				entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
-			});
+		// Check if camera is within the room (XZ distance from origin < 4.5)
+		const xzDist = camera.position.x ** 2 + camera.position.z ** 2;
+		const insideRoomRadius = 4.5;
+		const isInsideRoom = xzDist < insideRoomRadius ** 2;
+
+		if (isInsideRoom !== cameraInsideRoomRef.current) {
+			cameraInsideRoomRef.current = isInsideRoom;
+			if (isInsideRoom) {
+				wallFadeRef.current.forEach((entry) => {
+					entry.targetOpacity = 1;
+				});
+			} else {
+				// Re-evaluation quadrant when leaving the room
+				modelQuadrantRef.current = -1;
+			}
+		}
+
+		// Check if camera quadrant has changed (only when outside the room)
+		if (!isInsideRoom) {
+			const offset = new THREE.Vector3().subVectors(camera.position, ORBIT_TARGET);
+			const currentQuadrant = getQuadrant(Math.atan2(offset.x, offset.z));
+			if (wallFadeRef.current.size !== 0 && currentQuadrant !== modelQuadrantRef.current) {
+				modelQuadrantRef.current = currentQuadrant;
+				wallFadeRef.current.forEach((entry, name) => {
+					entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
+				});
+			}
 		}
 
 		// Animate wall opacity changes

@@ -11,20 +11,20 @@ import { CAMERA_INITIAL_POSITION } from "../../data/constants";
 const ORBIT_TARGET = new THREE.Vector3(0, 7, 0);
 const CAM_ROUTE_CONFIG: { [key: string]: { position: THREE.Vector3; lookAt: THREE.Vector3 } } = {
 	[ABOUT_ROUTE]: {
-		position: new THREE.Vector3(5, 6, -1),
-		lookAt: new THREE.Vector3(-5, 6, -1),
+		position: new THREE.Vector3(3, 6, -1),
+		lookAt: new THREE.Vector3(-3, 6, -1),
 	},
 	[SKILLS_ROUTE]: {
-		position: new THREE.Vector3(0, 6, 5),
-		lookAt: new THREE.Vector3(0, 6, -5),
+		position: new THREE.Vector3(0, 6, 3),
+		lookAt: new THREE.Vector3(0, 6, -3),
 	},
 	[PROJECTS_ROUTE]: {
-		position: new THREE.Vector3(-2.5, 6, 0),
-		lookAt: new THREE.Vector3(2.5, 6, 0),
+		position: new THREE.Vector3(-3, 6, 0),
+		lookAt: new THREE.Vector3(3, 6, 0),
 	},
 	[CONTACT_ROUTE]: {
-		position: new THREE.Vector3(-1, 6, -5),
-		lookAt: new THREE.Vector3(-1, 6, 5),
+		position: new THREE.Vector3(-1, 6, -3),
+		lookAt: new THREE.Vector3(-1, 6, 3),
 	},
 };
 const SCENE_RIGHT_SHIFT = 0.2;
