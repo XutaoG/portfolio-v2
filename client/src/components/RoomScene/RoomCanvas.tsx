@@ -17,7 +17,7 @@ export const RoomCanvas = () => {
 				<CanvasLoader />
 				<Canvas
 					camera={{ position: CAMERA_INITIAL_POSITION, fov: 30 }}
-					shadows={{ type: THREE.PCFSoftShadowMap }}
+					shadows={{ type: THREE.PCFShadowMap }}
 					gl={{
 						toneMapping: THREE.ACESFilmicToneMapping,
 						toneMappingExposure: 1.15,
