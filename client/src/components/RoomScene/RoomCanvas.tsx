@@ -4,7 +4,7 @@ import { CanvasLoader } from "./CanvasLoader";
 import { RoomScene } from "./RoomScene";
 import * as THREE from "three";
 import { CAMERA_INITIAL_POSITION } from "../../data/constants";
-import { Environment } from "@react-three/drei";
+import { Environment, Preload } from "@react-three/drei";
 import { CameraControl } from "./CameraControl";
 
 export const RoomCanvas = () => {
@@ -19,10 +19,11 @@ export const RoomCanvas = () => {
 					outputColorSpace: THREE.SRGBColorSpace,
 				}}
 			>
-				<Environment preset="studio" backgroundIntensity={0.2} environmentIntensity={0.2} />
+				<Environment preset="studio" environmentIntensity={0.07} />
 				<Suspense fallback={null}>
 					<CameraControl />
 					<RoomScene />
+					<Preload all />
 				</Suspense>
 			</Canvas>
 			<CanvasLoader />

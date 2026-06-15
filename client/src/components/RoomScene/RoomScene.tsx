@@ -3,8 +3,10 @@ import { useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { ORBIT_TARGET } from "../../data/constants";
+import { sceneState } from "../../data/sceneState";
+import { KTX2Loader } from "three-stdlib";
 
 const WALL_NAMES: { [key: string]: string } = {
 	bedWall: "Bed_Wall",
@@ -15,11 +17,25 @@ const WALL_NAMES: { [key: string]: string } = {
 
 type WallFadeState = { meshes: THREE.Mesh[]; opacity: number; targetOpacity: number };
 
+const easeOutCubic = (t: number) => {
+	return 1 - Math.pow(1 - t, 3);
+};
+
 export const RoomScene = () => {
-	const { scene } = useGLTF("/isometric-room.glb");
+	const gl = useThree((state) => state.gl);
+	const { scene } = useGLTF("/isometric-room-ktx2.glb", true, undefined, (loader) => {
+		const ktx2loader = new KTX2Loader();
+		ktx2loader.setTranscoderPath("https://cdn.jsdelivr.net/gh/pmndrs/drei-assets/basis/");
+		ktx2loader.detectSupport(gl);
+		loader.setKTX2Loader(ktx2loader);
+	});
+
 	const modelQuadrantRef = useRef(-1);
 	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
 	const cameraInsideRoomRef = useRef(false);
+
+	const sceneGroupRef = useRef<THREE.Group>(null);
+	const initAnimProgressRef = useRef(0);
 
 	const getQuadrant = useCallback((angleRad: number): number => {
 		if (angleRad >= 0 && angleRad < Math.PI / 2) return 0;
@@ -37,6 +53,8 @@ export const RoomScene = () => {
 	}, []);
 
 	useEffect(() => {
+		initAnimProgressRef.current = 0;
+
 		scene.traverse((obj) => {
 			// Enable shadow for all meshes
 			obj.castShadow = true;
@@ -91,6 +109,20 @@ export const RoomScene = () => {
 				wallFadeRef.current.forEach((entry, name) => {
 					entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
 				});
+			}
+		}
+
+		// Animate room scale pop-in and spin on first load
+		// Only start animating when FPS >= 30
+		if (initAnimProgressRef.current < 1 && 1 / delta >= 30) {
+			initAnimProgressRef.current = Math.min(initAnimProgressRef.current + delta / 0.8, 1);
+			const eased = easeOutCubic(initAnimProgressRef.current);
+			sceneGroupRef.current?.scale.setScalar(eased);
+			if (sceneGroupRef.current) {
+				sceneGroupRef.current.rotation.y = (1 - eased) * Math.PI * 2;
+			}
+			if (initAnimProgressRef.current >= 1) {
+				sceneState.introAnimDone = true;
 			}
 		}
 
@@ -151,7 +183,9 @@ export const RoomScene = () => {
 
 	return (
 		<Fragment>
-			<primitive object={scene} position={[0, 0, 0]} />
+			<group ref={sceneGroupRef} scale={0}>
+				<primitive object={scene} position={[0, 0, 0]} />
+			</group>
 			{/* Primary light */}
 			<pointLight
 				intensity={100}

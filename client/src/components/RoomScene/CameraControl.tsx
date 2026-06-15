@@ -7,6 +7,7 @@ import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } 
 import { degToRad, lerp } from "three/src/math/MathUtils.js";
 import { useFrame } from "@react-three/fiber";
 import { CAMERA_INITIAL_POSITION } from "../../data/constants";
+import { sceneState } from "../../data/sceneState";
 
 const ORBIT_TARGET = new THREE.Vector3(0, 7, 0);
 const CAM_ROUTE_CONFIG: { [key: string]: { position: THREE.Vector3; lookAt: THREE.Vector3 } } = {
@@ -90,7 +91,7 @@ export const CameraControl = () => {
 		const camTransition = camTransitionRef.current;
 
 		// Initiate camera transition
-		if (pendingCamTransitionRef.current && camTransitionConfig) {
+		if (pendingCamTransitionRef.current && camTransitionConfig && sceneState.introAnimDone) {
 			const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
 			camTransitionRef.current = {
 				startPos: camera.position.clone(),
