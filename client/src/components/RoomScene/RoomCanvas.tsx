@@ -17,14 +17,14 @@ export const RoomCanvas = () => {
 				<CanvasLoader />
 				<Canvas
 					camera={{ position: CAMERA_INITIAL_POSITION, fov: 30 }}
-					shadows={{ type: THREE.PCFShadowMap }}
+					shadows={{ type: THREE.PCFSoftShadowMap }}
 					gl={{
 						toneMapping: THREE.ACESFilmicToneMapping,
-						toneMappingExposure: 1,
+						toneMappingExposure: 1.15,
 						outputColorSpace: THREE.SRGBColorSpace,
 					}}
 				>
-					<Environment preset="studio" environmentIntensity={0.07} />
+					<Environment preset="studio" environmentIntensity={0.12} />
 					<CameraControl />
 					<RoomScene />
 					<Preload all />

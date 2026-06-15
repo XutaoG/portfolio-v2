@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useContext, useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, N8AO, SMAA, HueSaturation } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -31,6 +31,7 @@ export const RoomScene = () => {
 		loader.setKTX2Loader(ktx2loader);
 	});
 
+	const directionalLightRef = useRef<THREE.DirectionalLight>(null);
 	const modelQuadrantRef = useRef(-1);
 	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
 	const cameraInsideRoomRef = useRef(false);
@@ -116,6 +117,15 @@ export const RoomScene = () => {
 				wallFadeRef.current.forEach((entry, name) => {
 					entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
 				});
+
+				// Disable directional light when window wall is not visible
+				if (directionalLightRef.current) {
+					if (currentQuadrant === 1 || currentQuadrant === 2) {
+						directionalLightRef.current.intensity = 0;
+					} else {
+						directionalLightRef.current.intensity = 10;
+					}
+				}
 			}
 		}
 
@@ -175,16 +185,7 @@ export const RoomScene = () => {
 		];
 
 		return secondaryLightsPositions.map((lightPos, i) => (
-			<pointLight
-				key={i}
-				intensity={20}
-				color="#e6994e"
-				position={lightPos}
-				castShadow
-				shadow-bias={-0.005}
-				shadow-mapSize={[2048, 2048]}
-				shadow-radius={20}
-			/>
+			<pointLight key={i} intensity={14} color="#ebb87a" position={lightPos} />
 		));
 	}, []);
 
@@ -193,23 +194,42 @@ export const RoomScene = () => {
 			<group ref={sceneGroupRef} scale={0}>
 				<primitive object={scene} position={[0, 0, 0]} />
 			</group>
+
+			{/* Ambient fill — sky warm, ground very dark */}
+			<hemisphereLight args={["#ffd6a0", "#0d0500", 0.7]} />
+
 			{/* Primary light */}
 			<pointLight
-				intensity={100}
+				intensity={70}
 				color="#e6994e"
 				position={[0, 7, 0]}
 				castShadow
 				shadow-bias={-0.005}
 				shadow-mapSize={[2048, 2048]}
-				shadow-radius={20}
+				shadow-radius={30}
 			/>
 
-			{/* Secondary lights */}
+			{/* Secondary fill lights — no shadows */}
 			{secondaryLightsElements}
+
+			{/* Cool directional accent to simulate daylight from the window side */}
+			<directionalLight
+				ref={directionalLightRef}
+				intensity={10}
+				color="#d4e8ff"
+				position={[-2, 6, -13]}
+				target={scene}
+				castShadow
+				shadow-bias={-0.003}
+				shadow-mapSize={[1024, 1024]}
+			/>
 
 			{/* Post processing */}
 			<EffectComposer>
-				<Bloom intensity={0.5} luminanceThreshold={0.8} luminanceSmoothing={0.9} />
+				<Bloom intensity={0.6} luminanceThreshold={0.75} luminanceSmoothing={0.9} />
+				<N8AO aoRadius={2.5} intensity={1.5} distanceFalloff={1} quality="medium" />
+				<HueSaturation saturation={0.1} />
+				<SMAA />
 			</EffectComposer>
 		</Fragment>
 	);
