@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo, useRef } from "react";
+import { Fragment, useCallback, useContext, useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useEffect } from "react";
@@ -7,6 +7,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { ORBIT_TARGET } from "../../data/constants";
 import { sceneState } from "../../data/sceneState";
 import { KTX2Loader } from "three-stdlib";
+import { SceneStateContext } from "../../context";
 
 const WALL_NAMES: { [key: string]: string } = {
 	bedWall: "Bed_Wall",
@@ -52,6 +53,8 @@ export const RoomScene = () => {
 		return true;
 	}, []);
 
+	const sceneContextState = useContext(SceneStateContext);
+
 	useEffect(() => {
 		initAnimProgressRef.current = 0;
 
@@ -81,6 +84,10 @@ export const RoomScene = () => {
 			}
 		});
 	}, [scene]);
+
+	useEffect(() => {
+		sceneContextState?.setIsLoading(false);
+	}, [scene, sceneContextState]);
 
 	useFrame(({ camera }, delta) => {
 		// Check if camera is within the room (XZ distance from origin < 4.5)
