@@ -47,7 +47,7 @@ export const RoomScene = () => {
 	}, []);
 
 	const wallShouldBeVisible = useCallback((wallName: string, quadrant: number): boolean => {
-		if (quadrant === 0 && (wallName === WALL_NAMES.bedWall || wallName === WALL_NAMES.closetWall)) return false;
+		if (quadrant === 0 && (wallName === WALL_NAMES.closetWall || wallName === WALL_NAMES.bedWall)) return false;
 		if (quadrant === 1 && (wallName === WALL_NAMES.bedWall || wallName === WALL_NAMES.windowWall)) return false;
 		if (quadrant === 2 && (wallName === WALL_NAMES.windowWall || wallName === WALL_NAMES.deskWall)) return false;
 		if (quadrant === 3 && (wallName === WALL_NAMES.deskWall || wallName === WALL_NAMES.closetWall)) return false;
