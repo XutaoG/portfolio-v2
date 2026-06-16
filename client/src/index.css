@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: "Fira Code";
+	src: url("./fonts/FiraCode-VariableFont_wght.woff2") format("woff2");
+	font-weight: 300 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Chakra Petch";
+	src: url("./fonts/ChakraPetch-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Chakra Petch";
+	src: url("./fonts/ChakraPetch-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
 @keyframes blink {
 	0%,
 	60% {
