@@ -7,7 +7,7 @@ interface PageContainerProps {
 
 export const PageContainer = ({ children }: PageContainerProps) => {
 	return (
-		<div className="flex grow relative m-(--page-container-margin-size)">
+		<div className="flex gap-6 grow relative m-(--page-container-margin-size)">
 			<div className="grow flex justify-center">
 				<div className="w-full max-w-360">{children}</div>
 			</div>
