@@ -5,16 +5,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "../../routes";
 import { useMinWidth } from "../../hooks/useMinWidth";
 import { ListIcon } from "@phosphor-icons/react";
+import { useLocation } from "react-router";
 
 export const NavBar = () => {
 	const useMd = useMinWidth("md");
 	const [prevUseMd, setPrevUseMd] = useState(useMd);
 
+	const location = useLocation();
+	const topLevelPath = location.pathname.split("/")[1];
+	const [prevTopLevelPath, setPrevTopLevelPath] = useState(topLevelPath);
+
 	const navRef = useRef<HTMLElement>(null);
 	const [showMobileNavBar, setShowMobileNavBar] = useState(false);
 
-	if (useMd !== prevUseMd) {
+	if (useMd !== prevUseMd || prevTopLevelPath !== topLevelPath) {
 		setPrevUseMd(useMd);
+		setPrevTopLevelPath(topLevelPath);
 		if (!useMd) {
 			setShowMobileNavBar(false);
 		}
