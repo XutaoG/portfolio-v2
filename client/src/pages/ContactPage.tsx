@@ -24,8 +24,8 @@ export const ContactPage = () => {
 			</div>
 
 			<div className="flex gap-8 flex-col lg:flex-row self-stretch lg:self-auto">
-				<div className="flex gap-8 flex-row lg:flex-col">
-					<div className="flex flex-col gap-8">
+				<div className="flex gap-8 flex-col md:flex-row lg:flex-col">
+					<div className="flex flex-row md:flex-col gap-8 self-center md:self-auto ">
 						{/* Location */}
 						<div className="flex gap-4 items-center">
 							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
@@ -91,7 +91,7 @@ export const ContactPage = () => {
 				</TerminalWindowPanel>
 			</div>
 
-			<p>
+			<p className="text-center">
 				<span className="text-primary font-semibold">&lt;</span> Thanks for stopping by! I appreciate you taking
 				the time to reach out. <span className="text-primary font-semibold tracking-widest">&gt;</span>
 			</p>

@@ -68,7 +68,7 @@ export const NavBar = () => {
 			<AnimatePresence>
 				{showMobileNavBar && !useMd && (
 					<motion.div
-						className="absolute top-(--nav-height) mx-8 mt-4 inset-x-0 bg-base/50 backdrop-blur-md 
+						className="fixed top-(--nav-height) mx-8 mt-4 inset-x-0 bg-base/50 backdrop-blur-md 
 						z-50 overflow-hidden border border-content/20 rounded-lg"
 						initial={{ height: 0 }}
 						animate={{ height: "auto" }}
