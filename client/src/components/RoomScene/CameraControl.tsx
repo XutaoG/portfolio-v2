@@ -29,8 +29,13 @@ const CAM_ROUTE_CONFIG: { [key: string]: { position: THREE.Vector3; lookAt: THRE
 	},
 };
 const SCENE_RIGHT_SHIFT = 0.2;
+const SCENE_UP_SHIFT = 0.1;
 const PARALLAX_STRENGTH = 1;
 const PARALLAX_LERP_SPEED = 1;
+
+const REFERENCE_SIZE = 1500;
+const CAMERA_MIN_ZOOM = 0.1;
+const CAMERA_MAX_ZOOM = 1.2;
 
 const easeInOutCubic = (t: number): number => {
 	return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -189,13 +194,21 @@ export const CameraControl = () => {
 			camera.lookAt(parallaxCameraTargetRef.current);
 		}
 
-		// Shift scene to the right by updating perspective camera view offset
+		// Adjust camera configuration based on canvas size
 		const { width, height } = size;
 		const lastViewState = lastViewStateRef.current;
 		if (lastViewState.width !== width || lastViewState.height !== height || lastViewState.cameraId !== camera.id) {
 			lastViewStateRef.current = { width, height, cameraId: camera.id };
 			camera.aspect = width / height;
-			camera.setViewOffset(width * (1 + SCENE_RIGHT_SHIFT), height, 0, 0, width, height);
+			// Shift scene to the right by updating perspective camera view offset
+			camera.setViewOffset(width * (1 + SCENE_RIGHT_SHIFT), height * (1 - SCENE_UP_SHIFT), 0, 0, width, height);
+
+			// Adjust camera zoom based on screen size
+			camera.zoom = THREE.MathUtils.clamp(
+				Math.sqrt(width * height) / REFERENCE_SIZE,
+				CAMERA_MIN_ZOOM,
+				CAMERA_MAX_ZOOM,
+			);
 			camera.updateProjectionMatrix();
 		}
 	});
