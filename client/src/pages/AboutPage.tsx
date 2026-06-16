@@ -13,7 +13,7 @@ export const AboutPage = () => {
 		return basicInfoData.map((aboutMe) => (
 			<PrimaryPanel key={aboutMe.type}>
 				<div className="flex items-center gap-3 font-semibold text-primary">
-					{aboutMe.icon}
+					<div className="hidden sm:block">{aboutMe.icon}</div>
 					{aboutMe.title}
 				</div>
 				<div className="grow flex flex-col gap-3">
@@ -21,7 +21,10 @@ export const AboutPage = () => {
 					<p className="text-content/60">{aboutMe.subHeading}</p>
 				</div>
 				{aboutMe.ending && (
-					<p className={`font-semibold ${aboutMe.type === "work-status" ? "text-success" : "text-primary"}`}>
+					<p
+						className={`hidden sm:block font-semibold text-sm 
+						${aboutMe.type === "work-status" ? "text-success" : "text-primary"}`}
+					>
 						{aboutMe.ending}
 					</p>
 				)}
@@ -39,12 +42,12 @@ export const AboutPage = () => {
 	));
 
 	return (
-		<div className="flex flex-col gap-10 h-full justify-end">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
-			<div className="self-start flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ ABOUT ME</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl text-shadow-lg">
+					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Hey, I'm <span className="font-bold text-primary">Xutao_</span>
 					</h1>
 					<p className="text-content/60 font-medium">(Pronunced Shu-tao)</p>
@@ -63,7 +66,7 @@ export const AboutPage = () => {
 					to="https://www.google.com"
 					target="_blank"
 					rel="noreferrer"
-					className="flex items-center gap-2 font-medium underline underline-offset-4"
+					className="hidden sm:flex items-center gap-2 font-medium underline underline-offset-4"
 				>
 					VIEW RESUME
 					<ArrowSquareOutIcon size={20} weight="bold" />
@@ -71,9 +74,9 @@ export const AboutPage = () => {
 			</div>
 
 			{/* Basic info */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-8">{aboutMePanels}</div>
+			<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8">{aboutMePanels}</div>
 
-			<div className="grid grid-cols-1 lg:grid-cols-2 max-h-none lg:max-h-96 gap-8 ">
+			<div className="grid grid-cols-1 lg:grid-cols-2 max-h-none lg:max-h-96 gap-4 sm:gap-8 ">
 				{/* My story */}
 				<TerminalWindowPanel title="My Story" command="whoami" className="max-h-96 lg:max-h-none">
 					<p className="text-content/80">

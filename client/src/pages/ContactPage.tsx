@@ -8,12 +8,12 @@ import { Button } from "../components/Common/Button";
 
 export const ContactPage = () => {
 	return (
-		<div className="flex flex-col gap-10 h-full items-center">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full items-center">
 			{/* Introduction */}
-			<div className="flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ CONTACT ME</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl text-shadow-lg">
+					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Let's <span className="font-bold text-primary">Get In Touch_</span>
 					</h1>
 				</div>
@@ -24,8 +24,8 @@ export const ContactPage = () => {
 			</div>
 
 			<div className="flex gap-8 flex-col lg:flex-row self-stretch lg:self-auto">
-				<div className="flex gap-8 flex-col md:flex-row lg:flex-col">
-					<div className="flex flex-row md:flex-col gap-8 self-center md:self-auto ">
+				<div className="flex gap-4 sm:gap-8 flex-col md:flex-row lg:flex-col">
+					<div className="flex flex-col sm:flex-row md:flex-col gap-4 sm:gap-8 self-auto sm:self-center md:self-auto ">
 						{/* Location */}
 						<div className="flex gap-4 items-center">
 							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
@@ -55,21 +55,21 @@ export const ContactPage = () => {
 							<p className="font-semibold text-primary">Let's Connect!</p>
 							<p className="text-content/60">Find me on these platforms.</p>
 							<SocialLink
-								icon={<GithubLogoIcon size={24} weight="bold" />}
+								icon={<GithubLogoIcon size={24} weight="bold" className="shrink-0" />}
 								title="GitHub"
 								displayLink="github.com/XutaoG"
 								fullLink="https://github.com/XutaoG"
 								action="link"
 							/>
 							<SocialLink
-								icon={<LinkedinLogoIcon size={24} weight="bold" />}
+								icon={<LinkedinLogoIcon size={24} weight="bold" className="shrink-0" />}
 								title="LinkedIn"
 								displayLink="linkedin.com/in/xutaogao"
 								fullLink="https://www.linkedin.com/in/xutaogao"
 								action="link"
 							/>
 							<SocialLink
-								icon={<EnvelopeIcon size={24} weight="bold" />}
+								icon={<EnvelopeIcon size={24} weight="bold" className="shrink-0" />}
 								title="Email"
 								displayLink="xutao.gao04@gmail.com"
 								fullLink="xutao.gao04@gmail.com"
@@ -79,9 +79,9 @@ export const ContactPage = () => {
 					</div>
 				</div>
 
-				<TerminalWindowPanel title="Send Me a Message" command="contact_me.exe">
+				<TerminalWindowPanel title="Message Me" command="contact_me.exe">
 					<p className="text-content/60">Fill out the form below and I‘ll get back to you.</p>
-					<div className="grid grid-cols-2 gap-6">
+					<div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6">
 						<InputField title="Full Name" placeholder="John Doe" />
 						<InputField title="Email Address" placeholder="example@email.com" />
 					</div>

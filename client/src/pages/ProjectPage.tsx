@@ -19,12 +19,12 @@ export const ProjectPage = () => {
 	}, [isAnyProjectSelected]);
 
 	return (
-		<div className="flex flex-col gap-10 h-full justify-end">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
-			<div className="self-start flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ PROJECTS</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl text-shadow-lg">
+					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Things I've <span className="font-bold text-primary">Built_</span>
 					</h1>
 				</div>
@@ -36,11 +36,11 @@ export const ProjectPage = () => {
 
 			{/* Github link */}
 			<TerminalWindowPanel title="Locator" command="locate GitHub" className="self-start">
-				<div className="border border-content/40 p-2 rounded-lg flex justify-between items-center gap-10">
-					<GithubLogoIcon size={24} weight="bold" />
+				<div className="border border-content/40 p-2 rounded-lg flex justify-between items-center gap-4 sm:gap-10">
+					<GithubLogoIcon size={24} weight="bold" className="shrink-0" />
 					github.com/XutaoG
 					<Link to="https://github.com/XutaoG" target="_blank" rel="noreferrer">
-						<ArrowSquareOutIcon size={24} weight="bold" />
+						<ArrowSquareOutIcon size={24} weight="bold" className="shrink-0" />
 					</Link>
 				</div>
 			</TerminalWindowPanel>
@@ -48,8 +48,8 @@ export const ProjectPage = () => {
 			{/* Projects */}
 			<div className="flex gap-4">
 				<div
-					className={twMerge(`grid gap-4 content-start transition-[max-width] duration-300
-						${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-2 lg:grid-cols-3 max-w-full"}`)}
+					className={twMerge(`grid gap-2 sm:gap-4 content-start transition-[max-width] duration-300
+					${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-full"}`)}
 				>
 					{projectElements}
 				</div>

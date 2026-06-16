@@ -11,14 +11,21 @@ export const TerminalLine = ({ onAnimationComplete, sequence }: TerminalLineProp
 	const [isTypingFinished, setIsTypingFinsihed] = useState(false);
 
 	return (
-		<div className="text-content/80 font-medium flex items-center gap-2">
+		<div className="text-content/80 font-medium flex items-start gap-2">
 			<span className="text-primary">$</span>
 			<TypeAnimation
 				sequence={[...sequence, onAnimationComplete ?? (() => {}), () => setIsTypingFinsihed(true)]}
 				cursor={false}
 				speed={70}
 			/>
-			{isTypingFinished && <CheckCircleIcon size={18} weight="fill" color="var(--color-success)" />}
+			{isTypingFinished && (
+				<CheckCircleIcon
+					size={18}
+					weight="fill"
+					color="var(--color-success)"
+					className="self-center shrink-0 hidden sm:block"
+				/>
+			)}
 		</div>
 	);
 };

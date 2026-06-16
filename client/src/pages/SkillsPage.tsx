@@ -24,7 +24,7 @@ export const SkillsPage = () => {
 		return skills.map((skill) => (
 			<PrimaryPanel className="gap-4" key={skill.title}>
 				<div className="flex items-center gap-4 text-primary font-semibold">
-					{skill.icon}
+					<div className="hidden sm:block">{skill.icon}</div>
 					{skill.title}
 				</div>
 				<p className="text-content/80">{skill.description}</p>
@@ -54,25 +54,27 @@ export const SkillsPage = () => {
 					? "src/assets/cert-logos/aws-logo.svg"
 					: "src/assets/cert-logos/comptia-logo.svg";
 
-			const logoImageHeightStyle = certification.type === "AWS" ? "h-20" : "h-8";
+			const logoImageSizeStyle = certification.type === "AWS" ? "h-16 sm:h-20" : "h-6 sm:h-8";
 
 			return (
 				<Fragment key={i}>
 					<div
 						className="relative overflow-hidden border border-content/20 rounded-lg p-6
-					bg-base/80 backdrop-blur-xs flex flex-col justify-between items-center gap-4 grow basis-0"
+						bg-base/80 backdrop-blur-xs flex flex-row sm:flex-col justify-between items-center gap-4 grow sm:basis-0"
 					>
-						<div className="z-0 absolute -bottom-8 -right-8 w-2/3 aspect-square rounded-full bg-accent/20 blur-3xl" />
-						<div className="z-10 h-20 flex items-center">
-							<img src={logoImageSrc} className={`${logoImageHeightStyle}`} />
+						<div className="z-0 absolute -bottom-8 -right-8 w-2/3 h-2/3 rounded-full bg-accent/20 blur-3xl" />
+						<div className="z-10 h-16 sm:h-20 flex items-center">
+							<img src={logoImageSrc} className={`${logoImageSizeStyle}`} />
 						</div>
-						<p className="z-10 grow font-medium text-center max-w-60 text-content/80 flex items-center">
-							{certification.name}
-						</p>
-						<div className="h-px bg-content/20 w-full" />
-						<p className="z-10 text-sm font-medium">
-							Exp: <span className="text-primary">{certification.validThru}</span>
-						</p>
+						<div className="grow flex flex-col gap-4 items-center">
+							<p className="z-10 grow font-medium text-center max-w-60 text-content/80">
+								{certification.name}
+							</p>
+							<div className="h-px bg-content/20 w-full" />
+							<p className="z-10 text-sm font-medium">
+								Exp: <span className="text-primary">{certification.validThru}</span>
+							</p>
+						</div>
 					</div>
 					{i == certifications.length - 1 || (
 						<div className="hidden lg:flex items-center">
@@ -87,12 +89,12 @@ export const SkillsPage = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-10 h-full">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full">
 			{/* Introduction */}
-			<div className="flex flex-col gap-6 items-start self-end bg-base/20 backdrop-blur-sm">
+			<div className="flex flex-col gap-4 sm:gap-6 items-start self-end bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ SKILLS</p>
 				<div className="flex flex-col items-end">
-					<h1 className="font-medium text-5xl text-shadow-lg">
+					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						My Technical <span className="font-bold text-primary">Toolkit_</span>
 					</h1>
 				</div>
@@ -103,14 +105,14 @@ export const SkillsPage = () => {
 			</div>
 
 			{/* Skills */}
-			<div className="grid grid-cols-2 xl:grid-cols-4 gap-8">{skillElements}</div>
+			<div className="grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-4 gap-2 sm:gap-8">{skillElements}</div>
 
 			{/* Certifications */}
 			<div className="flex gap-4 lg:gap-8 flex-col xl:flex-row">
-				<div className="flex flex-col gap-8">
+				<div className="flex flex-col gap-4 lg:gap-8">
 					{/* Certification introduction */}
 					<div className="flex items-center gap-4">
-						<CertificateIcon size={40} color="var(--color-primary)" />
+						<CertificateIcon size={40} color="var(--color-primary)" className="shrink-0" />
 						<div className="flex flex-col gap-2">
 							<p className="font-semibold text-primary text-lg">Certifications</p>
 							<p>Industry-recognized certifications that validate my skills and knowledge.</p>
@@ -118,7 +120,7 @@ export const SkillsPage = () => {
 					</div>
 
 					{/* Completed certifications */}
-					<div className="flex gap-4 lg:gap-0">{certificationElements}</div>
+					<div className="flex flex-col sm:flex-row gap-2 sm:gap-4 lg:gap-0">{certificationElements}</div>
 				</div>
 
 				<TerminalWindowPanel title="Certification In Progress" command="inprogress" className="grow">

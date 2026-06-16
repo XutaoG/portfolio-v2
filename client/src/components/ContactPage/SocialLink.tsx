@@ -27,8 +27,8 @@ export const SocialLink = ({ icon, title, displayLink, fullLink, action }: Socia
 		<div className="border border-content/20 p-4 gap-6 flex items-center rounded-lg">
 			{icon}
 			<div className="grow flex flex-col gap-1">
-				<p className="font-medium">{title}</p>
-				<p className="text-content/60">{displayLink}</p>
+				<p className="font-medium text-content/60 sm:text-content">{title}</p>
+				<p className="text-content/60 hidden sm:block">{displayLink}</p>
 			</div>
 			{action === "link" ? (
 				<Link to={fullLink} target="_blank" rel="noreferrer">

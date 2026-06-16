@@ -42,7 +42,7 @@ export const NavBar = () => {
 		<Fragment>
 			<motion.nav
 				ref={navRef}
-				className="p-8 pb-0 sticky top-0 z-50 bg-base/50 backdrop-blur-md"
+				className="p-(--page-container-margin-size) pb-0 sticky top-0 z-50 bg-base/50 backdrop-blur-md"
 				initial={{ opacity: 0, y: "-100%" }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.3, ease: "easeOut" }}
@@ -68,7 +68,7 @@ export const NavBar = () => {
 			<AnimatePresence>
 				{showMobileNavBar && !useMd && (
 					<motion.div
-						className="fixed top-(--nav-height) mx-8 mt-4 inset-x-0 bg-base/50 backdrop-blur-md 
+						className="fixed top-(--nav-height) mx-(--page-container-margin-size) mt-4 inset-x-0 bg-base/50 backdrop-blur-md 
 						z-50 overflow-hidden border border-content/20 rounded-lg"
 						initial={{ height: 0 }}
 						animate={{ height: "auto" }}

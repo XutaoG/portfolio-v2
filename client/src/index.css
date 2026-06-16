@@ -49,12 +49,20 @@
 
 	--font-fira: "Fira Code", monospace;
 	--font-chakra: "Chakra Petch", sans-serif;
+
+	--breakpoint-xs: 30rem;
 }
 
 :root {
 	--page-container-margin-size: 32px;
 	--sidenav-top: calc(var(--nav-height) + var(--page-container-margin-size));
 	--sidenav-height: calc(100vh - var(--nav-height) - 2 * var(--page-container-margin-size));
+}
+
+@media (width < theme(--breakpoint-sm)) {
+	:root {
+		--page-container-margin-size: 24px;
+	}
 }
 
 @layer base {

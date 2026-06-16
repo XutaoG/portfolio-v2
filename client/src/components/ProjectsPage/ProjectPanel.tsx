@@ -3,6 +3,7 @@ import type { TProject } from "../../types";
 import { twMerge } from "tailwind-merge";
 import { useNavigate, useParams } from "react-router";
 import { PROJECTS_ROUTE } from "../../routes";
+import { useMinWidth } from "../../hooks/useMinWidth";
 
 interface ProjectPanelProps {
 	project: TProject;
@@ -12,6 +13,7 @@ interface ProjectPanelProps {
 export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const { projectId } = useParams();
 	const navigate = useNavigate();
+	const useSm = useMinWidth("sm");
 
 	const isSelected = projectId != null && project.id === Number(projectId);
 	const selectProject = (newProjectId: number) => {
@@ -25,7 +27,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const iconElement = (
 		<div
 			className={`p-1 rounded-lg bg-base border border-content/20
-			${useCard || "absolute left-4 top-4"}`}
+			${useCard || !useSm || "absolute left-4 top-4"}`}
 		>
 			<div className="bg-linear-to-br from-indigo-700 to-indigo-400 rounded-lg p-1">
 				<AppWindowIcon size={48} />
@@ -38,7 +40,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const projectNameElement = <p className="font-semibold">{project.name}</p>;
 	const projectDescriptionElement = <p className="font-sm text-content/60 line-clamp-2">{project.description}</p>;
 
-	if (useCard) {
+	if (useCard || !useSm) {
 		// Return card style
 		return (
 			<div

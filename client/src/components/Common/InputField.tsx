@@ -10,10 +10,10 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 export const InputField = ({ className, title, ...rest }: InputFieldProps) => {
 	return (
 		<div
-			className={twMerge(`border border-content/20 p-4 flex flex-col gap-2 rounded-lg 
+			className={twMerge(`border border-content/20 p-2 sm:p-4 flex flex-col gap-2 rounded-lg 
 			relative overflow-hidden ${className}`)}
 		>
-			<div className="absolute -bottom-8 -right-8 w-1/3 aspect-square bg-accent/10 rounded-full blur-3xl"/>
+			<div className="absolute -bottom-8 -right-8 w-1/3 aspect-square bg-accent/10 rounded-full blur-3xl" />
 			<p className="font-medium">{title}</p>
 			<input {...rest} />
 		</div>

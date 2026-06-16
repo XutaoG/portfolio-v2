@@ -14,7 +14,7 @@ export const TerminalLoadingText = () => {
 
 	const terminalLinesElements = terminalLines.map((line, i) => {
 		return (
-			<div key={i} className="h-6">
+			<div key={i}>
 				{linesCompleted >= i && (
 					<TerminalLine
 						sequence={line}

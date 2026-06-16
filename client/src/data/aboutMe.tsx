@@ -24,7 +24,7 @@ export const basicInfoData: TBasicInfo[] = [
 		title: "WORK HISTORY",
 		heading: "UCF Institute for Simulation & Training",
 		subHeading: "Full-time",
-		ending: "March 2025 - June 2026",
+		ending: "Mar 2025 - Jun 2026",
 	},
 	{
 		type: "location",
