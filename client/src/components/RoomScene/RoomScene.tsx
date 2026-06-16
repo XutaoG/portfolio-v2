@@ -99,9 +99,15 @@ export const RoomScene = () => {
 		if (isInsideRoom !== cameraInsideRoomRef.current) {
 			cameraInsideRoomRef.current = isInsideRoom;
 			if (isInsideRoom) {
+				// Enable all walls when the camera moves within the room
 				wallFadeRef.current.forEach((entry) => {
 					entry.targetOpacity = 1;
 				});
+
+				// Disable directional light when the camera moves within the room
+				if (directionalLightRef.current) {
+					directionalLightRef.current.intensity = 0;
+				}
 			} else {
 				// Re-evaluation quadrant when leaving the room
 				modelQuadrantRef.current = -1;
