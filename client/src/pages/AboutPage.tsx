@@ -1,19 +1,34 @@
-import {
-	ArrowSquareOutIcon,
-	BriefcaseIcon,
-	ClockClockwiseIcon,
-	GraduationCapIcon,
-	MapPinIcon,
-	TargetIcon,
-} from "@phosphor-icons/react";
+import { ArrowSquareOutIcon, TargetIcon } from "@phosphor-icons/react";
 import { Button } from "../components/Common/Button";
 import { Link } from "react-router";
 import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { SKILLS_ROUTE } from "../routes";
 import { PageTransitionLink } from "../components/Common/PageTransitionLink";
+import { useMemo } from "react";
+import { basicInfoData } from "../data/aboutMe";
 
 export const AboutPage = () => {
+	const aboutMePanels = useMemo(() => {
+		return basicInfoData.map((aboutMe) => (
+			<PrimaryPanel key={aboutMe.type}>
+				<div className="flex items-center gap-3 font-semibold text-primary">
+					{aboutMe.icon}
+					{aboutMe.title}
+				</div>
+				<div className="grow flex flex-col gap-3">
+					<p className="font-medium">{aboutMe.heading}</p>
+					<p className="text-content/60">{aboutMe.subHeading}</p>
+				</div>
+				{aboutMe.ending && (
+					<p className={`font-semibold ${aboutMe.type === "work-status" ? "text-success" : "text-primary"}`}>
+						{aboutMe.ending}
+					</p>
+				)}
+			</PrimaryPanel>
+		));
+	}, []);
+
 	const focuses = ["Focus 1", "Focus 2", "Focus 3", "Focus 4", "Focus 5", "Focus 6"];
 
 	const focusElements = focuses.map((focus, i) => (
@@ -56,62 +71,11 @@ export const AboutPage = () => {
 			</div>
 
 			{/* Basic info */}
-			<div className="grid grid-cols-4 gap-8">
-				{/* Education */}
-				<PrimaryPanel className="justify-between gap-6">
-					<div className="flex items-center gap-3 font-semibold text-primary">
-						<GraduationCapIcon size={24} weight="bold" color="var(--color-primary)" />
-						EDUCATION
-					</div>
-					<div className="flex flex-col gap-3">
-						<p className="font-medium">B.S. Computer Science</p>
-						<p className="text-content/60">University of Central Florida</p>
-					</div>
-					<p className="font-semibold text-primary">Graduated: May 2026</p>
-				</PrimaryPanel>
+			<div className="grid grid-cols-2 lg:grid-cols-4 gap-8">{aboutMePanels}</div>
 
-				{/* Work status */}
-				<PrimaryPanel className="justify-between gap-6">
-					<div className="flex items-center gap-3 font-semibold text-primary">
-						<BriefcaseIcon size={24} weight="bold" color="var(--color-primary)" />
-						WORK STATUS
-					</div>
-					<div className="flex flex-col gap-3">
-						<p className="font-medium">Full-stack Engineer</p>
-						<p className="text-content/60">Full-time</p>
-					</div>
-					<p className="font-semibold text-success">Open to new opportunities</p>
-				</PrimaryPanel>
-
-				{/* Work history */}
-				<PrimaryPanel className="justify-between gap-6">
-					<div className="flex items-center gap-3 font-semibold text-primary">
-						<ClockClockwiseIcon size={24} weight="bold" color="var(--color-primary)" />
-						WORK HISTORY
-					</div>
-					<div className="flex flex-col gap-3">
-						<p className="font-medium">UCF Institute for Simulation & Training</p>
-						<p className="text-content/60">Full-time</p>
-					</div>
-					<p className="font-semibold text-primary">March 2025 - June 2026</p>
-				</PrimaryPanel>
-
-				{/* Location */}
-				<PrimaryPanel className="justify-between gap-6">
-					<div className="flex items-center gap-3 font-semibold text-primary">
-						<MapPinIcon size={24} weight="bold" color="var(--color-primary)" />
-						LOCATION
-					</div>
-					<div className="flex flex-col gap-3 grow">
-						<p className="font-medium">Orlando, Florida</p>
-						<p className="text-content/60">United States</p>
-					</div>
-				</PrimaryPanel>
-			</div>
-
-			<div className="grid grid-cols-2 gap-8 max-h-96">
+			<div className="grid grid-cols-1 lg:grid-cols-2 max-h-none lg:max-h-96 gap-8 ">
 				{/* My story */}
-				<TerminalWindowPanel title="My Story" command="whoami">
+				<TerminalWindowPanel title="My Story" command="whoami" className="max-h-96 lg:max-h-none">
 					<p className="text-content/80">
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi, labore quaerat nostrum accusamus
 						laborum quas beatae quasi quae officiis tempore.
@@ -127,8 +91,12 @@ export const AboutPage = () => {
 				</TerminalWindowPanel>
 
 				{/* Current focus */}
-				<TerminalWindowPanel title="Current Focus" command="cat current_focus.md" className="h-full">
-					<div className="flex flex-col gap-4 text-content/80 ">
+				<TerminalWindowPanel
+					title="Current Focus"
+					command="cat current_focus.md"
+					className="max-h-96 lg:max-h-none"
+				>
+					<div className="flex flex-col gap-4 text-content/80">
 						<p>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt optio libero possimus illo
 							temporibus officiis reprehenderit nisi quam quis cum.

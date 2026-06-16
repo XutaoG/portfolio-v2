@@ -2,18 +2,21 @@ import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { Link, Outlet, useParams } from "react-router";
 import { ProjectPanel } from "../components/ProjectsPage/ProjectPanel";
-import { mockProjects } from "../data/projects";
+import { projects } from "../data/projects";
 import { twMerge } from "tailwind-merge";
 import { CONTACT_ROUTE } from "../routes";
 import { PageTransitionLink } from "../components/Common/PageTransitionLink";
+import { useMemo } from "react";
 
 export const ProjectPage = () => {
 	const { projectId } = useParams();
 	const isAnyProjectSelected = projectId != null;
 
-	const projectElements = mockProjects.map((project) => (
-		<ProjectPanel key={project.id} project={project} useCard={isAnyProjectSelected} />
-	));
+	const projectElements = useMemo(() => {
+		return projects.map((project) => (
+			<ProjectPanel key={project.id} project={project} useCard={isAnyProjectSelected} />
+		));
+	}, [isAnyProjectSelected]);
 
 	return (
 		<div className="flex flex-col gap-10 h-full justify-end">
@@ -46,7 +49,7 @@ export const ProjectPage = () => {
 			<div className="flex gap-4">
 				<div
 					className={twMerge(`grid gap-4 content-start transition-[max-width] duration-300
-						${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-3 max-w-full"}`)}
+						${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-2 lg:grid-cols-3 max-w-full"}`)}
 				>
 					{projectElements}
 				</div>

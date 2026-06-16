@@ -8,7 +8,7 @@ import { Button } from "../components/Common/Button";
 
 export const ContactPage = () => {
 	return (
-		<div className="flex flex-col gap-10 h-full justify-center items-center">
+		<div className="flex flex-col gap-10 h-full items-center">
 			{/* Introduction */}
 			<div className="flex flex-col gap-6 items-start bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ CONTACT ME</p>
@@ -23,56 +23,60 @@ export const ContactPage = () => {
 				</p>
 			</div>
 
-			<div className="flex gap-8">
-				<div className="flex flex-col gap-8">
-					{/* Location */}
-					<div className="flex gap-4">
-						<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
-							<MapPinIcon size={32} />
+			<div className="flex gap-8 flex-col lg:flex-row self-stretch lg:self-auto">
+				<div className="flex gap-8 flex-row lg:flex-col">
+					<div className="flex flex-col gap-8">
+						{/* Location */}
+						<div className="flex gap-4 items-center">
+							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
+								<MapPinIcon size={32} className="shrink-0" />
+							</div>
+							<div className="flex flex-col gap-2 items-start">
+								<p className="font-medium text-primary">LOCATION</p>
+								<p className="text-content/60 text-nowrap">Orlando, Florida</p>
+							</div>
 						</div>
-						<div className="flex flex-col gap-2">
-							<p className="font-medium text-primary">LOCATION</p>
-							<p className="text-content/60">Orlando, Florida</p>
-						</div>
-					</div>
 
-					{/* Location */}
-					<div className="flex gap-4">
-						<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
-							<HourglassHighIcon size={32} />
-						</div>
-						<div className="flex flex-col gap-2">
-							<p className="font-medium text-primary">RESPONSE TIME</p>
-							<p className="text-content/60">Usually within 24 hours</p>
+						{/* Location */}
+						<div className="flex gap-4 items-center">
+							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
+								<HourglassHighIcon size={32} className="shrink-0" />
+							</div>
+							<div className="flex flex-col gap-2 items-start">
+								<p className="font-medium text-primary">RESPONSE TIME</p>
+								<p className="text-content/60 text-nowrap">Within 24 hours</p>
+							</div>
 						</div>
 					</div>
 
 					{/* Socials */}
-					<PrimaryPanel className="gap-4">
-						<p className="font-semibold text-primary">Let's Connect!</p>
-						<p className="text-content/60">Find me on these platforms.</p>
-						<SocialLink
-							icon={<GithubLogoIcon size={24} weight="bold" />}
-							title="GitHub"
-							displayLink="github.com/XutaoG"
-							fullLink="https://github.com/XutaoG"
-							action="link"
-						/>
-						<SocialLink
-							icon={<LinkedinLogoIcon size={24} weight="bold" />}
-							title="LinkedIn"
-							displayLink="linkedin.com/in/xutaogao"
-							fullLink="https://www.linkedin.com/in/xutaogao"
-							action="link"
-						/>
-						<SocialLink
-							icon={<EnvelopeIcon size={24} weight="bold" />}
-							title="Email"
-							displayLink="xutao.gao04@gmail.com"
-							fullLink="xutao.gao04@gmail.com"
-							action="copy"
-						/>
-					</PrimaryPanel>
+					<div className="grow">
+						<PrimaryPanel className="gap-4">
+							<p className="font-semibold text-primary">Let's Connect!</p>
+							<p className="text-content/60">Find me on these platforms.</p>
+							<SocialLink
+								icon={<GithubLogoIcon size={24} weight="bold" />}
+								title="GitHub"
+								displayLink="github.com/XutaoG"
+								fullLink="https://github.com/XutaoG"
+								action="link"
+							/>
+							<SocialLink
+								icon={<LinkedinLogoIcon size={24} weight="bold" />}
+								title="LinkedIn"
+								displayLink="linkedin.com/in/xutaogao"
+								fullLink="https://www.linkedin.com/in/xutaogao"
+								action="link"
+							/>
+							<SocialLink
+								icon={<EnvelopeIcon size={24} weight="bold" />}
+								title="Email"
+								displayLink="xutao.gao04@gmail.com"
+								fullLink="xutao.gao04@gmail.com"
+								action="copy"
+							/>
+						</PrimaryPanel>
+					</div>
 				</div>
 
 				<TerminalWindowPanel title="Send Me a Message" command="contact_me.exe">

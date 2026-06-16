@@ -1,6 +1,6 @@
 import type { TProject } from "../types";
 
-export const mockProjects: TProject[] = [
+export const projects: TProject[] = [
 	{
 		id: 1,
 		name: "Project 1",

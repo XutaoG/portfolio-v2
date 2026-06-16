@@ -15,7 +15,7 @@ import { ProjectInfoPanel } from "./ProjectInfoPanel";
 import { ListItem } from "../Common/ListItem";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { mockProjects } from "../../data/projects";
+import { projects } from "../../data/projects";
 import { motion } from "framer-motion";
 
 export const ProjectInformation = () => {
@@ -23,7 +23,7 @@ export const ProjectInformation = () => {
 	const { projectId } = useParams();
 
 	useEffect(() => {
-		const selectedProject = mockProjects.find((project) => project.id === Number(projectId));
+		const selectedProject = projects.find((project) => project.id === Number(projectId));
 		if (!selectedProject) {
 			navigate("/projects");
 		}
