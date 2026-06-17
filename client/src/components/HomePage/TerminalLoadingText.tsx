@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { TerminalLine } from "../Common/TerminalLine";
 
-export const TerminalLoadingText = () => {
+export interface TerminalLoadingTextProps {
+	isTerminalLoadingComplete: boolean;
+	setTerminalLoadingCompleted: () => void;
+}
+
+export const TerminalLoadingText = ({
+	isTerminalLoadingComplete,
+	setTerminalLoadingCompleted: terminalLoadingCompleted,
+}: TerminalLoadingTextProps) => {
 	const [linesCompleted, setLinesCompleted] = useState(0);
 
 	const terminalLines = [
@@ -11,6 +19,10 @@ export const TerminalLoadingText = () => {
 		["starting services...", 100, "starting services"],
 		["system ready, welcome to my world"],
 	];
+
+	if (linesCompleted >= terminalLines.length && !isTerminalLoadingComplete) {
+		terminalLoadingCompleted();
+	}
 
 	const terminalLinesElements = terminalLines.map((line, i) => {
 		return (

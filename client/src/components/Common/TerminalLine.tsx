@@ -16,7 +16,7 @@ export const TerminalLine = ({ onAnimationComplete, sequence }: TerminalLineProp
 			<TypeAnimation
 				sequence={[...sequence, onAnimationComplete ?? (() => {}), () => setIsTypingFinsihed(true)]}
 				cursor={false}
-				speed={70}
+				speed={90}
 			/>
 			{isTypingFinished && (
 				<CheckCircleIcon
