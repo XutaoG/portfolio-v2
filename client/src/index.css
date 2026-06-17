@@ -58,6 +58,26 @@
 	* {
 		box-sizing: border-box;
 		color: var(--color-content);
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--color-content) 25%, transparent) transparent;
+	}
+
+	::-webkit-scrollbar {
+		width: 4px;
+		height: 4px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: color-mix(in srgb, var(--color-content) 25%, transparent);
+		border-radius: 9999px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-primary);
 	}
 
 	body {
