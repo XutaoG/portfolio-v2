@@ -89,7 +89,7 @@ export const SkillsPage = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-6 sm:gap-10 min-h-full">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
 			<div className="flex flex-col gap-4 sm:gap-6 items-start self-end bg-base/20 backdrop-blur-sm">
 				<p className="text-primary font-semibold">&gt;_ SKILLS</p>
