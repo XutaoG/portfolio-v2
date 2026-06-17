@@ -7,16 +7,18 @@ import { twMerge } from "tailwind-merge";
 import { CONTACT_ROUTE } from "../routes";
 import { PageTransitionLink } from "../components/Common/PageTransitionLink";
 import { useMemo } from "react";
+import { useMinWidth } from "../hooks/useMinWidth";
 
 export const ProjectPage = () => {
+	const isLg = useMinWidth("lg");
 	const { projectId } = useParams();
 	const isAnyProjectSelected = projectId != null;
 
 	const projectElements = useMemo(() => {
 		return projects.map((project) => (
-			<ProjectPanel key={project.id} project={project} useCard={isAnyProjectSelected} />
+			<ProjectPanel key={project.id} project={project} useCard={isAnyProjectSelected && isLg} />
 		));
-	}, [isAnyProjectSelected]);
+	}, [isAnyProjectSelected, isLg]);
 
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
@@ -49,7 +51,8 @@ export const ProjectPage = () => {
 			<div className="flex gap-4 items-start">
 				<div
 					className={twMerge(`grid gap-2 sm:gap-4 content-start transition-[max-width] duration-300
-					${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-full"}`)}
+					grid-cols-1 sm:grid-cols-2 
+					${isAnyProjectSelected ? "lg:grid-cols-1 lg:max-w-92" : "lg:grid-cols-3 max-w-full"}`)}
 				>
 					{projectElements}
 				</div>

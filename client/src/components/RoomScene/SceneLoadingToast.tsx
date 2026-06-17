@@ -15,7 +15,7 @@ export const SceneLoadingToast = () => {
 
 	return createPortal(
 		<div
-			className="fixed right-(--page-container-margin-size) top-(--sidenav-top) z-50 
+			className="fixed right-(--page-container-margin-size) top-(--sidenav-top) z-60 
 			flex items-center justify-center pointer-events-none"
 		>
 			<AnimatePresence>
@@ -25,7 +25,7 @@ export const SceneLoadingToast = () => {
 						animate={{ y: 0 }}
 						exit={{ y: -200 }}
 						transition={{ duration: 0.3, ease: "easeOut" }}
-						className="font-semibold text-nowrap flex items-center gap-4 p-4 rounded-lg bg-accent/20"
+						className="font-semibold text-nowrap flex items-center gap-4 p-4 rounded-lg bg-accent/20 backdrop-blur-sm"
 					>
 						<CircleNotchIcon size={24} weight="bold" className="animate-spin" />
 						Loading Model ({Math.round(progress)}%)...

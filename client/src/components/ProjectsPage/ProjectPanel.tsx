@@ -38,7 +38,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const projectTypeElement = (
 		<p className="rounded-sm p-1 bg-indigo-600/20 text-indigo-400 text-xs font-medium">{project.type}</p>
 	);
-	const projectNameElement = <p className="font-medium line-clamp-1 max-w-40 lg:max-w-none">{project.name}</p>;
+	const projectNameElement = <p className="font-medium line-clamp-1">{project.name}</p>;
 	const projectDescriptionElement = <p className="font-sm text-content/70 line-clamp-2">{project.description}</p>;
 
 	const tagsElement = useMemo(() => {

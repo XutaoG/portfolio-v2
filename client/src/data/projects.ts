@@ -3,7 +3,7 @@ import type { TProject } from "../types";
 export const projects: TProject[] = [
 	{
 		id: 1,
-		name: "Project 1 With a lot and a lot of stuff",
+		name: "Project 1 With a lot and a lot and a lot and a lot of stuff",
 		type: "Full-Stack",
 		description:
 			"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam neque in commodi minus, fuga iure.",

@@ -69,7 +69,7 @@ export const NavBar = () => {
 				{showMobileNavBar && !useMd && (
 					<motion.div
 						className="fixed top-(--nav-height) mx-(--page-container-margin-size) mt-4 inset-x-0 bg-base/50 backdrop-blur-md 
-						z-50 overflow-hidden border border-content/20 rounded-lg"
+						z-100 overflow-hidden border border-content/20 rounded-lg"
 						initial={{ height: 0 }}
 						animate={{ height: "auto" }}
 						exit={{ height: 0 }}
