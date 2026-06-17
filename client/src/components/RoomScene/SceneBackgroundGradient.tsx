@@ -18,7 +18,7 @@ export const SceneBackgroundGradient = () => {
 					initial={{ opacity: 0, width: 0 }}
 					animate={{ opacity: 0.5, width: "50%" }}
 					transition={{ duration: 1, ease: "easeOut" }}
-					className="bg-primary absolute top-1/2 left-3/5 -translate-1/2 aspect-square rounded-full blur-[256px]"
+					className="bg-primary/50 absolute top-1/2 left-3/5 -translate-1/2 aspect-square rounded-full blur-[256px]"
 				/>
 			)}
 			<AnimatePresence>

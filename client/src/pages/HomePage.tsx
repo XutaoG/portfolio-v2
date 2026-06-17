@@ -24,10 +24,7 @@ export const HomePage = () => {
 				>
 					<div className="flex flex-col gap-4 sm:gap-6 items-start">
 						{/* Name */}
-						<h1
-							className="text-7xl sm:text-8xl font-medium font-chakra leading-14 sm:leading-20 
-							text-shadow-lg mix-blend-difference"
-						>
+						<h1 className="text-7xl sm:text-8xl font-medium font-chakra leading-14 sm:leading-20 text-shadow-lg">
 							XUTAO
 							<br />
 							<span className="font-semibold text-primary">GAO_</span>
