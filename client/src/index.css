@@ -24,17 +24,6 @@
 	font-display: swap;
 }
 
-@keyframes blink {
-	0%,
-	60% {
-		opacity: 1;
-	}
-	61%,
-	100% {
-		opacity: 0;
-	}
-}
-
 @theme {
 	--animate-blink: blink 1.5s step-end infinite;
 	--default-transition-timing-function: ease-out;
@@ -99,5 +88,38 @@
 			transparent 2px,
 			transparent 8px
 		);
+	}
+
+	.loading-bar-pattern {
+		background: repeating-linear-gradient(
+			60deg,
+			var(--color-primary) 0px,
+			var(--color-primary) 10px,
+			transparent 10px,
+			transparent 20px
+		);
+		background-size: 24px 100%;
+		background-repeat: repeat;
+		animation: loading-bar-movement 0.5s linear infinite;
+	}
+
+	@keyframes loading-bar-movement {
+		0% {
+			background-position-x: 0;
+		}
+		100% {
+			background-position-x: 24px;
+		}
+	}
+
+	@keyframes blink {
+		0%,
+		60% {
+			opacity: 1;
+		}
+		61%,
+		100% {
+			opacity: 0;
+		}
 	}
 }

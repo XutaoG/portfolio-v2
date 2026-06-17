@@ -5,8 +5,9 @@ import * as THREE from "three";
 import { CAMERA_INITIAL_POSITION } from "../../data/constants";
 import { Environment, Preload } from "@react-three/drei";
 import { CameraControl } from "./CameraControl";
-import { CanvasLoader } from "./CanvasLoader";
+import { SceneLoadingToast } from "./SceneLoadingToast";
 import { SceneStateContext } from "../../context";
+import { SceneBackgroundGradient } from "./SceneBackgroundGradient";
 
 export const RoomCanvas = () => {
 	const [isSceneLoading, setIsSceneLoading] = useState(true);
@@ -14,7 +15,8 @@ export const RoomCanvas = () => {
 	return (
 		<Fragment>
 			<SceneStateContext.Provider value={{ isLoading: isSceneLoading, setIsLoading: setIsSceneLoading }}>
-				<CanvasLoader />
+				<SceneBackgroundGradient />
+				<SceneLoadingToast />
 				<Canvas
 					camera={{ position: CAMERA_INITIAL_POSITION, fov: 30 }}
 					shadows={{ type: THREE.PCFShadowMap }}

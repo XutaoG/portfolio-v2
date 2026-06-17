@@ -138,7 +138,7 @@ export const RoomScene = () => {
 		// Animate room scale pop-in and spin on first load
 		// Only start animating when FPS >= 30
 		if (initAnimProgressRef.current < 1 && 1 / delta >= 30) {
-			initAnimProgressRef.current = Math.min(initAnimProgressRef.current + delta / 0.8, 1);
+			initAnimProgressRef.current = Math.min(initAnimProgressRef.current + delta * 0.5, 1);
 			const eased = easeOutCubic(initAnimProgressRef.current);
 			sceneGroupRef.current?.scale.setScalar(eased);
 			if (sceneGroupRef.current) {

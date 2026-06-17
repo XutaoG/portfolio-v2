@@ -57,7 +57,10 @@ export const App = () => {
 				</AnimatePresence>
 			</PageContainer>
 			<div className="fixed top-0 left-0 h-screen w-screen bg-base -z-10" id="canvas-container">
+				{/* Room rendering */}
 				<RoomCanvas />
+
+				{/* Screen background gradient */}
 				<CanvasBackgroundGradient />
 			</div>
 		</div>
