@@ -38,7 +38,7 @@ export const App = () => {
 	}
 
 	return (
-		<div className="flex flex-col max-w-full w-full overflow-hidden min-h-screen relative">
+		<div className="flex flex-col max-w-full w-full overflow-clip min-h-screen relative">
 			<NavBar />
 			<PageContainer>
 				<AnimatePresence mode="wait" custom={navState.direction}>
