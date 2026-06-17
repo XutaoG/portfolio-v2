@@ -212,32 +212,18 @@ export const ProjectInformation = () => {
 		</div>
 	);
 
-	if (!isLg) {
-		return (
-			<Fragment>
-				<motion.div
-					initial={{ opacity: 0, y: "100%" }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.3, ease: "easeOut" }}
-					style={{ width: "auto", height: "auto" }}
-					className="fixed inset-(--page-container-margin-size) top-(--sidenav-top) z-50 overflow-y-auto
-					bg-base @container rounded-xl border border-content/20"
-				>
-					{content}
-				</motion.div>
-				<div className="fixed inset-0 bg-base/20 backdrop-blur-sm" />
-			</Fragment>
-		);
-	}
-
 	return (
-		<motion.div
-			initial={{ width: 0, height: 0, opacity: 0 }}
-			animate={{ width: "100%", height: "100%", opacity: 1 }}
-			transition={{ duration: 0.3, ease: "easeOut" }}
-			className="overflow-hidden static bg-base overflow-y-auto @container rounded-xl border border-content/20 min-w-0 min-h-0"
-		>
-			{content}
-		</motion.div>
+		<Fragment>
+			<motion.div
+				initial={{ opacity: 0, y: isLg ? 0 : "100%", width: isLg ? 0 : "auto", height: isLg ? 0 : "auto" }}
+				animate={{ opacity: 1, y: 0, width: isLg ? "100%" : "auto", height: isLg ? "100%" : "auto" }}
+				transition={{ duration: 0.3, ease: "easeOut" }}
+				className="fixed inset-(--page-container-margin-size) top-(--sidenav-top) lg:static z-50 lg:z-auto overflow-y-auto
+				bg-base @container rounded-xl border border-content/20"
+			>
+				{content}
+			</motion.div>
+			<div className="fixed lg:hidden inset-0 bg-base/20 backdrop-blur-sm" />
+		</Fragment>
 	);
 };
