@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { RoomScene } from "./RoomScene";
 import * as THREE from "three";
 import { CAMERA_INITIAL_POSITION } from "../../data/constants";
@@ -9,8 +9,33 @@ import { SceneLoadingToast } from "./SceneLoadingToast";
 import { SceneStateContext } from "../../context";
 import { SceneBackgroundGradient } from "./SceneBackgroundGradient";
 
+const RESIZE_DEBOUNCE_TIME = 150;
+
 export const RoomCanvas = () => {
 	const [isSceneLoading, setIsSceneLoading] = useState(true);
+	const [isResizing, setIsResizing] = useState(false);
+	const resizeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsResizing(true);
+			if (resizeTimerRef.current !== null) {
+				clearTimeout(resizeTimerRef.current);
+			}
+			resizeTimerRef.current = setTimeout(() => {
+				setIsResizing(false);
+				resizeTimerRef.current = null;
+			}, RESIZE_DEBOUNCE_TIME);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+			if (resizeTimerRef.current !== null) {
+				clearTimeout(resizeTimerRef.current);
+			}
+		};
+	}, []);
 
 	return (
 		<Fragment>
@@ -20,6 +45,7 @@ export const RoomCanvas = () => {
 				<Canvas
 					camera={{ position: CAMERA_INITIAL_POSITION, fov: 30 }}
 					shadows={{ type: THREE.PCFShadowMap }}
+					frameloop={isResizing ? "never" : "always"}
 					gl={{
 						toneMapping: THREE.ACESFilmicToneMapping,
 						toneMappingExposure: 1.15,
