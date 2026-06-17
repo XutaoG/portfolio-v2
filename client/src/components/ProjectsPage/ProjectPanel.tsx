@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { useNavigate, useParams } from "react-router";
 import { PROJECTS_ROUTE } from "../../routes";
 import { useMinWidth } from "../../hooks/useMinWidth";
+import { useMemo } from "react";
 
 interface ProjectPanelProps {
 	project: TProject;
@@ -27,7 +28,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const iconElement = (
 		<div
 			className={`p-1 rounded-lg bg-base border border-content/20
-			${useCard || !useSm || "absolute left-4 top-4"}`}
+			${useCard || !useSm || "absolute left-3 top-3"}`}
 		>
 			<div className="bg-linear-to-br from-indigo-700 to-indigo-400 rounded-lg p-1">
 				<AppWindowIcon size={48} />
@@ -37,14 +38,22 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const projectTypeElement = (
 		<p className="rounded-sm p-1 bg-indigo-600/20 text-indigo-400 text-xs font-medium">{project.type}</p>
 	);
-	const projectNameElement = <p className="font-semibold">{project.name}</p>;
+	const projectNameElement = <p className="font-medium line-clamp-1 max-w-40 lg:max-w-none">{project.name}</p>;
 	const projectDescriptionElement = <p className="font-sm text-content/70 line-clamp-2">{project.description}</p>;
+
+	const tagsElement = useMemo(() => {
+		return project.tags.map((tag, i) => (
+			<div key={i} className="rounded-sm px-1 py-0.5 border border-content/20 bg-base">
+				{tag}
+			</div>
+		));
+	}, [project.tags]);
 
 	if (useCard || !useSm) {
 		// Return card style
 		return (
 			<div
-				className={twMerge(`flex gap-4 items-start p-6 rounded-lg border border-content/20 bg-base/80 
+				className={twMerge(`flex gap-4 items-start p-4 xl:p-6 rounded-lg border border-content/20 bg-base/80 
 				backdrop-blur-xs relative overflow-hidden hover:cursor-pointer ${isSelected && "border-primary/60"}`)}
 				onClick={() => selectProject(project.id)}
 			>
@@ -63,15 +72,9 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 		);
 	}
 
-	const tagsElement = project.tags.map((tag, i) => (
-		<div key={i} className="rounded-sm px-1 py-0.5 border border-content/20 bg-base">
-			{tag}
-		</div>
-	));
-
 	return (
 		<div
-			className="flex flex-col p-6 gap-4 rounded-lg border border-content/20 bg-base/80 
+			className="flex flex-col p-4 md:p-6 gap-4 rounded-lg border border-content/20 bg-base/80 
 			backdrop-blur-xs relative overflow-hidden hover:cursor-pointer"
 			onClick={() => selectProject(project.id)}
 		>
@@ -81,14 +84,14 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 			{/* Icon */}
 			{iconElement}
 			{/* Image carousel */}
-			<div className="mt-6 rounded-lg aspect-4/3 bg-neutral-600"></div>
+			<div className="mt-4 md:mt-6 rounded-lg aspect-4/3 bg-neutral-600"></div>
 			<div className="flex flex-col gap-2 items-start grow">
 				{projectTypeElement}
 				{projectNameElement}
 				{projectDescriptionElement}
 			</div>
 			{/* Tags */}
-			<div className="flex gap-1 flex-wrap">{tagsElement}</div>
+			<div className="hidden md:flex gap-1 flex-wrap">{tagsElement}</div>
 			<div className="h-px bg-content/20" />
 
 			{/* View GitHub */}

@@ -9,7 +9,7 @@ import {
 	StackIcon,
 	StarIcon,
 	UserCheckIcon,
-	XCircleIcon,
+	XIcon,
 } from "@phosphor-icons/react";
 import { ProjectInfoPanel } from "./ProjectInfoPanel";
 import { ListItem } from "../Common/ListItem";
@@ -38,10 +38,11 @@ export const ProjectInformation = () => {
 			initial={{ width: 0, height: 0, opacity: 0 }}
 			animate={{ width: "100%", height: "100%", opacity: 1 }}
 			transition={{ duration: 0.3, ease: "easeOut" }}
-			className="flex-1 overflow-hidden flex justify-end"
+			className="overflow-hidden static 
+			bg-base overflow-y-auto @container rounded-xl border border-content/20 min-w-0 min-h-0"
 		>
-			<div className="w-full flex flex-col border border-content/20 rounded-xl bg-base min-w-0">
-				<div className="p-8 pb-6 flex items-start gap-4">
+			<div className="flex flex-col min-h-full">
+				<div className="p-6 flex items-start gap-4">
 					{/* Icon */}
 					<div className="p-1 rounded-lg bg-base border border-content/20">
 						<div className="bg-linear-to-br from-indigo-700 to-indigo-400 rounded-lg p-1">
@@ -57,37 +58,41 @@ export const ProjectInformation = () => {
 							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, sapiente?
 						</p>
 						{/* GitHub link */}
-						<div className="border border-content/20 px-2 py-1 rounded-sm flex items-center gap-4 text-sm">
-							<GithubLogoIcon size={16} weight="bold" />
+						<div className="border border-content/40 px-3 py-1.5 rounded-lg flex items-center gap-4">
+							<GithubLogoIcon size={20} weight="bold" className="shrink-0" />
 							GitHub
-							<ArrowSquareOutIcon size={16} weight="bold" />
+							<ArrowSquareOutIcon size={20} weight="bold" className="shrink-0" />
 						</div>
 					</div>
 
 					<button
 						onClick={handleClose}
-						className="flex items-center gap-2 px-2 py-1 rounded-lg border border-content/20"
+						className="flex items-center gap-2 p-2 rounded-full border border-content/20 
+					bg-base hover:scale-110 transition-all duration-300 active:bg-neutral"
 					>
-						<XCircleIcon size={20} />
-						Close
+						<XIcon size={24} weight="bold" />
 					</button>
 				</div>
 
-				<div className="grow p-6 border-t border-content/20 flex flex-col gap-6 relative">
+				<div className="p-6 border-t border-content/20 flex flex-col gap-4 relative grow overflow-hidden">
 					<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
 					<div className="absolute -top-8 -left-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
 
-					<div className="flex gap-2 overflow-x-scroll">
-						<div className="bg-neutral rounded-lg h-75 aspect-4/3" />
-						<div className="bg-neutral rounded-lg h-75 aspect-4/3" />
-						<div className="bg-neutral rounded-lg h-75 aspect-4/3" />
-						<div className="bg-neutral rounded-lg h-75 aspect-4/3" />
+					<div className="flex gap-2 overflow-x-scroll min-w-0 w-full">
+						<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
+						<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
+						<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
+						<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
 					</div>
 
-					<div className="flex gap-4">
+					<div className="flex gap-4 flex-wrap">
 						{/* Description */}
-						<ProjectInfoPanel icon={<LightbulbIcon size={24} weight="bold" />} title="Description">
-							<p className="text-content/70 text-sm">
+						<ProjectInfoPanel
+							icon={<LightbulbIcon size={24} weight="bold" />}
+							title="Description"
+							className="min-w-92 @xl:min-w-132 flex-1"
+						>
+							<p className="text-content/70">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias veniam dolores quos,
 								sapiente non vel quo libero recusandae deserunt nemo.
 								<br />
@@ -100,9 +105,9 @@ export const ProjectInformation = () => {
 						<ProjectInfoPanel
 							icon={<StackIcon size={24} weight="bold" />}
 							title="Tech Stack"
-							className="min-w-fit"
+							className="min-w-fit flex-1"
 						>
-							<div className="flex flex-col gap-2 text-content/70 text-sm">
+							<div className="flex flex-col gap-2 text-content/70">
 								<ListItem>Item 1</ListItem>
 								<ListItem>Item 2</ListItem>
 								<ListItem>Item 3</ListItem>
@@ -113,8 +118,12 @@ export const ProjectInformation = () => {
 						</ProjectInfoPanel>
 
 						{/* My role  */}
-						<ProjectInfoPanel icon={<UserCheckIcon size={24} weight="bold" />} title="My Role">
-							<div className="flex flex-col gap-2 text-content/70 text-sm">
+						<ProjectInfoPanel
+							icon={<UserCheckIcon size={24} weight="bold" />}
+							title="My Role"
+							className="flex-1 min-w-64"
+						>
+							<div className="flex flex-col gap-2 text-content/70">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae incidunt amet praesentium.
 								<ListItem>Item 1</ListItem>
 								<ListItem>Item 2</ListItem>
@@ -124,11 +133,11 @@ export const ProjectInformation = () => {
 						</ProjectInfoPanel>
 					</div>
 
-					<div className="flex gap-4">
-						<div className="flex flex-col gap-4 min-w-80">
+					<div className="flex gap-4 flex-wrap grow">
+						<div className="flex flex-col gap-4 min-w-80 flex-1">
 							{/* Time frame */}
 							<ProjectInfoPanel icon={<CalendarIcon size={24} weight="bold" />} title="Time Frame">
-								<div className="text-content/70 text-sm flex flex-col gap-2 items-end">
+								<div className="text-content/70 flex flex-col gap-2 items-end">
 									Mar 2024 - Jun 2024
 									<p className="text-primary font-medium">3 Months</p>
 								</div>
@@ -138,9 +147,9 @@ export const ProjectInformation = () => {
 							<ProjectInfoPanel
 								icon={<StarIcon size={24} weight="bold" />}
 								title="Notable Features"
-								className="grow"
+								className="flex-1"
 							>
-								<div className="flex flex-col gap-2 text-content/70 text-sm">
+								<div className="flex flex-col gap-2 text-content/70">
 									<ListItem>
 										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias porro incidunt
 										laborum culpa mollitia!
@@ -157,8 +166,12 @@ export const ProjectInformation = () => {
 						</div>
 
 						{/* Engineering shallenges */}
-						<ProjectInfoPanel icon={<FlagIcon size={24} weight="bold" />} title="Engineering Challenges">
-							<div className="flex flex-col gap-2 text-content/70 text-sm">
+						<ProjectInfoPanel
+							icon={<FlagIcon size={24} weight="bold" />}
+							title="Engineering Challenges"
+							className="min-w-92 @xl:min-w-132 flex-1"
+						>
+							<div className="flex flex-col gap-2 text-content/70">
 								<ListItem>
 									Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio.
 								</ListItem>
@@ -177,8 +190,12 @@ export const ProjectInformation = () => {
 						</ProjectInfoPanel>
 
 						{/* What I learned */}
-						<ProjectInfoPanel icon={<GraduationCapIcon size={24} weight="bold" />} title="What I Leanred">
-							<p className="text-content/70 text-sm">
+						<ProjectInfoPanel
+							icon={<GraduationCapIcon size={24} weight="bold" />}
+							title="What I Leanred"
+							className="min-w-92 @xl:min-w-132 flex-1"
+						>
+							<p className="text-content/70">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, enim! Ad voluptates
 								obcaecati ipsam tempora nulla magni, placeat porro, ipsa ullam alias cum repudiandae
 								officiis consequatur quam id vel labore sint delectus.

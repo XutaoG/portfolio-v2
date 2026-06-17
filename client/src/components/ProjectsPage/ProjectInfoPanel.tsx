@@ -16,10 +16,10 @@ export const ProjectInfoPanel = ({ className, icon, title, children }: ProjectIn
 				${className}`,
 			)}
 		>
-			<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-content/10 blur-[96px]" />
-			<div className="flex items-center gap-2">
+			<div className="absolute -bottom-8 -right-8 w-1/2 h-1/2 rounded-full bg-content/10 blur-[96px]" />
+			<div className="flex items-center gap-4">
 				{icon}
-				<p className="font-semibold text-nowrap">{title}</p>
+				<p className="font-medium text-nowrap">{title}</p>
 			</div>
 			{children}
 		</div>

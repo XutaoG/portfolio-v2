@@ -46,7 +46,7 @@ export const ProjectPage = () => {
 			</TerminalWindowPanel>
 
 			{/* Projects */}
-			<div className="flex gap-4">
+			<div className="flex gap-4 items-start">
 				<div
 					className={twMerge(`grid gap-2 sm:gap-4 content-start transition-[max-width] duration-300
 					${isAnyProjectSelected ? "grid-cols-1 max-w-92" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-full"}`)}
