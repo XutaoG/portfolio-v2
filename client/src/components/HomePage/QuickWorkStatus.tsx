@@ -8,7 +8,7 @@ export const QuickWorkStatus = () => {
 			>
 				<div className="flex items-center">
 					<div className="size-2 mr-4 rounded-full bg-primary animate-ping" />
-					<p className="text-content/60">STATUS</p>
+					<p className="text-content/70">STATUS</p>
 				</div>
 				<div className="ml-6 mr-6">
 					<p className="text-success">

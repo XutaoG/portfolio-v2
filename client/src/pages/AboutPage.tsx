@@ -18,7 +18,7 @@ export const AboutPage = () => {
 				</div>
 				<div className="grow flex flex-col gap-3">
 					<p className="font-medium">{aboutMe.heading}</p>
-					<p className="text-content/60">{aboutMe.subHeading}</p>
+					<p className="text-content/70">{aboutMe.subHeading}</p>
 				</div>
 				{aboutMe.ending && (
 					<p
@@ -44,15 +44,15 @@ export const AboutPage = () => {
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
-			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start">
 				<p className="text-primary font-semibold">&gt;_ ABOUT ME</p>
 				<div className="flex flex-col items-end">
 					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Hey, I'm <span className="font-bold text-primary">Xutao_</span>
 					</h1>
-					<p className="text-content/60 font-medium">(Pronunced Shu-tao)</p>
+					<p className="text-content/70 font-medium">(Pronunced Shu-tao)</p>
 				</div>
-				<p className="text-content/60 max-w-100">
+				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
 					provident itaque distinctio mollitia alias libero.
 				</p>

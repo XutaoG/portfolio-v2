@@ -91,14 +91,14 @@ export const SkillsPage = () => {
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
-			<div className="flex flex-col gap-4 sm:gap-6 items-start self-end bg-base/20 backdrop-blur-sm">
+			<div className="flex flex-col gap-4 sm:gap-6 items-start self-end">
 				<p className="text-primary font-semibold">&gt;_ SKILLS</p>
 				<div className="flex flex-col items-end">
 					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						My Technical <span className="font-bold text-primary">Toolkit_</span>
 					</h1>
 				</div>
-				<p className="text-content/60 max-w-120">
+				<p className="text-content/70 max-w-120 rounded-sm bg-base/10 backdrop-blur-xs">
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
 					provident itaque distinctio mollitia alias libero.
 				</p>
@@ -123,7 +123,7 @@ export const SkillsPage = () => {
 					<div className="flex flex-col sm:flex-row gap-2 sm:gap-4 lg:gap-0">{certificationElements}</div>
 				</div>
 
-				<TerminalWindowPanel title="Certification In Progress" command="inprogress" className="grow">
+				<TerminalWindowPanel title="In Progress" command="inprogress" className="grow">
 					<div className="flex flex-col justify-between items-center gap-6">
 						<div className="h-24 flex items-center">
 							<img src="src/assets/cert-logos/aws-logo.svg" className="h-24" />

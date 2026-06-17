@@ -53,7 +53,7 @@ export const ProjectInformation = () => {
 						{/* Project name */}
 						<p className="font-semibold">Project 1</p>
 						{/* Project description */}
-						<p className="font-sm text-content/60 line-clamp-2">
+						<p className="font-sm text-content/70 line-clamp-2">
 							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, sapiente?
 						</p>
 						{/* GitHub link */}
@@ -87,7 +87,7 @@ export const ProjectInformation = () => {
 					<div className="flex gap-4">
 						{/* Description */}
 						<ProjectInfoPanel icon={<LightbulbIcon size={24} weight="bold" />} title="Description">
-							<p className="text-content/60 text-sm">
+							<p className="text-content/70 text-sm">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias veniam dolores quos,
 								sapiente non vel quo libero recusandae deserunt nemo.
 								<br />
@@ -102,7 +102,7 @@ export const ProjectInformation = () => {
 							title="Tech Stack"
 							className="min-w-fit"
 						>
-							<div className="flex flex-col gap-2 text-content/60 text-sm">
+							<div className="flex flex-col gap-2 text-content/70 text-sm">
 								<ListItem>Item 1</ListItem>
 								<ListItem>Item 2</ListItem>
 								<ListItem>Item 3</ListItem>
@@ -114,7 +114,7 @@ export const ProjectInformation = () => {
 
 						{/* My role  */}
 						<ProjectInfoPanel icon={<UserCheckIcon size={24} weight="bold" />} title="My Role">
-							<div className="flex flex-col gap-2 text-content/60 text-sm">
+							<div className="flex flex-col gap-2 text-content/70 text-sm">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae incidunt amet praesentium.
 								<ListItem>Item 1</ListItem>
 								<ListItem>Item 2</ListItem>
@@ -128,7 +128,7 @@ export const ProjectInformation = () => {
 						<div className="flex flex-col gap-4 min-w-80">
 							{/* Time frame */}
 							<ProjectInfoPanel icon={<CalendarIcon size={24} weight="bold" />} title="Time Frame">
-								<div className="text-content/60 text-sm flex flex-col gap-2 items-end">
+								<div className="text-content/70 text-sm flex flex-col gap-2 items-end">
 									Mar 2024 - Jun 2024
 									<p className="text-primary font-medium">3 Months</p>
 								</div>
@@ -140,7 +140,7 @@ export const ProjectInformation = () => {
 								title="Notable Features"
 								className="grow"
 							>
-								<div className="flex flex-col gap-2 text-content/60 text-sm">
+								<div className="flex flex-col gap-2 text-content/70 text-sm">
 									<ListItem>
 										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias porro incidunt
 										laborum culpa mollitia!
@@ -158,7 +158,7 @@ export const ProjectInformation = () => {
 
 						{/* Engineering shallenges */}
 						<ProjectInfoPanel icon={<FlagIcon size={24} weight="bold" />} title="Engineering Challenges">
-							<div className="flex flex-col gap-2 text-content/60 text-sm">
+							<div className="flex flex-col gap-2 text-content/70 text-sm">
 								<ListItem>
 									Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio.
 								</ListItem>
@@ -178,7 +178,7 @@ export const ProjectInformation = () => {
 
 						{/* What I learned */}
 						<ProjectInfoPanel icon={<GraduationCapIcon size={24} weight="bold" />} title="What I Leanred">
-							<p className="text-content/60 text-sm">
+							<p className="text-content/70 text-sm">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, enim! Ad voluptates
 								obcaecati ipsam tempora nulla magni, placeat porro, ipsa ullam alias cum repudiandae
 								officiis consequatur quam id vel labore sint delectus.

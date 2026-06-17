@@ -34,7 +34,7 @@ const PARALLAX_STRENGTH = 1;
 const PARALLAX_LERP_SPEED = 1;
 
 const REFERENCE_SIZE = 1500;
-const CAMERA_MIN_ZOOM = 0.1;
+const CAMERA_MIN_ZOOM = 0.6;
 const CAMERA_MAX_ZOOM = 1.2;
 
 const easeInOutCubic = (t: number): number => {

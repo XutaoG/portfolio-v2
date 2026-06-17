@@ -14,9 +14,9 @@ export const Button = ({ className, children, disabled, ...rest }: ButtonProps) 
 			disabled={disabled}
 			{...rest}
 		>
-			<div className="absolute inset-0 rounded-sm border-2 border-primary diagonal-stripe-pattern" />
+			<div className="absolute inset-0 rounded-sm border-2 border-primary/60 diagonal-stripe-pattern" />
 			<div
-				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base
+				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base/50 backdrop-blur-xs
 				font-semibold flex items-center relative overflow-hidden transition-transform duration-300
 				z-10 group-hover:-translate-1.5 ${disabled && "border-primary/40"}`)}
 			>

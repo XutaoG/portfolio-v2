@@ -38,7 +38,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 		<p className="rounded-sm p-1 bg-indigo-600/20 text-indigo-400 text-xs font-medium">{project.type}</p>
 	);
 	const projectNameElement = <p className="font-semibold">{project.name}</p>;
-	const projectDescriptionElement = <p className="font-sm text-content/60 line-clamp-2">{project.description}</p>;
+	const projectDescriptionElement = <p className="font-sm text-content/70 line-clamp-2">{project.description}</p>;
 
 	if (useCard || !useSm) {
 		// Return card style

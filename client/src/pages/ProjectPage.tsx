@@ -21,14 +21,14 @@ export const ProjectPage = () => {
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
-			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start">
 				<p className="text-primary font-semibold">&gt;_ PROJECTS</p>
 				<div className="flex flex-col items-end">
 					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Things I've <span className="font-bold text-primary">Built_</span>
 					</h1>
 				</div>
-				<p className="text-content/60 max-w-100">
+				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aspernatur aperiam! Mollitia
 					iste error at impedit eum et voluptatibus sed optio nostrum, nesciunt omnis eaque?
 				</p>

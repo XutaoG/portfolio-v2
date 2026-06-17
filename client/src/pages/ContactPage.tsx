@@ -10,14 +10,14 @@ export const ContactPage = () => {
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full items-center">
 			{/* Introduction */}
-			<div className="flex flex-col gap-4 sm:gap-6 items-start bg-base/20 backdrop-blur-sm">
+			<div className="flex flex-col gap-4 sm:gap-6 items-start m">
 				<p className="text-primary font-semibold">&gt;_ CONTACT ME</p>
 				<div className="flex flex-col items-end">
 					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
 						Let's <span className="font-bold text-primary">Get In Touch_</span>
 					</h1>
 				</div>
-				<p className="text-content/60 max-w-100">
+				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
 					provident itaque distinctio mollitia alias libero.
 				</p>
@@ -28,23 +28,23 @@ export const ContactPage = () => {
 					<div className="flex flex-col sm:flex-row md:flex-col gap-4 sm:gap-8 self-auto sm:self-center md:self-auto ">
 						{/* Location */}
 						<div className="flex gap-4 items-center">
-							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
+							<div className="border border-content/20 bg-base/80 p-2 rounded-lg flex justify-center items-center aspect-square">
 								<MapPinIcon size={32} className="shrink-0" />
 							</div>
-							<div className="flex flex-col gap-2 items-start">
+							<div className="flex flex-col gap-2 items-start rounded-sm bg-base/10 backdrop-blur-xs  px-2">
 								<p className="font-medium text-primary">LOCATION</p>
-								<p className="text-content/60 text-nowrap">Orlando, Florida</p>
+								<p className="text-content/70 text-nowrap">Orlando, Florida</p>
 							</div>
 						</div>
 
 						{/* Location */}
 						<div className="flex gap-4 items-center">
-							<div className="border border-content/20 bg-neutral p-2 rounded-lg flex justify-center items-center aspect-square">
+							<div className="border border-content/20 bg-base/80 p-2 rounded-lg flex justify-center items-center aspect-square">
 								<HourglassHighIcon size={32} className="shrink-0" />
 							</div>
-							<div className="flex flex-col gap-2 items-start">
+							<div className="flex flex-col gap-2 items-start rounded-sm bg-base/10 backdrop-blur-xs px-2">
 								<p className="font-medium text-primary">RESPONSE TIME</p>
-								<p className="text-content/60 text-nowrap">Within 24 hours</p>
+								<p className="text-content/70 text-nowrap">Within 24 hours</p>
 							</div>
 						</div>
 					</div>
@@ -53,7 +53,7 @@ export const ContactPage = () => {
 					<div className="grow">
 						<PrimaryPanel className="gap-4">
 							<p className="font-semibold text-primary">Let's Connect!</p>
-							<p className="text-content/60">Find me on these platforms.</p>
+							<p className="text-content/70">Find me on these platforms.</p>
 							<SocialLink
 								icon={<GithubLogoIcon size={24} weight="bold" className="shrink-0" />}
 								title="GitHub"
@@ -80,7 +80,7 @@ export const ContactPage = () => {
 				</div>
 
 				<TerminalWindowPanel title="Message Me" command="contact_me.exe">
-					<p className="text-content/60">Fill out the form below and I‘ll get back to you.</p>
+					<p className="text-content/70">Fill out the form below and I‘ll get back to you.</p>
 					<div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6">
 						<InputField title="Full Name" placeholder="John Doe" />
 						<InputField title="Email Address" placeholder="example@email.com" />
