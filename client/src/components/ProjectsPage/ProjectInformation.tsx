@@ -15,7 +15,7 @@ import { ListItem } from "../Common/ListItem";
 import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { projects } from "../../data/projects";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMinWidth } from "../../hooks/useMinWidth";
 import type { TProjectSectionInfo } from "../../types";
 import { ProjectTypeIcon } from "./ProjectTypeIcon";
@@ -90,7 +90,14 @@ export const ProjectInformation = () => {
 	}, [project]);
 
 	const content = project && (
-		<div className="flex flex-col min-h-full">
+		<motion.div
+			key={project?.id}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+			transition={{ duration: 0.3, ease: "easeOut" }}
+			className="flex flex-col min-h-full"
+		>
 			<div className="p-6 flex items-start gap-4 sticky top-0 z-40 bg-base border-b border-content/20 overflow-hidden">
 				<div className="absolute -top-8 -left-8 w-1/3 aspect-square rounded-full bg-accent/20 blur-[192px] -z-10" />
 				<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/20 blur-[96px] -z-10" />
@@ -202,7 +209,7 @@ export const ProjectInformation = () => {
 					</ProjectInfoPanel>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 
 	return (
@@ -214,7 +221,7 @@ export const ProjectInformation = () => {
 				className="fixed inset-(--page-container-margin-size) top-(--sidenav-top) lg:static z-50 lg:z-auto overflow-y-auto
 				bg-base @container rounded-xl border border-content/20"
 			>
-				{content}
+				<AnimatePresence mode="wait">{content}</AnimatePresence>
 			</motion.div>
 			<div className="fixed lg:hidden inset-0 bg-base/20 backdrop-blur-sm" />
 		</Fragment>

@@ -27,7 +27,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 	const iconElement = (
 		<div
 			className={`p-1 rounded-lg bg-base border border-content/20
-			${useCard || !useSm || "absolute left-3 top-3"}`}
+			${useCard || !useSm || "absolute left-3 top-3 z-10"}`}
 		>
 			<ProjectTypeIcon project={project} />
 		</div>
@@ -43,17 +43,21 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 		return (
 			<div
 				className={twMerge(`flex gap-4 items-start p-4 xl:p-6 rounded-lg border border-content/20 bg-base/80 
-				backdrop-blur-xs relative overflow-hidden hover:cursor-pointer ${isSelected && "border-primary/60"}`)}
+				backdrop-blur-xs relative overflow-hidden hover:cursor-pointer z-0 transition-colors duration-300
+				${isSelected && "border-primary/60"}`)}
 				onClick={() => selectProject(project.id)}
 			>
-				<div className="absolute -bottom-8 -right-8 size-32 rounded-full bg-content/10 blur-3xl" />
+				<div
+					className={twMerge(`absolute -bottom-8 -right-8 size-1/2 rounded-full bg-accent/20 blur-3xl 
+					transition-colors duration-300 -z-10 ${isSelected && "bg-primary/50"}`)}
+				/>
 				{iconElement}
 				<div className="flex flex-col gap-2 grow">
 					<div className="flex justify-between gap-4 items-start">
 						{projectTypeElement}
 						<div
 							className={twMerge(`size-3 aspect-square border border-content/20 rounded-full 
-							${isSelected && "border-0 bg-primary"}`)}
+							transition-colors duration-300 ${isSelected && "border-0 bg-primary"}`)}
 						/>
 					</div>
 					{projectNameElement}
@@ -82,11 +86,19 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 			{/* Icon */}
 			{iconElement}
 			{/* Image */}
-			<img
-				loading="eager"
-				src={`/project-images/${project.imageLinks.prefix}-01${project.imageLinks.fileFormat}`}
-				className="mt-4 md:mt-6 rounded-lg shrink-0 aspect-video border border-content/20 object-fill"
-			/>
+			<div className="mt-4 md:mt-6 relative border border-content/20">
+				<img
+					loading="eager"
+					src={`/project-images/${project.imageLinks.prefix}-01${project.imageLinks.fileFormat}`}
+					className="rounded-lg shrink-0 aspect-video object-fill"
+				/>
+				<p
+					className="absolute right-2 bottom-2 size-6 border border-content/20 
+					rounded-md bg-base/40 content-center text-center font-medium"
+				>
+					{project.imageLinks.count}
+				</p>
+			</div>
 			<div className="flex flex-col gap-2 items-start grow">
 				{projectTypeElement}
 				{projectNameElement}

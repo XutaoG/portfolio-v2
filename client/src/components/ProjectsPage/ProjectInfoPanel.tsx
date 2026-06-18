@@ -12,7 +12,7 @@ export const ProjectInfoPanel = ({ className, icon, title, children }: ProjectIn
 	return (
 		<div
 			className={twMerge(
-				`flex flex-col border border-content/20 p-4 gap-4 rounded-lg relative overflow-hidden 
+				`flex flex-col border border-content/20 p-4 gap-4 rounded-lg relative overflow-hidden
 				${className}`,
 			)}
 		>

@@ -36,11 +36,7 @@ export const ImageCarousel = ({ imageLinks }: ImageCarouselProps) => {
 	}
 
 	const dotIndicators = imageLinks.map((_, i) => (
-		<button
-			key={i}
-			className={`h-1.5 rounded-full transition-all duration-300 
-			${i === current ? "w-6 bg-primary" : "w-1.5 bg-content/30 hover:bg-content/50"}`}
-		/>
+		<div key={i} className={`h-1.5 rounded-full ${i === current ? "w-6 bg-primary" : "w-1.5 bg-content/30"}`} />
 	));
 
 	return (
@@ -56,20 +52,17 @@ export const ImageCarousel = ({ imageLinks }: ImageCarouselProps) => {
 
 				<div className="grow flex justify-center items-center relative z-0">
 					{/* Previous image */}
-					<button
-						className="absolute inset-y-8 left-0 aspect-video opacity-70 hover:opacity-90 transition-opacity duration-300 -z-10"
-						onClick={goPrev}
-					>
+					<div className="absolute inset-y-8 left-0 aspect-video bg-base opacity-70 hover:opacity-90 transition-opacity duration-300 -z-10">
 						<img
 							src={imageLinks[prev]}
 							className="size-full object-cover rounded-lg border border-content/20"
 							alt="Previous Image"
 						/>
-					</button>
+					</div>
 
 					{/* Current image */}
 					<div className="mx-3 sm:mx-6 md:mx-12 relative flex-1">
-						<div className="relative overflow-hidden rounded-lg border border-primary/60 shadow-lg shadow-primary/10">
+						<div className="relative overflow-hidden rounded-lg border bg-base border-primary/60 shadow-lg shadow-primary/10">
 							<div className="w-full aspect-video" />
 							<AnimatePresence initial={false} custom={direction}>
 								<motion.img
@@ -89,16 +82,13 @@ export const ImageCarousel = ({ imageLinks }: ImageCarouselProps) => {
 					</div>
 
 					{/* Next image */}
-					<button
-						className="absolute inset-y-8 right-0 aspect-video opacity-70 hover:opacity-90 transition-opacity duration-300 -z-10"
-						onClick={goNext}
-					>
+					<div className="absolute inset-y-8 right-0 aspect-video bg-base opacity-70 hover:opacity-90 transition-opacity duration-300 -z-10">
 						<img
 							src={imageLinks[next]}
 							className="size-full object-cover rounded-lg border border-content/20"
 							alt="Next Image"
 						/>
-					</button>
+					</div>
 				</div>
 
 				<button
