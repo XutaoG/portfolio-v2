@@ -23,10 +23,7 @@ export const TerminalWindowPanel = ({ className, children, command, title }: Ter
 				</div>
 				<p className="font-semibold text-primary">&gt;_ {title}</p>
 			</div>
-			<div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6 overflow-y-auto bg-base/80 backdrop-blur-xs h-full z-0 relative">
-				<div className="absolute -top-8 -left-8 w-1/3 aspect-square rounded-full bg-accent/10 blur-3xl -z-10" />
-				<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-3xl -z-10" />
-
+			<div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6 overflow-x-hidden overflow-y-auto bg-base/80 backdrop-blur-xs h-full z-0 relative">
 				<TerminalLine sequence={[command]} />
 				{children}
 			</div>

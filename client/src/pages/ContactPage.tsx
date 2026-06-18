@@ -88,7 +88,7 @@ export const ContactPage = () => {
 				</div>
 
 				<TerminalWindowPanel title="Message Me" command="contact_me.exe">
-					<p className="text-content/70">Fill out the form below and I‘ll get back to you.</p>
+					<p className="text-content/70">Fill out the form below and I'll get back to you.</p>
 					<div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6">
 						<InputField title="Full Name" placeholder="John Doe" />
 						<InputField title="Email Address" placeholder="example@email.com" />
