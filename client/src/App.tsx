@@ -3,9 +3,8 @@ import { Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { PageContainer } from "./components/Common/PageContainer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { Fragment, useState } from "react";
+import { type ComponentType, Fragment, useEffect, useState } from "react";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
-import { RoomCanvas } from "./components/RoomScene/RoomCanvas";
 import { CanvasBackgroundGradient } from "./components/RoomScene/CanvasBackgroundGradient";
 
 const navOrder = [HOME_ROUTE, ABOUT_ROUTE, SKILLS_ROUTE, PROJECTS_ROUTE, CONTACT_ROUTE];
@@ -27,6 +26,12 @@ const pageVariants = {
 };
 
 export const App = () => {
+	const [RoomCanvas, setRoomCanvas] = useState<ComponentType | null>(null);
+
+	useEffect(() => {
+		import("./components/RoomScene/RoomCanvas").then((m) => setRoomCanvas(() => m.RoomCanvas));
+	}, []);
+
 	const location = useLocation();
 	const topLevelPath = location.pathname.split("/")[1];
 
@@ -61,7 +66,7 @@ export const App = () => {
 			<div className="fixed top-0 left-0 h-screen w-screen bg-base -z-10" id="canvas-container">
 				{isKnownRoute && (
 					<Fragment>
-						<RoomCanvas />
+						{RoomCanvas && <RoomCanvas />}
 						<CanvasBackgroundGradient />
 					</Fragment>
 				)}
