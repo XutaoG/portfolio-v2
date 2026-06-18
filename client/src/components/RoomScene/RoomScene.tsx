@@ -1,5 +1,5 @@
-import { Fragment, useCallback, useContext, useMemo, useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
+import { useGLTF, PerformanceMonitor, AdaptiveDpr } from "@react-three/drei";
 import { EffectComposer, Bloom, HueSaturation } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
@@ -51,6 +51,8 @@ export const RoomScene = () => {
 		if (quadrant === 3 && (wallName === WALL_NAMES.deskWall || wallName === WALL_NAMES.closetWall)) return false;
 		return true;
 	}, []);
+
+	const [lowPerf, setLowPerf] = useState(false);
 
 	const sceneContextState = useContext(SceneStateContext);
 
@@ -141,12 +143,13 @@ export const RoomScene = () => {
 		];
 
 		return secondaryLightsPositions.map((lightPos, i) => (
-			<pointLight key={i} intensity={14} color="#ebb87a" position={lightPos} />
+			<pointLight key={i} intensity={14} color="#ebb87a" position={lightPos} castShadow={false} />
 		));
 	}, []);
 
 	return (
-		<Fragment>
+		<PerformanceMonitor onDecline={() => setLowPerf(true)} onIncline={() => setLowPerf(false)}>
+			<AdaptiveDpr pixelated />
 			<group ref={sceneGroupRef} scale={0}>
 				<primitive object={scene} position={[0, 0, 0]} />
 			</group>
@@ -181,10 +184,12 @@ export const RoomScene = () => {
 			/>
 
 			{/* Post processing */}
-			<EffectComposer>
-				<Bloom intensity={0.05} luminanceThreshold={0.3} luminanceSmoothing={0.5} />
-				<HueSaturation saturation={0.1} />
-			</EffectComposer>
-		</Fragment>
+			{!lowPerf && (
+				<EffectComposer>
+					<Bloom intensity={0.05} luminanceThreshold={0.3} luminanceSmoothing={0.5} />
+					<HueSaturation saturation={0.1} />
+				</EffectComposer>
+			)}
+		</PerformanceMonitor>
 	);
 };
