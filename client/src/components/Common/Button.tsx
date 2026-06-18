@@ -18,17 +18,17 @@ export const Button = ({ className, children, disabled, ...rest }: ButtonProps) 
 			<div
 				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base/50 backdrop-blur-xs
 				font-semibold flex items-center relative overflow-hidden transition-transform duration-300
-				z-10 -translate-1.5 group-hover:translate-y-1.5 ${disabled && "border-primary/40"}`)}
+				z-10 -translate-1.5 ${disabled ? "border-primary/40" : "group-hover:translate-y-1.5"}`)}
 			>
 				<div
 					className={twMerge(
 						`absolute top-1/2 left-1/2 -translate-1/2 bg-primary rounded-full w-0 aspect-square 
-						transition-[width] duration-300 group-hover:w-[120%]`,
+						transition-[width] duration-300 ${disabled || "group-hover:w-[120%]"}`,
 					)}
 				/>
 				<span
-					className={twMerge(`z-20 font-medium text-primary 
-					transition-colors duration-300 group-hover:text-black`)}
+					className={twMerge(`z-20 font-medium text-primary transition-colors duration-300 
+					${disabled || "group-hover:text-black"}`)}
 				>
 					$
 				</span>

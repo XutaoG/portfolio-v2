@@ -1,4 +1,11 @@
-import { EnvelopeIcon, GithubLogoIcon, HourglassHighIcon, LinkedinLogoIcon, MapPinIcon } from "@phosphor-icons/react";
+import {
+	EnvelopeIcon,
+	GithubLogoIcon,
+	HourglassHighIcon,
+	LinkedinLogoIcon,
+	MapPinIcon,
+	WarningIcon,
+} from "@phosphor-icons/react";
 import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { SocialLink } from "../components/ContactPage/SocialLink";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
@@ -88,7 +95,13 @@ export const ContactPage = () => {
 					</div>
 					<InputField title="Subject" placeholder="What’s this about?" />
 					<TextArea title="Message" placeholder="Your message..." />
-					<Button className="self-start">SEND</Button>
+					<Button className="self-start" disabled>
+						SEND
+					</Button>
+					<p className="text-error flex items-start gap-2">
+						<WarningIcon size={24} weight="bold" color="var(--color-error)" />
+						To be implemented soon, sorry for the inconvinence!
+					</p>
 				</TerminalWindowPanel>
 			</div>
 
