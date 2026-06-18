@@ -3,12 +3,13 @@ import { Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { PageContainer } from "./components/Common/PageContainer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 import { RoomCanvas } from "./components/RoomScene/RoomCanvas";
 import { CanvasBackgroundGradient } from "./components/RoomScene/CanvasBackgroundGradient";
 
 const navOrder = [HOME_ROUTE, ABOUT_ROUTE, SKILLS_ROUTE, PROJECTS_ROUTE, CONTACT_ROUTE];
+const knownRoutes = new Set(navOrder);
 
 const pageVariants = {
 	initial: (direction: number) => ({
@@ -29,6 +30,7 @@ export const App = () => {
 	const location = useLocation();
 	const topLevelPath = location.pathname.split("/")[1];
 
+	const isKnownRoute = knownRoutes.has(topLevelPath);
 	const [navState, setNavState] = useState({ prevPath: topLevelPath, direction: 1 });
 
 	if (navState.prevPath !== topLevelPath) {
@@ -57,11 +59,12 @@ export const App = () => {
 				</AnimatePresence>
 			</PageContainer>
 			<div className="fixed top-0 left-0 h-screen w-screen bg-base -z-10" id="canvas-container">
-				{/* Room rendering */}
-				<RoomCanvas />
-
-				{/* Screen background gradient */}
-				<CanvasBackgroundGradient />
+				{isKnownRoute && (
+					<Fragment>
+						<RoomCanvas />
+						<CanvasBackgroundGradient />
+					</Fragment>
+				)}
 			</div>
 		</div>
 	);

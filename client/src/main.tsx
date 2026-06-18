@@ -10,6 +10,7 @@ import { ProjectPage } from "./pages/ProjectPage";
 import { ContactPage } from "./pages/ContactPage";
 import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
 import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
 	{
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
 				],
 			},
 			{ path: CONTACT_ROUTE, Component: ContactPage },
+			{ path: "*", Component: NotFoundPage },
 		],
 	},
 ]);

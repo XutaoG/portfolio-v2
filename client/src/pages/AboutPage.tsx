@@ -39,7 +39,7 @@ export const AboutPage = () => {
 				<p className="text-primary font-semibold">&gt;_ ABOUT ME</p>
 				<div className="flex flex-col items-end">
 					<h1 className="font-medium text-4xl sm:text-5xl text-shadow-lg">
-						Hey, I'm <span className="font-bold text-primary">Xutao_</span>
+						Hey, I'm <span className="text-primary">Xutao_</span>
 					</h1>
 					<p className="text-content/70 font-medium">(Pronunced Shu-tao)</p>
 				</div>
