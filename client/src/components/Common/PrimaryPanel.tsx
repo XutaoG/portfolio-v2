@@ -16,7 +16,7 @@ export const PrimaryPanel = ({ children, className }: PrimaryPanelProps) => {
 				-translate-1.5 transition-all duration-300 ${className}`)}
 			>
 				<div
-					className="absolute -bottom-8 -right-8 w-1/2 h-1/2 rounded-full 
+					className="absolute -bottom-8 -right-8 w-1/2 h-1/2 rounded-full -z-10
 					bg-primary/20 blur-[96px] group-hover:bg-primary/80 transition-colors duration-300"
 				/>
 				{children}
