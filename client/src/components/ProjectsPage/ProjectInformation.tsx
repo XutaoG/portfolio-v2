@@ -128,13 +128,22 @@ export const ProjectInformation = () => {
 					<p className="font-sm text-content/70 line-clamp-2">{project.subheading}</p>
 					{/* GitHub link */}
 					{project.gitHubLink && (
-						<Link to={project.gitHubLink} target="_blank" rel="noreferrer" className="mt-2">
-							<Button sm>GitHub</Button>
+						<Link
+							aria-label="Visit GitHub repository"
+							to={project.gitHubLink}
+							target="_blank"
+							rel="noreferrer"
+							className="mt-2"
+						>
+							<Button sm aria-label="Visit GitHub repository">
+								GitHub
+							</Button>
 						</Link>
 					)}
 				</div>
 
 				<button
+					aria-label="Close project information panel"
 					onClick={closePanel}
 					className="flex items-center gap-2 p-1.5 rounded-full border border-primary/50 
 					bg-base hover:bg-primary/30  hover:border-primary transition-colors duration-300"

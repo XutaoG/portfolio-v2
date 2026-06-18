@@ -1,4 +1,5 @@
-﻿import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react";
+﻿import { Helmet } from "react-helmet-async";
+import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { Link, Outlet, useParams } from "react-router";
 import { ProjectPanel } from "../components/ProjectsPage/ProjectPanel";
@@ -8,6 +9,7 @@ import { CONTACT_ROUTE } from "../routes";
 import { PageTransitionLink } from "../components/Common/PageTransitionLink";
 import { useMemo } from "react";
 import { useMinWidth } from "../hooks/useMinWidth";
+import { socialLinks } from "../data/socialLinks";
 
 export const ProjectPage = () => {
 	const isLg = useMinWidth("lg");
@@ -22,6 +24,13 @@ export const ProjectPage = () => {
 
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
+			<Helmet>
+				<title>Projects — Xutao Gao</title>
+				<meta
+					name="description"
+					content="Browse Xutao Gao's portfolio of projects — full-stack applications, simulations, and interactive 3D web experiences born from curiosity and hands-on experimentation."
+				/>
+			</Helmet>
 			{/* Introduction */}
 			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start">
 				<p className="text-primary font-semibold">&gt;_ PROJECTS</p>
@@ -41,7 +50,12 @@ export const ProjectPage = () => {
 				<div className="border border-content/40 p-2 rounded-lg flex justify-between items-center gap-4 sm:gap-10">
 					<GithubLogoIcon size={24} weight="bold" className="shrink-0" />
 					github.com/XutaoG
-					<Link to="https://github.com/XutaoG" target="_blank" rel="noreferrer">
+					<Link
+						aria-label="Go to GitHub"
+						to={socialLinks.gitHub.displayLink}
+						target="_blank"
+						rel="noreferrer"
+					>
 						<ArrowSquareOutIcon size={24} weight="bold" className="shrink-0" />
 					</Link>
 				</div>

@@ -10,6 +10,7 @@ interface NavButtonProps {
 export const NavButton = ({ text, to }: NavButtonProps) => {
 	return (
 		<NavLink
+			aria-label={`Go to ${text}`}
 			to={to}
 			className={({ isActive }) =>
 				twMerge(

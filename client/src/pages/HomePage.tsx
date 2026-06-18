@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 import { Button } from "../components/Common/Button";
 import { QuickSocial } from "../components/HomePage/QuickSocial";
 import { TerminalLoadingText } from "../components/HomePage/TerminalLoadingText";
@@ -11,6 +12,13 @@ export const HomePage = () => {
 
 	return (
 		<div className="flex flex-col items-start justify-between gap-8 sm:gap-24 min-h-full">
+			<Helmet>
+				<title>Xutao Gao</title>
+				<meta
+					name="description"
+					content="Xutao Gao — Software Engineer, Builder, Problem Solver. Explore a portfolio of full-stack, cloud, and interactive 3D web projects."
+				/>
+			</Helmet>
 			<TerminalLoadingText
 				isTerminalLoadingComplete={isTerminalLoadingCompleted}
 				setTerminalLoadingCompleted={() => setIsTerminalLoadingCompleted(true)}
@@ -42,8 +50,8 @@ export const HomePage = () => {
 							Every project begins with curiosity. This portfolio is a collection of where mine has led
 							me.
 						</p>
-						<Link to={`/${ABOUT_ROUTE}`}>
-							<Button>ABOUT ME</Button>
+						<Link aria-label="Go to about page" to={`/${ABOUT_ROUTE}`}>
+							<Button aria-label="Learn more about Xutao">ABOUT ME</Button>
 						</Link>
 					</div>
 				</motion.div>

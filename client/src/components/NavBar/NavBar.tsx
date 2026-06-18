@@ -60,7 +60,11 @@ export const NavBar = () => {
 						<NavButton to={`/${PROJECTS_ROUTE}`} text="PROJECTS" />
 						<NavButton to={`/${CONTACT_ROUTE}`} text="CONTACT" />
 					</div>
-					<button className="flex md:hidden" onClick={() => setShowMobileNavBar((val) => !val)}>
+					<button
+						ria-label="Toggle mobile navigation menu"
+						className="flex md:hidden"
+						onClick={() => setShowMobileNavBar((val) => !val)}
+					>
 						<ListIcon size={32} weight="bold" />
 					</button>
 				</div>

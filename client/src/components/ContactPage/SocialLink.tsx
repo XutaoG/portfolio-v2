@@ -31,11 +31,11 @@ export const SocialLink = ({ icon, title, displayLink, fullLink, action }: Socia
 				<p className="text-content/70 hidden sm:block">{displayLink}</p>
 			</div>
 			{action === "link" ? (
-				<Link to={fullLink} target="_blank" rel="noreferrer">
+				<Link aria-label={`Go to ${displayLink}`} to={fullLink} target="_blank" rel="noreferrer">
 					<ArrowSquareOutIcon size={24} weight="bold" />
 				</Link>
 			) : (
-				<button onClick={copyEmail}>
+				<button aria-label="Copy email address" onClick={copyEmail}>
 					{hasCopidEmail ? (
 						<CheckCircleIcon size={24} color="var(--color-primary)" weight="fill" />
 					) : (

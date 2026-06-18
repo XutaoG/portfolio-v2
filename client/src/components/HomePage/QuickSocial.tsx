@@ -28,6 +28,7 @@ export const QuickSocial = () => {
 	return (
 		<div className="flex gap-1">
 			<Link
+				aria-label="Go to GitHub"
 				to={socialLinks.gitHub.fullyQualifiedLink}
 				target="_blank"
 				rel="noreferrer"
@@ -37,6 +38,7 @@ export const QuickSocial = () => {
 				<GithubLogoIcon size={24} weight="bold" className="z-10" />
 			</Link>
 			<Link
+				aria-label="Go to LinkedIn"
 				to={socialLinks.linkedIn.fullyQualifiedLink}
 				target="_blank"
 				rel="noreferrer"
@@ -59,7 +61,7 @@ export const QuickSocial = () => {
 				>
 					<div className="z-0 absolute bg-primary/40 size-12 -bottom-6 -right-6 rounded-full blur-xl group-hover:bg-primary/80" />
 					<p>{myEmail}</p>
-					<button onClick={copyEmail}>
+					<button aria-label="Copy email address" onClick={copyEmail}>
 						{hasCopidEmail ? (
 							<CheckCircleIcon size={24} color="var(--color-success)" weight="fill" />
 						) : (

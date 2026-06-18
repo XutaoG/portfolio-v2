@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { CertificateIcon, DiamondIcon, DiamondsFourIcon } from "@phosphor-icons/react";
 import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { Fragment, useMemo } from "react";
@@ -45,7 +46,7 @@ export const SkillsPage = () => {
 								</Fragment>
 							) : (
 								<Fragment>
-									<img src={item.logo} className="size-6" />
+									<img alt="logo" src={item.logo} className="size-6" />
 									{item.name}
 								</Fragment>
 							)}
@@ -68,7 +69,11 @@ export const SkillsPage = () => {
 					>
 						<div className="z-0 absolute -bottom-8 -right-8 w-2/3 h-2/3 rounded-full bg-accent/20 blur-3xl" />
 						<div className="z-10 h-16 sm:h-20 flex items-center">
-							<img src={certification.logo} className={`${logoImageSizeStyle}`} />
+							<img
+								alt="certification logo"
+								src={certification.logo}
+								className={`${logoImageSizeStyle}`}
+							/>
 						</div>
 						<div className="grow flex flex-col gap-4 items-center">
 							<p className="z-10 grow font-medium text-center max-w-60 text-content/80">
@@ -94,6 +99,13 @@ export const SkillsPage = () => {
 
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
+			<Helmet>
+				<title>Skills — Xutao Gao</title>
+				<meta
+					name="description"
+					content="Explore Xutao Gao's technical toolkit including skills from full-stack development, cloud engineering, AWS certifications, and more."
+				/>
+			</Helmet>
 			{/* Introduction */}
 			<div className="flex flex-col gap-4 sm:gap-6 items-start self-end">
 				<p className="text-primary font-semibold">&gt;_ SKILLS</p>
@@ -132,7 +144,7 @@ export const SkillsPage = () => {
 				<TerminalWindowPanel title="In Progress" command="inprogress" className="grow">
 					<div className="flex flex-col justify-between items-center gap-6">
 						<div className="h-24 flex items-center">
-							<img src="logos/aws-logo.svg" className="h-24" />
+							<img alt="certification logo" src="logos/aws-logo.svg" className="h-24" />
 						</div>
 						<p className="grow font-medium text-center max-w-60 text-content/80">
 							AWS Certified DevOps Engineer Professional

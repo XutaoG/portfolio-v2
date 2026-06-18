@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import {
 	EnvelopeIcon,
 	GithubLogoIcon,
@@ -17,6 +18,13 @@ import { socialLinks } from "../data/socialLinks";
 export const ContactPage = () => {
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full items-center">
+			<Helmet>
+				<title>Contact — Xutao Gao</title>
+				<meta
+					name="description"
+					content="Get in touch with Xutao Gao. Connect via GitHub, LinkedIn, or email with a response time within 24 hours."
+				/>
+			</Helmet>
 			{/* Introduction */}
 			<div className="flex flex-col gap-4 sm:gap-6 items-start m">
 				<p className="text-primary font-semibold">&gt;_ CONTACT ME</p>
@@ -95,7 +103,7 @@ export const ContactPage = () => {
 					</div>
 					<InputField title="Subject" placeholder="What’s this about?" />
 					<TextArea title="Message" placeholder="Your message..." />
-					<Button className="self-start" disabled>
+					<Button aria-label="Send message" className="self-start" disabled>
 						SEND
 					</Button>
 					<p className="text-error flex items-start gap-2">

@@ -33,7 +33,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 		</div>
 	);
 	const projectTypeElement = (
-		<p className="rounded-sm p-1 bg-indigo-600/20 text-indigo-400 text-xs font-medium">{project.type}</p>
+		<p className="rounded-sm p-1 px-1.5 bg-sky-600/20 text-indigo-100 text-xs font-medium">{project.type}</p>
 	);
 	const projectNameElement = <p className="font-medium line-clamp-1">{project.name}</p>;
 	const projectSubheadingElement = <p className="font-sm text-content/70 line-clamp-2">{project.subheading}</p>;

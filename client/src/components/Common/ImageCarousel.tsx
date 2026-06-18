@@ -43,6 +43,7 @@ export const ImageCarousel = ({ imageLinks }: ImageCarouselProps) => {
 		<div className="flex flex-col gap-4 w-full">
 			<div className="flex items-center w-full h-full gap-2">
 				<button
+					aria-label="Go to previous image"
 					onClick={goPrev}
 					className="p-1.5 border border-primary/50 rounded-full bg-base/70 hover:bg-primary/30 
 					hover:border-primary transition-colors duration-300"
@@ -92,6 +93,7 @@ export const ImageCarousel = ({ imageLinks }: ImageCarouselProps) => {
 				</div>
 
 				<button
+					aria-label="Go to next image"
 					onClick={goNext}
 					className="p-1.5 border border-primary/50 rounded-full bg-base/70 hover:bg-primary/30 
 					hover:border-primary transition-colors duration-300 backdrop-blur-xs"

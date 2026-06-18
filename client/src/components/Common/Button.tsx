@@ -10,12 +10,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({ className, children, disabled, sm, ...rest }: ButtonProps) => {
 	return (
 		<button
-			className={`relative transiton-transform duration-300 disabled:cursor-not-allowed ml-1.5 mt-1.5
+			className={`relative transiton-transform duration-300 disabled:cursor-not-allowed pl-1.5 pt-1.5
 			group ${disabled || "active:translate-y-1"} ${className}`}
 			disabled={disabled}
 			{...rest}
 		>
-			<div className="absolute inset-0 rounded-sm border-2 border-primary opacity-60 diagonal-stripe-pattern" />
+			<div className="absolute inset-0 ml-1.5 mt-1.5 rounded-sm border-2 border-primary opacity-60 diagonal-stripe-pattern" />
 			<div
 				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base/50 backdrop-blur-xs
 				font-semibold flex items-center relative overflow-hidden transition-transform duration-300

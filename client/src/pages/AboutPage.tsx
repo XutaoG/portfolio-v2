@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { ArrowSquareOutIcon, TargetIcon } from "@phosphor-icons/react";
 import { Button } from "../components/Common/Button";
 import { Link } from "react-router";
@@ -34,6 +35,13 @@ export const AboutPage = () => {
 
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
+			<Helmet>
+				<title>About — Xutao Gao</title>
+				<meta
+					name="description"
+					content="Learn about Xutao Gao — a UCF Computer Science graduate and software engineer with over a year of professional experience."
+				/>
+			</Helmet>
 			{/* Introduction */}
 			<div className="self-start flex flex-col gap-4 sm:gap-6 items-start">
 				<p className="text-primary font-semibold">&gt;_ ABOUT ME</p>
@@ -53,9 +61,10 @@ export const AboutPage = () => {
 
 			<div className="flex items-center gap-8">
 				<a href="/Xutao Gao Resume.pdf" download="Xutao Gao Resume.pdf">
-					<Button>DOWNLOAD RESUME</Button>
+					<Button aria-label="Download resume">DOWNLOAD RESUME</Button>
 				</a>
 				<Link
+					aria-label="View resume in another page"
 					to="/Xutao Gao Resume.pdf"
 					target="_blank"
 					rel="noreferrer"
