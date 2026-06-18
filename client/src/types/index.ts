@@ -5,12 +5,34 @@ export type TLink = {
 	fullyQualifiedLink: string;
 };
 
+export type TProjectSectionInfo = {
+	textInfo?: string[];
+	listInfo?: string[];
+};
+
 export type TProject = {
-	id: number;
+	id: string;
 	name: string;
 	type: string;
-	description: string;
-	tags: string[];
+	iconCategory: "Web" | "Server" | "Simulation" | "Creative";
+	gitHubLink?: string;
+	subheading: string;
+	techStacks: TProjectSectionInfo;
+	description: TProjectSectionInfo;
+	myRole?: TProjectSectionInfo;
+	timeFrame: {
+		start: string;
+		end: string;
+		duration: string;
+	};
+	notableFeatures: TProjectSectionInfo;
+	engineeringChallenges?: TProjectSectionInfo;
+	whatILearned: TProjectSectionInfo;
+	imageLinks: {
+		prefix: string;
+		count: number;
+		fileFormat: string;
+	};
 };
 
 export type TBasicInfo = {

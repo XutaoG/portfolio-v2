@@ -13,23 +13,29 @@ import {
 } from "@phosphor-icons/react";
 import { ProjectInfoPanel } from "./ProjectInfoPanel";
 import { ListItem } from "../Common/ListItem";
-import { Fragment, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Fragment, useCallback, useEffect, useMemo } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import { projects } from "../../data/projects";
 import { motion } from "framer-motion";
 import { useMinWidth } from "../../hooks/useMinWidth";
+import type { TProjectSectionInfo } from "../../types";
 
 export const ProjectInformation = () => {
 	const navigate = useNavigate();
 	const { projectId } = useParams();
 	const isLg = useMinWidth("lg");
 
+	const closePanel = useCallback(() => {
+		navigate("/projects");
+	}, [navigate]);
+
+	const project = projects.find((p) => p.id === projectId);
+
 	useEffect(() => {
-		const selectedProject = projects.find((project) => project.id === Number(projectId));
-		if (!selectedProject) {
-			navigate("/projects");
+		if (!project) {
+			closePanel();
 		}
-	}, [navigate, projectId]);
+	}, [closePanel, project]);
 
 	// Disable body overflow when modal is active
 	useEffect(() => {
@@ -41,11 +47,54 @@ export const ProjectInformation = () => {
 		}
 	}, [isLg]);
 
-	const handleClose = () => {
-		navigate("/projects");
+	const buildProjectSection = (section: TProjectSectionInfo) => {
+		const textElements =
+			section.textInfo &&
+			section.textInfo.map((paragraph, i, textInfo) => {
+				return (
+					<Fragment>
+						<p>{paragraph}</p>
+						{i < textInfo.length - 1 && (
+							<Fragment>
+								<br />
+								<br />
+							</Fragment>
+						)}
+					</Fragment>
+				);
+			});
+
+		const listElements =
+			section.listInfo &&
+			section.listInfo.map((item) => {
+				return <ListItem key={item}>{item}</ListItem>;
+			});
+
+		return (
+			<div className="flex flex-col gap-2 text-content/70">
+				{textElements}
+				{listElements}
+			</div>
+		);
 	};
 
-	const content = (
+	const projectImages = useMemo(() => {
+		return (
+			project?.imageLinks &&
+			[...Array(project.imageLinks.count)].map((_, i) => {
+				const paddedIndex = (i + 1).toString().padStart(2, "0");
+				return (
+					<img
+						loading="lazy"
+						src={`/project-images/${project.imageLinks.prefix}-${paddedIndex}${project.imageLinks.fileFormat}`}
+						className="rounded-lg h-75 shrink-0"
+					/>
+				);
+			})
+		);
+	}, [project]);
+
+	const content = project && (
 		<div className="flex flex-col min-h-full">
 			<div className="p-6 flex items-start gap-4 sticky top-0 z-40 bg-base border-b border-content/20">
 				{/* Icon */}
@@ -57,21 +106,26 @@ export const ProjectInformation = () => {
 
 				<div className="flex flex-col gap-2 items-start grow">
 					{/* Project name */}
-					<p className="font-semibold">Project 1</p>
-					{/* Project description */}
-					<p className="font-sm text-content/70 line-clamp-2">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, sapiente?
-					</p>
+					<p className="font-medium text-lg">{project.name}</p>
+					{/* Project subheading */}
+					<p className="font-sm text-content/70 line-clamp-2">{project.subheading}</p>
 					{/* GitHub link */}
-					<div className="border border-content/40 px-3 py-1.5 rounded-lg flex items-center gap-4">
-						<GithubLogoIcon size={20} weight="bold" className="shrink-0" />
-						GitHub
-						<ArrowSquareOutIcon size={20} weight="bold" className="shrink-0" />
-					</div>
+					{project.gitHubLink && (
+						<Link
+							to={project.gitHubLink}
+							target="_blank"
+							rel="noreferrer"
+							className="border border-content/40 px-3 py-1.5 rounded-lg flex items-center gap-4"
+						>
+							<GithubLogoIcon size={20} weight="bold" className="shrink-0" />
+							GitHub
+							<ArrowSquareOutIcon size={20} weight="bold" className="shrink-0" />
+						</Link>
+					)}
 				</div>
 
 				<button
-					onClick={handleClose}
+					onClick={closePanel}
 					className="flex items-center gap-2 p-2 rounded-full border border-content/20 
 					bg-base hover:scale-110 transition-all duration-300 active:bg-neutral"
 				>
@@ -83,27 +137,16 @@ export const ProjectInformation = () => {
 				<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
 				<div className="absolute -top-8 -left-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
 
-				<div className="flex gap-2 overflow-x-scroll min-w-0 w-full">
-					<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
-					<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
-					<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
-					<div className="bg-neutral rounded-lg w-100 aspect-4/3 shrink-0" />
-				</div>
+				<div className="flex gap-2 overflow-x-scroll min-w-0 w-full">{projectImages}</div>
 
-				<div className="flex gap-4 flex-wrap">
+				<div className="flex gap-4 flex-wrap grow">
 					{/* Description */}
 					<ProjectInfoPanel
 						icon={<LightbulbIcon size={24} weight="bold" />}
 						title="Description"
 						className="min-w-92 @xl:min-w-132 flex-1"
 					>
-						<p className="text-content/70">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias veniam dolores quos,
-							sapiente non vel quo libero recusandae deserunt nemo.
-							<br />
-							<br />
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						</p>
+						{buildProjectSection(project.description)}
 					</ProjectInfoPanel>
 
 					{/* Tech stack  */}
@@ -112,39 +155,26 @@ export const ProjectInformation = () => {
 						title="Tech Stack"
 						className="min-w-fit flex-1"
 					>
-						<div className="flex flex-col gap-2 text-content/70">
-							<ListItem>Item 1</ListItem>
-							<ListItem>Item 2</ListItem>
-							<ListItem>Item 3</ListItem>
-							<ListItem>Item 4</ListItem>
-							<ListItem>Item 5</ListItem>
-							<ListItem>Item 6</ListItem>
-						</div>
+						{buildProjectSection(project.techStacks)}
 					</ProjectInfoPanel>
 
 					{/* My role  */}
-					<ProjectInfoPanel
-						icon={<UserCheckIcon size={24} weight="bold" />}
-						title="My Role"
-						className="flex-1 min-w-64"
-					>
-						<div className="flex flex-col gap-2 text-content/70">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae incidunt amet praesentium.
-							<ListItem>Item 1</ListItem>
-							<ListItem>Item 2</ListItem>
-							<ListItem>Item 3</ListItem>
-							<ListItem>Item 4</ListItem>
-						</div>
-					</ProjectInfoPanel>
-				</div>
+					{project.myRole && (
+						<ProjectInfoPanel
+							icon={<UserCheckIcon size={24} weight="bold" />}
+							title="My Role"
+							className="flex-1 min-w-92"
+						>
+							{buildProjectSection(project.myRole)}
+						</ProjectInfoPanel>
+					)}
 
-				<div className="flex gap-4 flex-wrap grow">
 					<div className="flex flex-col gap-4 min-w-80 flex-1">
 						{/* Time frame */}
 						<ProjectInfoPanel icon={<CalendarIcon size={24} weight="bold" />} title="Time Frame">
 							<div className="text-content/70 flex flex-col gap-2 items-end">
-								Mar 2024 - Jun 2024
-								<p className="text-primary font-medium">3 Months</p>
+								{project.timeFrame.start} - {project.timeFrame.end}
+								<p className="text-primary font-medium">{project.timeFrame.duration}</p>
 							</div>
 						</ProjectInfoPanel>
 
@@ -154,42 +184,20 @@ export const ProjectInformation = () => {
 							title="Notable Features"
 							className="flex-1"
 						>
-							<div className="flex flex-col gap-2 text-content/70">
-								<ListItem>
-									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias porro incidunt
-									laborum culpa mollitia!
-								</ListItem>
-								<ListItem>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio.
-								</ListItem>
-								<ListItem>
-									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat, repellendus minus.
-								</ListItem>
-							</div>
+							{buildProjectSection(project.notableFeatures)}
 						</ProjectInfoPanel>
 					</div>
 
 					{/* Engineering shallenges */}
-					<ProjectInfoPanel
-						icon={<FlagIcon size={24} weight="bold" />}
-						title="Engineering Challenges"
-						className="min-w-92 @xl:min-w-132 flex-1"
-					>
-						<div className="flex flex-col gap-2 text-content/70">
-							<ListItem>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio.</ListItem>
-							<ListItem>
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat, repellendus minus.
-							</ListItem>
-							<ListItem>
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias porro incidunt laborum
-								culpa mollitia!
-							</ListItem>
-							<ListItem>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit numquam eveniet impedit
-								vitae aliquam dolorem distinctio, quas commodi dolor veniam?
-							</ListItem>
-						</div>
-					</ProjectInfoPanel>
+					{project.engineeringChallenges && (
+						<ProjectInfoPanel
+							icon={<FlagIcon size={24} weight="bold" />}
+							title="Engineering Challenges"
+							className="min-w-92 @xl:min-w-132 flex-1"
+						>
+							{buildProjectSection(project.engineeringChallenges)}
+						</ProjectInfoPanel>
+					)}
 
 					{/* What I learned */}
 					<ProjectInfoPanel
@@ -197,15 +205,7 @@ export const ProjectInformation = () => {
 						title="What I Leanred"
 						className="min-w-92 @xl:min-w-132 flex-1"
 					>
-						<p className="text-content/70">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, enim! Ad voluptates obcaecati
-							ipsam tempora nulla magni, placeat porro, ipsa ullam alias cum repudiandae officiis
-							consequatur quam id vel labore sint delectus.
-							<br />
-							<br />
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore doloremque minus soluta
-							beatae facere aspernatur iure eum? Nisi cupiditate ex eos ab.
-						</p>
+						{buildProjectSection(project.whatILearned)}
 					</ProjectInfoPanel>
 				</div>
 			</div>
