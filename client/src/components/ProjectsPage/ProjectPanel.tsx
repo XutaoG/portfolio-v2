@@ -89,6 +89,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 			<div className="mt-4 md:mt-6 relative border border-content/20">
 				<img
 					loading="eager"
+					alt="Project Thumbnail"
 					src={`/project-images/${project.imageLinks.prefix}-01${project.imageLinks.fileFormat}`}
 					className="rounded-lg shrink-0 aspect-video object-fill"
 				/>
