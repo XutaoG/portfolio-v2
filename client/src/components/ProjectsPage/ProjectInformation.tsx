@@ -54,13 +54,15 @@ export const ProjectInformation = () => {
 			section.textInfo.map((paragraph, i, textInfo) => {
 				return (
 					<Fragment key={i}>
-						<p>{paragraph}</p>
-						{i < textInfo.length - 1 && (
-							<Fragment>
-								<br />
-								<br />
-							</Fragment>
-						)}
+						<p className="text-content/70">
+							{paragraph}
+							{i < textInfo.length - 1 && (
+								<Fragment>
+									<br />
+									<br />
+								</Fragment>
+							)}
+						</p>
 					</Fragment>
 				);
 			});
@@ -68,7 +70,20 @@ export const ProjectInformation = () => {
 		const listElements =
 			section.listInfo &&
 			section.listInfo.map((item) => {
-				return <ListItem key={item}>{item}</ListItem>;
+				const splits = item.split(":");
+				const hasKey = splits.length > 1;
+
+				return (
+					<ListItem key={item} className="text-content/70">
+						{hasKey ? (
+							<p>
+								<span className="font-medium text-content/90">{splits[0]}</span>:{splits[1]}
+							</p>
+						) : (
+							item
+						)}
+					</ListItem>
+				);
 			});
 
 		return (

@@ -7,14 +7,14 @@ export const projects: TProject[] = [
 		type: "Crowd Simulation",
 		iconCategory: "Game",
 		setting: "Professional Work",
-		subheading: "Large-Scale Crowd Behavior and Evacuation Simulation",
+		subheading: "Large-Scale Crowd Behavior and Evacuation Simulation.",
 		techStacks: {
 			listInfo: ["Unity Engine", "Unity DOTS", "Cesium"],
 		},
 		description: {
 			textInfo: [
-				"DHS Incident Command Simulation is a large-scale crowd behavior simulation developed in Unity to model emergency response scenarios during a concert at the Washington, D.C. National Mall.",
-				"Built using Unity DOTS, ECS, and Cesium, the platform simulates the behavior of tens of thousands of individuals following a simulated explosive event. Users can configure crowd density, place obstacles, trigger incidents at arbitrary locations, and observe how different behavioral responses and evacuation patterns emerge over time.",
+				"DHS Incident Command Simulation is a large-scale crowd simulation platform developed to model emergency evacuation scenarios within the Washington D.C. National Mall.",
+				"Built using Unity DOTS, ECS, and Cesium, the system simulates tens of thousands of agents in real time, enabling analysis of crowd behavior, evacuation efficiency, and incident response under dynamically changing conditions.",
 			],
 		},
 		timeFrame: {
@@ -24,28 +24,27 @@ export const projects: TProject[] = [
 		},
 		myRole: {
 			textInfo: [
-				"I designed and implemented the core crowd simulation systems, including agent behavior modeling, state-transition logic, flow field navigation, and ECS-based processing architecture.",
-				"My responsibilities focused on building scalable simulation systems capable of supporting tens of thousands of agents while maintaining real-time performance and realistic evacuation behavior.",
+				"I designed and implemented the core simulation architecture, including agent behavior changes, state-transition system, flow field navigation, and ECS-based workflow. My work focused on building scalable simulation systems capable of supporting tens of thousands of concurrent agents while maintaining real-time performance.",
 			],
 		},
 		notableFeatures: {
 			listInfo: [
-				"Large-Scale Crowd Simulation: Simulates tens of thousands of autonomous agents simultaneously using Unity DOTS and ECS architecture.",
-				"Configurable Population Distribution: Allows users to place crowd volumes with varying densities to model different attendance patterns and population concentrations.",
-				"Flow Field Navigation: Utilizes flow field pathfinding to efficiently guide large populations toward safe areas while avoiding computationally expensive per-agent pathfinding.",
-				"Interactive Obstacle Placement: Supports runtime placement of barriers and obstructions that affect evacuation patterns.",
+				"Mass-Agent Simulation: Simulated tens of thousands of autonomous agents using Unity DOTS and ECS.",
+				"Flow Field Navigation: Implemented scalable pathfinding optimized for large-scale evacuation scenarios.",
+				"Behavioral State Modeling: Simulated panic, investigation, freezing, and evacuation behaviors through configurable state transitions.",
+				"Dynamic Scenario Configuration: Supported runtime crowd generation, obstacle placement, and incident triggering.",
 			],
 		},
 		engineeringChallenges: {
 			listInfo: [
-				"Simulating tens of thousands of agents required migrating traditional object-oriented approaches to Unity's ECS architecture to achieve acceptable performance and memory usage.",
-				"Maintaining stable simulation performance across varying crowd densities required extensive profiling and optimization of ECS systems, job scheduling, and burst compiling.",
+				"Redesigned simulation systems around ECS and data-oriented design principles to achieve real-time performance at large agent counts.",
+				"Implemented flow field navigation to replace computationally expensive per-agent pathfinding algorithms.",
+				"Optimized memory layout, job scheduling, and system execution to maintain stable performance under varying crowd densities.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"I learned how Unity's ECS architecture fundamentally improves performance by optimizing memory layout, burst compiler, and parallel execution compared to traditional GameObject-based approaches.",
-				"Furthermore, implementing flow field navigation deepened my understanding of scalable pathfinding techniques and demonstrated why conventional algorithms such as A* become impractical when applied to tens of thousands of agents simultaneously.",
+				"This project improved my understanding of data-oriented architecture, multi-threaded processing, and large-scale simulation design. I learned how to better optimize memory access patterns, leverage ECS and Burst-compiled systems, and implement scalable navigation techniques that remain performant when simulating tens of thousands of concurrent agents.",
 			],
 		},
 		imageLinks: { prefix: "dhs-incident-command", count: 5, fileFormat: ".webp" },
@@ -56,14 +55,14 @@ export const projects: TProject[] = [
 		type: "Microchip Simulation",
 		iconCategory: "Logic",
 		setting: "Professional Work",
-		subheading: "Semiconductor Manufacturing Simulation Platform",
+		subheading: "Semiconductor manufacturing simulation and digital twin platform.",
 		techStacks: {
 			listInfo: ["Angular", "Nest.js", "three.js", "Supabase"],
 		},
 		description: {
 			textInfo: [
-				"MeDT Dashboard is a manufacturing simulation and analytics platform that models the operations of a semiconductor fabrication facility in real time. The system simulates configurable production flows across 44 machines and 22 manufacturing processes, allowing users to evaluate the impact of changes to orders, staffing levels, machine configurations, maintenance schedules, and production routing.",
-				"An interactive 3D visualization engine renders machine states, worker movement, product lots, and operational metrics, enabling floor managers to identify bottlenecks, evaluate what-if scenarios, and optimize manufacturing throughput.",
+				"MeDT Dashboard is a manufacturing simulation platform that models semiconductor fabrication workflows across 44 machines and 22 production processes.",
+				"The system combines a discrete-event simulation engine with a real-time 3D digital twin, enabling users to analyze throughput, evaluate operational constraints, and perform what-if analysis across staffing, maintenance, production routing, and order volume scenarios.",
 			],
 		},
 		timeFrame: {
@@ -73,33 +72,34 @@ export const projects: TProject[] = [
 		},
 		myRole: {
 			textInfo: [
-				"I designed and implemented the discrete-event simulation architecture, state lifecycle management, and WebGL-based visualization engine that power the platform. This included:",
+				"I architected and developed the simulation engine, state management systems, and WebGL-based digital twin that power the platform.",
+				"My responsibilities also included: ",
 			],
 			listInfo: [
 				"Modeling fabrication workflows.",
-				"Developing event scheduling and processing systems and optimizing simulation performance.",
-				"Building analysis tools for evaluating bottlenecks and throughput.",
+				"Implementing event scheduling and lifecycle management.",
+				"Optimizing simulation performance.",
+				"Building tooling for operational analysis and bottleneck detection.",
 			],
 		},
 		notableFeatures: {
 			listInfo: [
-				"Real-Time 3D Factory Visualization: Interactive WebGL-based digital twin rendering machine states, workers, product lots, and production activity in real time.",
-				"Adjustable Simulation Speed: Supports simulation execution speed from 1X to 200X.",
-				"Operational Bottleneck Detection: Identifies throughput constraints, machine utilization issues, and production inefficiencies throughout the manufacturing process.",
-				"Event-Driven Simulation Engine: Processes manufacturing events through lifecycle-based execution rather than continuous polling, significantly improving simulation efficiency.",
+				"Discrete-Event Simulation Engine: Modeled fabrication workflows using event scheduling rather than continuous state evaluation.",
+				"Real-Time 3D Digital Twin: Visualized machine states, worker activity, product lots, and operational metrics through an interactive WebGL environment.",
+				"What-If Scenario Analysis: Simulated the impact of staffing, maintenance, machine configurations, production flows, and order volume changes.",
+				"Accelerated Simulation Execution: Supported configurable simulation speeds from 1X to 200X for rapid operational analysis.",
 			],
 		},
 		engineeringChallenges: {
-			textInfo: [
-				"Rendering a large-scale manufacturing environment in real time was slow and required me to optimize scene updates and visualization performance to maintain smooth interaction.",
-				"As simulation complexity increased, repeatedly evaluating machine, worker, and product states became computationally expensive, leading me to redesign the engine around an event-driven architecture.",
+			listInfo: [
+				"Redesigned the simulation engine around an event-driven architecture to eliminate unnecessary state evaluations and reduce computational overhead.",
+				"Optimized synchronization between simulation state and 3D visualization layers while maintaining real-time responsiveness.",
+				"Modeled configurable manufacturing workflows capable of supporting arbitrary production routes without hardcoded process definitions.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"Developing MeDT Dashboard significantly expanded my understanding of simulation architecture, event-driven systems, and real-time visualization.",
-				"I learned how discrete-event simulations can dramatically outperform time-step approaches by processing only meaningful state transitions rather than continuously evaluating every entity in the system.",
-				"Learning to implement the event-driven architecture reinforced the importance of lifecycle management and event scheduling when modeling large-scale operational systems.",
+				"Developing the MeDT Dashboard deepened my understanding of simulation architecture, event-driven systems, and performance engineering. I gained experience designing discrete-event simulations, modeling complex operational workflows, and optimizing state processing through lifecycle-based execution. The project also reinforced the importance of state statement and rendering efficiency when building large-scale systems.",
 			],
 		},
 		imageLinks: { prefix: "medt-dashboard", count: 6, fileFormat: ".webp" },
@@ -111,15 +111,14 @@ export const projects: TProject[] = [
 		gitHubLink: "https://github.com/lbrown169/Medical-Resident-Scheduling",
 		iconCategory: "Logic",
 		setting: "Senior Design Project",
-		subheading: "Resident Scheduling Platform Powered by Constraint-Based Scheduling",
+		subheading: "Constraint-based scheduling platform for medical resident rotation planning.",
 		techStacks: {
 			listInfo: ["ASP.NET Core", "Entity Framework Core", "Docker", "MySQL Server", "SwaggerHub"],
 		},
 		description: {
 			textInfo: [
-				"Psycall PGY4 Scheduler is a scheduling platform developed for Orlando Health that automates the creation of year-long resident rotation schedules.",
-				"Residents submit their preferred, alternative, and avoided rotations, while administrators generate and refine schedules based on organizational constraints and staffing requirements.",
-				"The platform combines a constraint-driven scheduling engine, real-time validation feedback, and manual editing tools to produce fair, balanced schedules that optimize resident preferences while maintaining operational requirements.",
+				"Psycall PGY4 Scheduler is a scheduling platform developed for Orlando Health that automates the generation of year-long resident rotation schedules.",
+				"The system combines constraint-based scheduling, optimization heuristics, and real-time validation to ensure resident preferences, staffing requirements, and organizational schedule constraints, replacing the email/spreadsheet with a streamlined process.",
 			],
 		},
 		timeFrame: {
@@ -128,30 +127,29 @@ export const projects: TProject[] = [
 			duration: "6 months",
 		},
 		myRole: {
-			textInfo: [
-				"I architected and developed the core scheduling engine, implementing backtracking and constraint-validation algorithms to generate fair, optimized resident rotation schedules.",
-				"Furthermore, I was also responsible for designing and building the backend services responsible for resident preference collection, schedule generation workflows, constraint evaluation, and administrator-driven schedule modifications.",
+			listInfo: [
+				"I architected and developed the scheduling engine, implementing backtracking, constraint evaluation, and fitness-based optimization algorithms to generate valid resident schedules.",
+				"I also built the backend API responsible for resident preference submission, schedule generation endpoints, constraint analysis, and administrator-driven schedule modifications.",
 			],
 		},
 		notableFeatures: {
 			listInfo: [
-				"Resident Preference Management: Collects preferred, alternative, and avoided rotations to incorporate resident input into schedule generation.",
-				"Manual Schedule Revision Tools: Allows administrators to modify generated schedules while continuously validating constraint satisfaction.",
-				"Real-Time Constraint Validation: Provides immediate feedback on scheduling conflicts, violations, and rule compliance during schedule generation and editing.",
-				"Fairness & Distribution Analysis: Balances rotation assignments across residents to prevent scheduling bias and uneven workload distribution.",
+				"Constraint-Based Schedule Generation: Produced valid yearly schedules while satisfying organizational and staffing requirements.",
+				"Fitness-Driven Optimization: Evaluated candidate schedules using scoring functions based on fairness, preference satisfaction, and workload distribution.",
+				"Administrative Schedule Overrides: Supported manual schedule overrides while preserving constraint compliance.",
+				"Real-Time Constraint Analysis: Continuously validated scheduling rules and conflicts during generation and manual editing.",
 			],
 		},
 		engineeringChallenges: {
-			textInfo: [
-				"Implementing backtracking efficiently forced me to minimize unnecessary search paths and optimize constraint validation to prevent combinatorial explosion.",
-				"Providing real-time feedback on constraint violations required efficient evaluation strategies that could quickly identify conflicts across an entire yearly schedule.",
-				"Creating a fitness scoring system required translating subjective concepts such as fairness, preference satisfaction, and schedule distribution into measurable evaluation criteria.",
+			listInfo: [
+				"Optimized backtracking performance through search-space pruning and efficient constraint evaluation strategies.",
+				"Designed a flexible constraint architecture capable of supporting evolving scheduling requirements without algorithm rewrites.",
+				"Translated subjective scheduling goals such as fairness and preference satisfaction into quantifiable metrics.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"I learned how search-space pruning and efficient constraint validation can dramatically improve the performance of backtracking algorithms when generating highly constrained schedules.",
-				"Building the fitness evaluation system also taught me how to translate qualitative scheduling goals, such as fairness, preference satisfaction, and workload distribution, into quantifiable scoring metrics that could be objectively optimized.",
+				"This project deepened my understanding of constraint satisfaction problems, heuristic optimization, and algorithm design. I gained experience modeling complex scheduling rules as composable constraints, reducing computational complexity through search-space pruning, and developing scoring systems that objectively evaluate schedule quality across competing scheduling objectives.",
 			],
 		},
 		imageLinks: { prefix: "psycall", count: 4, fileFormat: ".webp" },
@@ -162,7 +160,7 @@ export const projects: TProject[] = [
 		type: "Full-Stack",
 		iconCategory: "Web",
 		setting: "Professional Work",
-		subheading: "Multi-organization platform for asset discovery and management",
+		subheading: "Enterprise digital marketplace platform for asset discovery and management.",
 		techStacks: {
 			listInfo: [
 				"React TypeScript",
@@ -175,8 +173,7 @@ export const projects: TProject[] = [
 		},
 		description: {
 			textInfo: [
-				"The Florida Semiconductor Engine Digital Marketplace is a full-stack enterprise platform used by 10+ universities and companies to manage and share physical and digital assets.",
-				"Replacing manual email and spreadsheet workflows, it centralizes asset discovery, requests, and lifecycle management through a streamlined marketplace experience. The platform includes role-based access control and approval workflows that support secure asset submission, review, and publication across organizations.",
+				"The Florida Semiconductor Engine Digital Marketplace is a multi-tenant enterprise platform used by 10+ universities and industry partners to manage, discover, and share physical and digital assets. The system centralizes asset lifecycle management, approval workflows, and cross-organization collaboration through a unified marketplace architecture.",
 			],
 		},
 		timeFrame: {
@@ -186,22 +183,21 @@ export const projects: TProject[] = [
 		},
 		notableFeatures: {
 			listInfo: [
-				"Role-Based Access Control: Granular permission system supporting organization owners, administrators, and members with distinct levels of access.",
-				"Multi-Stage Approval Workflow: Structured review process for asset submission, approval, and publication to maintain data quality and governance.",
-				"Database-Driven Dynamic Forms: Form fields, validation rules, and workflows are configured through database metadata, allowing administrators to adapt processes without code changes.",
+				"Role-Based Access Control: Implemented hierarchical permissions supporting organization owners, administrators, and members across multiple organizations.",
+				"Configurable Approval Workflows: Includes asset submission, review, approval, and publication through a multi-stage pipelines.",
+				"Metadata-Driven Form Engine: Generated forms, validation rules, and input behavior from database-managed configurations.",
 			],
 		},
 		engineeringChallenges: {
-			textInfo: [
-				"Designing a flexible role-based permission system required balancing security with usability across organization owners, administrators, and members.",
-				"Building database-driven forms challenged me to create a generic architecture that could support a wide variety of field types, validation rules, and workflows without requiring code changes.",
-				"As the platform expanded, I had to ensure that search, filtering, and asset management features remained performant across large datasets.",
+			listInfo: [
+				"Built a metadata-driven form architecture capable of supporting diverse asset types, validation requirements, and workflow configurations without code changes.",
+				"Modeled complex relationships between organizations, users, assets, permissions, and approval states while maintaining data integrity and query performance.",
+				"Optimized search and filtering operations across large asset inventories while preserving responsive user interactions.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"learned how to design relational schemas that support complex relationships between organizations, users, assets, and approval workflows while maintaining referential integrity.",
-				"Developing database-driven forms also demonstrated to me how metadata can be leveraged to create highly configurable systems that minimize future code changes.",
+				"This project deepened my understanding of enterprise application architecture, particularly in the areas of authorization and database design. I gained experience designing database-driven systems, implementing access patterns, and structuring relational schemas that support complex business processes while remaining scalable and maintainable.",
 			],
 		},
 		imageLinks: { prefix: "asset-manager", count: 7, fileFormat: ".webp" },
@@ -219,8 +215,7 @@ export const projects: TProject[] = [
 		},
 		description: {
 			textInfo: [
-				"Pantrify is an online recipe app designed to help users effortlessly organize, track, and share their personal recipe collections.",
-				"With a comprehensive recipe and ingredient management system, Pantrify makes it easy to store and access your favorite dishes anytime. Currently available on the web, it is built using Next.js, ASP.NET Core, and Azure SQL for a seamless and responsive experience.",
+				"Pantrify is a full-stack recipe management platform that enables users to organize, search, and share recipe collections. Built with Next.js and ASP.NET Core, the application manages complex relationships between recipes, ingredients, shopping lists, and user-generated content through a structured relational data model.",
 			],
 		},
 		timeFrame: {
@@ -230,24 +225,22 @@ export const projects: TProject[] = [
 		},
 		notableFeatures: {
 			listInfo: [
-				"Advanced Search with Lazy Loading: Full and partial match search capabilities with lazy loading on all recipes and ingredients.",
-				"Secure Authentication: Robust session management using JWT authentication to ensure secure user access.",
-				"Server-Side Rendering (SSR): Pre-renders pages on the server for faster load times and improved SEO.",
-				"Recipe Book Sharing: Easily share your recipe book with other users, allowing them to view and access your saved recipes.",
-				"Ingredient Availability: Displays which ingredients you already have and which ones you’re missing for each recipe.",
+				"Advanced Search & Filtering: Supported full and partial matching across recipes and ingredients with lazy-loaded results.",
+				"JWT Authentication: Secured user accounts and workflows through JWT.",
+				"Recipe Collection Sharing: Enabled users to share recipe libraries while maintaining ownership and access controls.",
+				"Ingredient Inventory Tracking: Compared recipe requirements against available ingredients to identify missing items.",
 			],
 		},
 		engineeringChallenges: {
-			textInfo: [
-				"Designing a flexible data model required carefully structuring relationships between recipes, ingredients, categories, and user-generated content.",
-				"Creating reusable forms for recipe and ingredient management pushed me to develop maintainable frontend patterns that reduced duplication.",
-				"Managing complex CRUD workflows challenged me to maintain data consistency across multiple schemas.",
+			listInfo: [
+				"Designed a relational schema supporting recipes, ingredients, categories, inventories, and user-generated content.",
+				"Implemented reusable form architectures to manage complex recipe and ingredient CRUD workflows.",
+				"Maintained data consistency across interconnected entities while supporting flexible editing and sharing capabilities.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"This project gave me valuable experience building a full-stack application with Next.js and ASP.NET Core backend.",
-				"Through designing database relationships and implementing recipe management workflows, I developed a stronger understanding of relational data modeling and Entity Framework Core.",
+				"Building Pantrify strengthened my understanding of relational database design and Entity Framework Core. Building the platform exposed me to modeling complex entity relationships, managing transactional CRUD operations, and designing APIs that efficiently serve interconnected datasets.",
 			],
 		},
 		imageLinks: { prefix: "pantrify", count: 4, fileFormat: ".webp" },
@@ -259,13 +252,14 @@ export const projects: TProject[] = [
 		gitHubLink: "https://github.com/XutaoG/portfolio",
 		iconCategory: "Creative",
 		setting: "Solo Development",
-		subheading: "Full-stack portfolio platform built to highlight personal and professional growth.",
+		subheading: "Full-stack personal portfolio built to highlight personal and professional growth.",
 		techStacks: {
 			listInfo: ["React TypeScript", "Express.js", "MongoDB", "Vercel & Render", "GoDaddy", "Cloudinary"],
 		},
 		description: {
 			textInfo: [
-				"My portfolio is a reflection of my technical skills and design sensibility, built with a focus on performance, functionality, and modern aesthetics. I used the MERN stack (MongoDB, Express, React, Node.js) for the web application, ensuring a smooth user experience and fast loading times. The layout is styled with TailwindCSS, offering a clean and minimalist design, while maintaining responsiveness across devices.",
+				"Portfolio V1 is a full-stack web application built to showcase projects, technical skills, and professional experience.",
+				"The platform combines a React frontend with an Express and MongoDB backend, leveraging Cloudinary for image storage and cloud-hosted infrastructure for hosting and content delivery.",
 			],
 		},
 		timeFrame: {
@@ -275,13 +269,14 @@ export const projects: TProject[] = [
 		},
 		notableFeatures: {
 			listInfo: [
-				"Efficient image loading: Optimized backend integration ensures that only necessary images are fetched, minimizing resource usage and enhancing overall performance.",
-				"Clean and Modern Interface: Leveraging TailwindCSS to maintain a cohesive, visually appealing, and user-friendly interface across the entire platform.",
+				"Cloud-Based Asset Management: Integrated Cloudinary for image storage, optimization, and delivery.",
+				"Responsive Portfolio Architecture: Delivered a consistent user experience across desktop and mobile devices.",
+				"Full-Stack Content Platform: Served project data and media through a custom Express and MongoDB backend.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"Building my first portfolio taught me that creating a successful application involves much more than implementing features. I gained experience architecting and deploying a full-stack application, managing cloud-hosted assets, and optimizing performance for real-world users.",
+				"Building this portfolio (V1) introduced me to many aspects of production application deployment beyond feature development. I gained experience integrating third-party cloud services, managing distributed deployment environments, and optimizing asset delivery pipelines while building a maintainable full-stack architecture.",
 			],
 		},
 		imageLinks: { prefix: "portfolio-v1", count: 4, fileFormat: ".webp" },
@@ -293,14 +288,13 @@ export const projects: TProject[] = [
 		gitHubLink: "https://github.com/Gersh01/Dev-Fusion",
 		iconCategory: "Team",
 		setting: "Team Project",
-		subheading: "Project collaboration platform that connects developers through shared projects and ideas.",
+		subheading: "Cross-platform developer collaboration platform for project discovery and team formation.",
 		techStacks: {
 			listInfo: ["React", "Express.js", "MongoDB", "Heroku", "GoDaddy", "Flutter"],
 		},
 		description: {
 			textInfo: [
-				"DevFusion is an online project collaboration platform designed to connect developers eager to enhance their skills. Users can explore projects that match their interests and expertise, as well as post their own ideas for others to join.",
-				"DevFusion is available on both web and mobile platforms, utilizing the MERN stack for the web version and Flutter for the mobile app.",
+				"DevFusion is a full-stack collaboration platform that connects developers through shared projects and technical interests. Built for both web and mobile, the application provides project discovery, team management, and skill-based matching capabilities through a unified backend architecture serving web and mobile clients.",
 			],
 		},
 		timeFrame: {
@@ -310,23 +304,22 @@ export const projects: TProject[] = [
 		},
 		notableFeatures: {
 			listInfo: [
-				"Advanced Search with Lazy Loading: Full and partial match search capabilities with lazy loading on the Discover page for seamless browsing.",
-				"Secure Authentication: Robust session management using JWT authentication to ensure secure user access.",
-				"Light and Dark Mode: Customizable appearance with both light and dark themes.",
-				"Smart Project Suggestions: Dynamic project recommendations on the Discover page, based on matching user skills with project requirements.",
-				"Team Management Tools: Easily assign and update roles and descriptions for individual team members.",
+				"Cross-Platform Architecture: Delivered a shared backend powering both React web and Flutter mobile applications.",
+				"Skill-Based Project Discovery: Matched developers to projects using searchable skills and project requirements.",
+				"JWT Authentication & Authorization: Secured user accounts and project management workflows through JWT.",
+				"Project & Team Management: Supported project creation, member management, and role assignment across development teams.",
 			],
 		},
 		engineeringChallenges: {
 			listInfo: [
-				"Supporting both web and mobile platforms required me to design API contracts that remained consistent across React and Flutter despite differences in implementation.",
-				"Building a responsive project discovery system involved optimizing filtering logic.",
-				"Maintaining feature parity between the React and Flutter applications required careful API design and data modeling decisions.",
+				"Designed API contracts that maintained consistent behavior across both React and Flutter clients.",
+				"Modeled complex relationships between users, projects, memberships, and skill sets within MongoDB.",
+				"Maintained equivalent features across web and mobile platforms while minimizing duplicated business logic.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"Leading the development of DevFusion taught me how to architect and maintain a full-stack application that serves multiple client platforms from a shared backend. I gained experience designing database schemas, building RESTful APIs, and coordinating data flow between React and Flutter applications.",
+				"DevFusion strengthened my understanding of multi-platform application API design. I gained experience designing RESTful services, modeling interconnected datasets in MongoDB, and building a shared backend capable of supporting both web and mobile clients while maintaining consistent functionality across platforms.",
 			],
 		},
 		imageLinks: { prefix: "dev-fusion", count: 3, fileFormat: ".webp" },
@@ -338,13 +331,14 @@ export const projects: TProject[] = [
 		gitHubLink: "https://github.com/XutaoG/weather-forecast-app",
 		iconCategory: "Creative",
 		setting: "Solo Development",
-		subheading: "Interactive weather dashboard powered by real-time climate data.",
+		subheading: "Real-time weather analytics platform with interactive forecast visualization.",
 		techStacks: {
 			listInfo: ["React", "TypeScript", "Redux Toolkit Query", "Recharts", "Tailwindcss", "tomorrow.io"],
 		},
 		description: {
 			textInfo: [
-				"WeatherWing is a weather forecast app developed primarily in React that displays the weather forecast information over the week. The weather data gathered and retrieved from tomorrow.io details the hourly fluctuation in all climate variables including temperature, precipitation, visibility, wind status, etc.",
+				"WeatherWing is a React-based weather analytics application that retrieves forecast data from Tomorrow.io and transforms it into interactive visualizations.",
+				"The platform provides hourly and weekly weather insights through responsive dashboards, enabling users to quickly analyze climate trends and conditions.",
 			],
 		},
 		timeFrame: {
@@ -354,21 +348,21 @@ export const projects: TProject[] = [
 		},
 		notableFeatures: {
 			listInfo: [
-				"Comprehensive Weekly Forecasts: View detailed weather forecasts for the entire week.",
-				"Nationwide Weather Search: Search and retrieve weather data for any city across the United States.",
-				"Interactive Charts and Graphs: Access accurate forecast information with enhanced visualizations for daily and weekly trends.",
+				"Interactive Forecast Visualizations: Displayed hourly and weekly weather trends through dynamic charts.",
+				"Efficient Data Fetching: Leveraged Redux Toolkit Query for caching and API state management.",
+				"Location-Based Forecast Search: Retrieved weather data for cities across the United States.",
 			],
 		},
 		engineeringChallenges: {
 			listInfo: [
-				"Transformed complex weather API responses into structured datasets for interactive charts and forecast visualizations.",
-				"Implemented robust loading, error, and fallback states to ensure a reliable user experience during network interruptions and API failures.",
+				"Transformed complex API responses into normalized datasets optimized for visualization.",
+				"Maintained type safety across asynchronous forecast data and API interactions.",
+				"Managed loading, caching, and error states while preserving a responsive user experience.",
 			],
 		},
 		whatILearned: {
 			textInfo: [
-				"As this was one of my earliest personal project, it strengthened my understanding of modern frontend development by exposing me to real-world challenges in API integration, state management, and data visualization.",
-				"I learned how to consume and transform complex weather data into meaningful user-facing insights and gained experience balancing technical implementation with user experience, laying a strong foundation for future React development.",
+				"WeatherWing introduced me to building data-driven frontend applications around external APIs. I gained experience modeling complex API responses with TypeScript, implementing client-side caching with Redux Toolkit Query, and transforming raw datasets into interactive visualizations optimized for user consumption.",
 			],
 		},
 		imageLinks: { prefix: "weather-wing", count: 3, fileFormat: ".webp" },

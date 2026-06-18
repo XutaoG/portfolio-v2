@@ -69,7 +69,7 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 
 	return (
 		<div
-			className="flex flex-col p-4 md:p-6 gap-4 rounded-lg border border-content/20 bg-base/80 
+			className="flex flex-col p-4 md:p-6 gap-4 lg:gap-8 rounded-lg border border-content/20 bg-base/80 
 			backdrop-blur-xs relative overflow-hidden hover:cursor-pointer z-0 
 			hover:bg-base/90 transition-colors duration-300 group"
 			onClick={() => selectProject(project.id)}

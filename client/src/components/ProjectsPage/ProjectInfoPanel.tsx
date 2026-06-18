@@ -16,7 +16,7 @@ export const ProjectInfoPanel = ({ className, icon, title, children }: ProjectIn
 				${className}`,
 			)}
 		>
-			<div className="absolute -bottom-8 -right-8 w-1/2 h-1/2 rounded-full bg-content/10 blur-[96px] -z-10" />
+			<div className="absolute -bottom-8 -right-8 w-1/2 h-1/2 rounded-full bg-accent/10 blur-[96px] -z-10" />
 			<div className="flex items-center gap-4">
 				{icon}
 				<p className="font-medium text-nowrap">{title}</p>

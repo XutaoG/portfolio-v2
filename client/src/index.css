@@ -57,9 +57,12 @@
 @layer base {
 	* {
 		box-sizing: border-box;
-		color: var(--color-content);
 		scrollbar-width: thin;
 		scrollbar-color: color-mix(in srgb, var(--color-content) 25%, transparent) transparent;
+	}
+
+	html {
+		color: var(--color-content);
 	}
 
 	::-webkit-scrollbar {
