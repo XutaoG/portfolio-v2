@@ -1,6 +1,7 @@
 import { CheckCircleIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { twMerge } from "tailwind-merge";
 
 interface TerminalLineProps {
 	sequence: (string | number)[];
@@ -11,13 +12,15 @@ export const TerminalLine = ({ onAnimationComplete, sequence }: TerminalLineProp
 	const [isTypingFinished, setIsTypingFinsihed] = useState(false);
 
 	return (
-		<div className="text-content/80 font-medium flex items-start gap-2">
+		<div className="font-medium flex items-start gap-2">
 			<span className="text-primary">$</span>
-			<TypeAnimation
-				sequence={[...sequence, onAnimationComplete ?? (() => {}), () => setIsTypingFinsihed(true)]}
-				cursor={false}
-				speed={90}
-			/>
+			<span className={twMerge(`text-content/80 ${isTypingFinished && "text-success/80"}`)}>
+				<TypeAnimation
+					sequence={[...sequence, onAnimationComplete ?? (() => {}), () => setIsTypingFinsihed(true)]}
+					cursor={false}
+					speed={90}
+				/>
+			</span>
 			{isTypingFinished && (
 				<CheckCircleIcon
 					size={18}
