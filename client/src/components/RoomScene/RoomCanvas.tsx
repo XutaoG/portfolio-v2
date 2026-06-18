@@ -8,12 +8,10 @@ import { CameraControl } from "./CameraControl";
 import { SceneLoadingToast } from "./SceneLoadingToast";
 import { SceneStateContext } from "../../context";
 import { SceneBackgroundGradient } from "./SceneBackgroundGradient";
-import { useWebGLSupport } from "../../hooks/useWebGLSupport";
 
 const RESIZE_DEBOUNCE_TIME = 150;
 
 export const RoomCanvas = () => {
-	const webGLSupported = useWebGLSupport();
 	const [isSceneLoading, setIsSceneLoading] = useState(true);
 	const [isResizing, setIsResizing] = useState(false);
 	const resizeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -38,16 +36,6 @@ export const RoomCanvas = () => {
 			}
 		};
 	}, []);
-
-	if (!webGLSupported) {
-		return (
-			<div className="absolute inset-0 flex justify-center items-end pb-6">
-				<p className="text-content/80">
-					3D scene unavailable — WebGL is not supported or is disabled in your browser.
-				</p>
-			</div>
-		);
-	}
 
 	return (
 		<Fragment>
