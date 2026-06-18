@@ -5,6 +5,7 @@ import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { InputField } from "../components/Common/InputField";
 import { TextArea } from "../components/Common/TextArea";
 import { Button } from "../components/Common/Button";
+import { socialLinks } from "../data/socialLinks";
 
 export const ContactPage = () => {
 	return (
@@ -17,9 +18,9 @@ export const ContactPage = () => {
 						Let's <span className="font-bold text-primary">Get In Touch_</span>
 					</h1>
 				</div>
-				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
-					provident itaque distinctio mollitia alias libero.
+				<p className="text-content/80 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
+					Every project starts with a conversation. If you'd like to connect, collaborate, or simply say
+					hello, my inbox is always open.
 				</p>
 			</div>
 
@@ -57,22 +58,22 @@ export const ContactPage = () => {
 							<SocialLink
 								icon={<GithubLogoIcon size={24} weight="bold" className="shrink-0" />}
 								title="GitHub"
-								displayLink="github.com/XutaoG"
-								fullLink="https://github.com/XutaoG"
+								displayLink={socialLinks.gitHub.displayLink}
+								fullLink={socialLinks.gitHub.fullyQualifiedLink}
 								action="link"
 							/>
 							<SocialLink
 								icon={<LinkedinLogoIcon size={24} weight="bold" className="shrink-0" />}
 								title="LinkedIn"
-								displayLink="linkedin.com/in/xutaogao"
-								fullLink="https://www.linkedin.com/in/xutaogao"
+								displayLink={socialLinks.linkedIn.displayLink}
+								fullLink={socialLinks.linkedIn.fullyQualifiedLink}
 								action="link"
 							/>
 							<SocialLink
 								icon={<EnvelopeIcon size={24} weight="bold" className="shrink-0" />}
 								title="Email"
-								displayLink="xutao.gao04@gmail.com"
-								fullLink="xutao.gao04@gmail.com"
+								displayLink={socialLinks.email.displayLink}
+								fullLink={socialLinks.email.displayLink}
 								action="copy"
 							/>
 						</PrimaryPanel>

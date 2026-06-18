@@ -32,15 +32,6 @@ export const AboutPage = () => {
 		));
 	}, []);
 
-	const focuses = ["Focus 1", "Focus 2", "Focus 3", "Focus 4", "Focus 5", "Focus 6"];
-
-	const focusElements = focuses.map((focus, i) => (
-		<div key={i} className="flex items-center gap-3 ml-2">
-			<TargetIcon size={24} color="var(--color-primary)" />
-			{focus}
-		</div>
-	));
-
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
 			{/* Introduction */}
@@ -52,18 +43,20 @@ export const AboutPage = () => {
 					</h1>
 					<p className="text-content/70 font-medium">(Pronunced Shu-tao)</p>
 				</div>
-				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
-					provident itaque distinctio mollitia alias libero.
+				<p className="text-content/80 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
+					I'm a software engineer and UCF Computer Science graduate with over a year of professional
+					experience building software across the web, cloud, and beyond.
 				</p>
 			</div>
 
 			{/* Resume info */}
 
 			<div className="flex items-center gap-8">
-				<Button>DOWNLOAD RESUME</Button>
+				<a href="/Xutao Gao Resume.pdf" download="Xutao Gao Resume.pdf">
+					<Button>DOWNLOAD RESUME</Button>
+				</a>
 				<Link
-					to="https://www.google.com"
+					to="/Xutao Gao Resume.pdf"
 					target="_blank"
 					rel="noreferrer"
 					className="hidden sm:flex items-center gap-2 font-medium underline underline-offset-4"
@@ -80,16 +73,13 @@ export const AboutPage = () => {
 				{/* My story */}
 				<TerminalWindowPanel title="My Story" command="whoami" className="max-h-96 lg:max-h-none">
 					<p className="text-content/80">
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi, labore quaerat nostrum accusamus
-						laborum quas beatae quasi quae officiis tempore.
+						Most of what you'll find here started the same way: I wondered how something worked, got
+						distracted trying to understand it, and ended up building something of my own.
 						<br />
 						<br />
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, exercitationem. Ut iusto,
-						ullam ab saepe eaque, adipisci nobis modi eligendi culpa nisi quod laborum id aut ipsa tempora,
-						dolorem non!
-						<br />
-						<br />
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, pariatur.
+						This portfolio is a collection of those detours—projects, experiments, and ideas that grew
+						larger than I expected. Along the way, I've explored everything from full-stack applications and
+						simulations to interactive 3D experiences on the web.
 					</p>
 				</TerminalWindowPanel>
 
@@ -100,11 +90,19 @@ export const AboutPage = () => {
 					className="max-h-96 lg:max-h-none"
 				>
 					<div className="flex flex-col gap-4 text-content/80">
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt optio libero possimus illo
-							temporibus officiis reprehenderit nisi quam quis cum.
+						<div className="flex items-center gap-3 ml-2 text-primary font-medium">
+							<TargetIcon size={24} color="var(--color-primary)" />
+							AWS Certified DevOps Engineer - Professional
+						</div>
+						<p className="text-content/80">
+							My current focus is cloud engineering and DevOps. I'm pursuing the AWS Certified DevOps
+							Engineer - Professional certification while learning more about infrastructure automation,
+							deployment pipelines, and cloud-native architectures.
+							<br />
+							<br />
+							The deeper I go, the more I appreciate the systems that keep modern applications reliable,
+							scalable, and easy to maintain.
 						</p>
-						{focusElements}
 					</div>
 				</TerminalWindowPanel>
 			</div>

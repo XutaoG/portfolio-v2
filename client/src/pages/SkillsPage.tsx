@@ -38,8 +38,17 @@ export const SkillsPage = () => {
 				>
 					{skill.items.map((item, j) => (
 						<motion.div className="flex items-center gap-2" key={j} variants={skillItemVariant}>
-							<DiamondIcon size={16} weight="bold" color="var(--color-primary)" />
-							{item}
+							{typeof item === "string" ? (
+								<Fragment>
+									<DiamondIcon size={16} weight="bold" color="var(--color-primary)" />
+									{item}
+								</Fragment>
+							) : (
+								<Fragment>
+									<img src={item.logo} className="size-6" />
+									{item.name}
+								</Fragment>
+							)}
 						</motion.div>
 					))}
 				</motion.div>
@@ -49,11 +58,6 @@ export const SkillsPage = () => {
 
 	const certificationElements = useMemo(() => {
 		return certifications.map((certification, i) => {
-			const logoImageSrc =
-				certification.type === "AWS"
-					? "src/assets/cert-logos/aws-logo.svg"
-					: "src/assets/cert-logos/comptia-logo.svg";
-
 			const logoImageSizeStyle = certification.type === "AWS" ? "h-16 sm:h-20" : "h-6 sm:h-8";
 
 			return (
@@ -64,7 +68,7 @@ export const SkillsPage = () => {
 					>
 						<div className="z-0 absolute -bottom-8 -right-8 w-2/3 h-2/3 rounded-full bg-accent/20 blur-3xl" />
 						<div className="z-10 h-16 sm:h-20 flex items-center">
-							<img src={logoImageSrc} className={`${logoImageSizeStyle}`} />
+							<img src={certification.logo} className={`${logoImageSizeStyle}`} />
 						</div>
 						<div className="grow flex flex-col gap-4 items-center">
 							<p className="z-10 grow font-medium text-center max-w-60 text-content/80">
@@ -98,9 +102,9 @@ export const SkillsPage = () => {
 						My Technical <span className="font-bold text-primary">Toolkit_</span>
 					</h1>
 				</div>
-				<p className="text-content/70 max-w-120 rounded-sm bg-base/10 backdrop-blur-xs">
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus nemo dolores excepturi earum vel
-					provident itaque distinctio mollitia alias libero.
+				<p className="text-content/80 max-w-120 rounded-sm bg-base/10 backdrop-blur-xs">
+					Every project leaves something behind. This collection reflects the technologies and skills I've
+					developed through professional work, personal projects, and a lot of hands-on experimentation.
 				</p>
 			</div>
 
@@ -115,7 +119,9 @@ export const SkillsPage = () => {
 						<CertificateIcon size={40} color="var(--color-primary)" className="shrink-0" />
 						<div className="flex flex-col gap-2">
 							<p className="font-semibold text-primary text-lg">Certifications</p>
-							<p>Industry-recognized certifications that validate my skills and knowledge.</p>
+							<p className="rounded-sm bg-base/10 backdrop-blur-xs">
+								Industry-recognized certifications that validate my skills and knowledge.
+							</p>
 						</div>
 					</div>
 
@@ -126,7 +132,7 @@ export const SkillsPage = () => {
 				<TerminalWindowPanel title="In Progress" command="inprogress" className="grow">
 					<div className="flex flex-col justify-between items-center gap-6">
 						<div className="h-24 flex items-center">
-							<img src="src/assets/cert-logos/aws-logo.svg" className="h-24" />
+							<img src="logos/aws-logo.svg" className="h-24" />
 						</div>
 						<p className="grow font-medium text-center max-w-60 text-content/80">
 							AWS Certified DevOps Engineer Professional

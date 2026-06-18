@@ -38,7 +38,7 @@ export const HomePage = () => {
 							Problem Solver.
 						</p>
 						{/* Introduction */}
-						<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
+						<p className="text-content/80 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
 							Every project begins with curiosity. This portfolio is a collection of where mine has led
 							me.
 						</p>

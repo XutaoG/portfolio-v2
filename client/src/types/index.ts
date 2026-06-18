@@ -1,5 +1,10 @@
 import type { ReactNode } from "react";
 
+export type TLink = {
+	displayLink: string;
+	fullyQualifiedLink: string;
+};
+
 export type TProject = {
 	id: number;
 	name: string;
@@ -21,11 +26,12 @@ export type TSkill = {
 	icon: ReactNode;
 	title: string;
 	description: string;
-	items: string[];
+	items: ({ name: string; logo: string } | string)[];
 };
 
 export type TCertification = {
 	type: "AWS" | "CompTIA";
 	name: string;
 	validThru: string;
+	logo: string;
 };

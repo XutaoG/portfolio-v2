@@ -30,7 +30,7 @@ export const ProjectPage = () => {
 						Things I've <span className="font-bold text-primary">Built_</span>
 					</h1>
 				</div>
-				<p className="text-content/70 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
+				<p className="text-content/80 max-w-100 rounded-sm bg-base/10 backdrop-blur-xs">
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aspernatur aperiam! Mollitia
 					iste error at impedit eum et voluptatibus sed optio nostrum, nesciunt omnis eaque?
 				</p>

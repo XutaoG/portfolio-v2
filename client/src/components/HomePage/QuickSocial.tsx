@@ -1,12 +1,13 @@
 import { CheckCircleIcon, CopyIcon, EnvelopeIcon, GithubLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
+import { socialLinks } from "../../data/socialLinks";
 
 export const QuickSocial = () => {
 	const [hasCopidEmail, setHasCopiedEmail] = useState(false);
 	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	const myEmail = "xutao.gao04@gmail.com";
+	const myEmail = socialLinks.email.displayLink;
 
 	const copyEmail = () => {
 		navigator.clipboard.writeText(myEmail);
@@ -26,11 +27,21 @@ export const QuickSocial = () => {
 
 	return (
 		<div className="flex gap-1">
-			<Link to="https://www.google.com" target="_blank" rel="noreferrer" className={linkClassNames}>
+			<Link
+				to={socialLinks.gitHub.fullyQualifiedLink}
+				target="_blank"
+				rel="noreferrer"
+				className={linkClassNames}
+			>
 				{gradientElement}
 				<GithubLogoIcon size={24} weight="bold" className="z-10" />
 			</Link>
-			<Link to="https://www.google.com" target="_blank" rel="noreferrer" className={linkClassNames}>
+			<Link
+				to={socialLinks.linkedIn.fullyQualifiedLink}
+				target="_blank"
+				rel="noreferrer"
+				className={linkClassNames}
+			>
 				{gradientElement}
 				<LinkedinLogoIcon size={24} weight="bold" />
 			</Link>
