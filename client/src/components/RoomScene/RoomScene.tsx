@@ -168,7 +168,7 @@ export const RoomScene = () => {
 				position={[0, 7, 0]}
 				castShadow
 				shadow-bias={-0.005}
-				shadow-mapSize={[2048, 2048]}
+				shadow-mapSize={[1024, 1024]}
 				shadow-radius={30}
 			/>
 
