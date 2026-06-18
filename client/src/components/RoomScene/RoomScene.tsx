@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useContext, useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { EffectComposer, Bloom, N8AO, SMAA, HueSaturation } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, HueSaturation } from "@react-three/postprocessing";
 import { useEffect } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -15,8 +15,6 @@ const WALL_NAMES: { [key: string]: string } = {
 	windowWall: "Window_Wall",
 	deskWall: "Desk_Wall",
 };
-
-type WallFadeState = { meshes: THREE.Mesh[]; opacity: number; targetOpacity: number };
 
 const easeOutCubic = (t: number) => {
 	return 1 - Math.pow(1 - t, 3);
@@ -33,7 +31,7 @@ export const RoomScene = () => {
 
 	const directionalLightRef = useRef<THREE.DirectionalLight>(null);
 	const modelQuadrantRef = useRef(-1);
-	const wallFadeRef = useRef<Map<string, WallFadeState>>(new Map());
+	const wallFadeRef = useRef<Map<string, THREE.Object3D>>(new Map());
 	const cameraInsideRoomRef = useRef(false);
 
 	const sceneGroupRef = useRef<THREE.Group>(null);
@@ -64,24 +62,8 @@ export const RoomScene = () => {
 			obj.castShadow = true;
 			obj.receiveShadow = true;
 
-			// For all meshes associated with a wall, clone its material and add to wallFadeRef
 			if (Object.values(WALL_NAMES).includes(obj.name)) {
-				const meshes: THREE.Mesh[] = [];
-
-				obj.traverse((child) => {
-					if (child instanceof THREE.Mesh) {
-						const mats = Array.isArray(child.material) ? child.material : [child.material];
-						const cloned = mats.map((mat: THREE.Material) => {
-							const clonedMat = mat.clone();
-							clonedMat.transparent = true;
-							return clonedMat;
-						});
-						child.material = Array.isArray(child.material) ? cloned : cloned[0];
-						meshes.push(child);
-					}
-				});
-
-				wallFadeRef.current.set(obj.name, { meshes, opacity: 1, targetOpacity: 1 });
+				wallFadeRef.current.set(obj.name, obj);
 			}
 		});
 	}, [scene]);
@@ -99,9 +81,9 @@ export const RoomScene = () => {
 		if (isInsideRoom !== cameraInsideRoomRef.current) {
 			cameraInsideRoomRef.current = isInsideRoom;
 			if (isInsideRoom) {
-				// Enable all walls when the camera moves within the room
-				wallFadeRef.current.forEach((entry) => {
-					entry.targetOpacity = 1;
+				// Show all walls when the camera moves within the room
+				wallFadeRef.current.forEach((wall) => {
+					wall.visible = true;
 				});
 
 				// Disable directional light when the camera moves within the room
@@ -120,8 +102,8 @@ export const RoomScene = () => {
 			const currentQuadrant = getQuadrant(Math.atan2(offset.x, offset.z));
 			if (wallFadeRef.current.size !== 0 && currentQuadrant !== modelQuadrantRef.current) {
 				modelQuadrantRef.current = currentQuadrant;
-				wallFadeRef.current.forEach((entry, name) => {
-					entry.targetOpacity = wallShouldBeVisible(name, currentQuadrant) ? 1 : 0;
+				wallFadeRef.current.forEach((wall, name) => {
+					wall.visible = wallShouldBeVisible(name, currentQuadrant);
 				});
 
 				// Disable directional light when window wall is not visible
@@ -148,38 +130,6 @@ export const RoomScene = () => {
 				sceneState.introAnimDone = true;
 			}
 		}
-
-		// Animate wall opacity changes
-		wallFadeRef.current.forEach((entry) => {
-			if (entry.opacity === entry.targetOpacity) {
-				return;
-			}
-
-			// Instantly hide mesh if target opacity is 0
-			if (entry.targetOpacity === 0) {
-				entry.meshes.forEach((mesh) => {
-					mesh.visible = false;
-					const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-					mats.forEach((mat) => (mat.opacity = 0));
-					entry.opacity = 0;
-				});
-				return;
-			}
-
-			// Linearly interpolate from current opacity to target opacity
-			const fadeInSpeed = 3;
-			entry.opacity = THREE.MathUtils.lerp(entry.opacity, entry.targetOpacity, delta * fadeInSpeed);
-
-			if (Math.abs(entry.opacity - entry.targetOpacity) < 0.01) {
-				entry.opacity = entry.targetOpacity;
-			}
-
-			entry.meshes.forEach((mesh) => {
-				mesh.visible = entry.opacity > 0.001;
-				const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-				mats.forEach((mat) => (mat.opacity = entry.opacity));
-			});
-		});
 	});
 
 	const secondaryLightsElements = useMemo(() => {
@@ -232,10 +182,8 @@ export const RoomScene = () => {
 
 			{/* Post processing */}
 			<EffectComposer>
-				<Bloom intensity={0.6} luminanceThreshold={0.75} luminanceSmoothing={0.9} />
-				<N8AO aoRadius={2.5} intensity={1.5} distanceFalloff={1} quality="medium" />
+				<Bloom intensity={0.05} luminanceThreshold={0.3} luminanceSmoothing={0.5} />
 				<HueSaturation saturation={0.1} />
-				<SMAA />
 			</EffectComposer>
 		</Fragment>
 	);
