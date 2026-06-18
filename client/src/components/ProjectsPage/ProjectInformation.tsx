@@ -1,8 +1,6 @@
 import {
-	ArrowSquareOutIcon,
 	CalendarIcon,
 	FlagIcon,
-	GithubLogoIcon,
 	GraduationCapIcon,
 	LightbulbIcon,
 	StackIcon,
@@ -20,6 +18,7 @@ import { useMinWidth } from "../../hooks/useMinWidth";
 import type { TProjectSectionInfo } from "../../types";
 import { ProjectTypeIcon } from "./ProjectTypeIcon";
 import { ImageCarousel } from "../Common/ImageCarousel";
+import { Button } from "../Common/Button";
 
 export const ProjectInformation = () => {
 	const navigate = useNavigate();
@@ -129,25 +128,18 @@ export const ProjectInformation = () => {
 					<p className="font-sm text-content/70 line-clamp-2">{project.subheading}</p>
 					{/* GitHub link */}
 					{project.gitHubLink && (
-						<Link
-							to={project.gitHubLink}
-							target="_blank"
-							rel="noreferrer"
-							className="border border-content/40 px-3 py-1.5 rounded-lg flex items-center gap-4"
-						>
-							<GithubLogoIcon size={20} weight="bold" className="shrink-0" />
-							GitHub
-							<ArrowSquareOutIcon size={20} weight="bold" className="shrink-0" />
+						<Link to={project.gitHubLink} target="_blank" rel="noreferrer" className="mt-2">
+							<Button sm>GitHub</Button>
 						</Link>
 					)}
 				</div>
 
 				<button
 					onClick={closePanel}
-					className="flex items-center gap-2 p-2 rounded-full border border-content/20 
-					bg-base hover:scale-110 transition-all duration-300 active:bg-neutral"
+					className="flex items-center gap-2 p-1.5 rounded-full border border-primary/50 
+					bg-base hover:bg-primary/30  hover:border-primary transition-colors duration-300"
 				>
-					<XIcon size={24} weight="bold" />
+					<XIcon size={20} weight="bold" />
 				</button>
 			</div>
 

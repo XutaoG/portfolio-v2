@@ -4,9 +4,10 @@ import { twMerge } from "tailwind-merge";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string;
 	children?: string;
+	sm?: boolean;
 }
 
-export const Button = ({ className, children, disabled, ...rest }: ButtonProps) => {
+export const Button = ({ className, children, disabled, sm, ...rest }: ButtonProps) => {
 	return (
 		<button
 			className={`relative transiton-transform duration-300 disabled:cursor-not-allowed ml-1.5 mt-1.5
@@ -18,7 +19,8 @@ export const Button = ({ className, children, disabled, ...rest }: ButtonProps) 
 			<div
 				className={twMerge(`px-6 py-3 gap-3 border border-primary rounded-sm bg-base/50 backdrop-blur-xs
 				font-semibold flex items-center relative overflow-hidden transition-transform duration-300
-				z-10 -translate-1.5 ${disabled ? "border-primary/40" : "group-hover:translate-y-1.5"}`)}
+				z-10 -translate-1.5 ${disabled ? "border-primary/40" : "group-hover:translate-y-1.5"}
+				${sm && "px-3 py-1.5 -translate-1 group-hover:translate-y-1"}`)}
 			>
 				<div
 					className={twMerge(
