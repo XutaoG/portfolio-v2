@@ -1,5 +1,4 @@
 import {
-	AppWindowIcon,
 	ArrowSquareOutIcon,
 	CalendarIcon,
 	FlagIcon,
@@ -19,6 +18,8 @@ import { projects } from "../../data/projects";
 import { motion } from "framer-motion";
 import { useMinWidth } from "../../hooks/useMinWidth";
 import type { TProjectSectionInfo } from "../../types";
+import { ProjectTypeIcon } from "./ProjectTypeIcon";
+import { ImageCarousel } from "../Common/ImageCarousel";
 
 export const ProjectInformation = () => {
 	const navigate = useNavigate();
@@ -52,7 +53,7 @@ export const ProjectInformation = () => {
 			section.textInfo &&
 			section.textInfo.map((paragraph, i, textInfo) => {
 				return (
-					<Fragment>
+					<Fragment key={i}>
 						<p>{paragraph}</p>
 						{i < textInfo.length - 1 && (
 							<Fragment>
@@ -78,30 +79,25 @@ export const ProjectInformation = () => {
 		);
 	};
 
-	const projectImages = useMemo(() => {
+	const imageLinks = useMemo(() => {
 		return (
-			project?.imageLinks &&
+			project &&
 			[...Array(project.imageLinks.count)].map((_, i) => {
 				const paddedIndex = (i + 1).toString().padStart(2, "0");
-				return (
-					<img
-						loading="lazy"
-						src={`/project-images/${project.imageLinks.prefix}-${paddedIndex}${project.imageLinks.fileFormat}`}
-						className="rounded-lg h-75 shrink-0"
-					/>
-				);
+				return `/project-images/${project.imageLinks.prefix}-${paddedIndex}${project.imageLinks.fileFormat}`;
 			})
 		);
 	}, [project]);
 
 	const content = project && (
 		<div className="flex flex-col min-h-full">
-			<div className="p-6 flex items-start gap-4 sticky top-0 z-40 bg-base border-b border-content/20">
+			<div className="p-6 flex items-start gap-4 sticky top-0 z-40 bg-base border-b border-content/20 overflow-hidden">
+				<div className="absolute -top-8 -left-8 w-1/3 aspect-square rounded-full bg-accent/20 blur-[192px] -z-10" />
+				<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/20 blur-[96px] -z-10" />
+
 				{/* Icon */}
 				<div className="p-1 rounded-lg bg-base border border-content/20">
-					<div className="bg-linear-to-br from-indigo-700 to-indigo-400 rounded-lg p-1">
-						<AppWindowIcon size={48} />
-					</div>
+					<ProjectTypeIcon project={project} />
 				</div>
 
 				<div className="flex flex-col gap-2 items-start grow">
@@ -134,17 +130,14 @@ export const ProjectInformation = () => {
 			</div>
 
 			<div className="p-6 flex flex-col gap-4 relative grow overflow-hidden">
-				<div className="absolute -bottom-8 -right-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
-				<div className="absolute -top-8 -left-8 w-1/2 aspect-square rounded-full bg-accent/10 blur-[192px]" />
-
-				<div className="flex gap-2 overflow-x-scroll min-w-0 w-full">{projectImages}</div>
+				{imageLinks && <ImageCarousel imageLinks={imageLinks} />}
 
 				<div className="flex gap-4 flex-wrap grow">
 					{/* Description */}
 					<ProjectInfoPanel
 						icon={<LightbulbIcon size={24} weight="bold" />}
 						title="Description"
-						className="min-w-92 @xl:min-w-132 flex-1"
+						className="min-w-64 sm:min-w-92 @xl:min-w-132 flex-1"
 					>
 						{buildProjectSection(project.description)}
 					</ProjectInfoPanel>
@@ -163,13 +156,13 @@ export const ProjectInformation = () => {
 						<ProjectInfoPanel
 							icon={<UserCheckIcon size={24} weight="bold" />}
 							title="My Role"
-							className="flex-1 min-w-92"
+							className="min-w-64 sm:min-w-92 flex-1"
 						>
 							{buildProjectSection(project.myRole)}
 						</ProjectInfoPanel>
 					)}
 
-					<div className="flex flex-col gap-4 min-w-80 flex-1">
+					<div className="flex flex-col gap-4 min-w-64 sm:min-w-80 flex-1">
 						{/* Time frame */}
 						<ProjectInfoPanel icon={<CalendarIcon size={24} weight="bold" />} title="Time Frame">
 							<div className="text-content/70 flex flex-col gap-2 items-end">
@@ -193,7 +186,7 @@ export const ProjectInformation = () => {
 						<ProjectInfoPanel
 							icon={<FlagIcon size={24} weight="bold" />}
 							title="Engineering Challenges"
-							className="min-w-92 @xl:min-w-132 flex-1"
+							className="min-w-64 sm:min-w-92 @xl:min-w-132 flex-1"
 						>
 							{buildProjectSection(project.engineeringChallenges)}
 						</ProjectInfoPanel>
@@ -203,7 +196,7 @@ export const ProjectInformation = () => {
 					<ProjectInfoPanel
 						icon={<GraduationCapIcon size={24} weight="bold" />}
 						title="What I Leanred"
-						className="min-w-92 @xl:min-w-132 flex-1"
+						className="min-w-64 sm:min-w-92 @xl:min-w-132 flex-1"
 					>
 						{buildProjectSection(project.whatILearned)}
 					</ProjectInfoPanel>

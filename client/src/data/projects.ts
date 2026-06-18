@@ -5,7 +5,8 @@ export const projects: TProject[] = [
 		id: "o8bvj1",
 		name: "DHS Incident Command Simulation",
 		type: "Crowd Simulation",
-		iconCategory: "Simulation",
+		iconCategory: "Game",
+		setting: "Professional Work",
 		subheading: "Large-Scale Crowd Behavior and Evacuation Simulation",
 		techStacks: {
 			listInfo: ["Unity Engine", "Unity DOTS", "Cesium"],
@@ -53,7 +54,8 @@ export const projects: TProject[] = [
 		id: "usnv23",
 		name: "MeDT Dashboard",
 		type: "Microchip Simulation",
-		iconCategory: "Simulation",
+		iconCategory: "Logic",
+		setting: "Professional Work",
 		subheading: "Semiconductor Manufacturing Simulation Platform",
 		techStacks: {
 			listInfo: ["Angular", "Nest.js", "three.js", "Supabase"],
@@ -107,7 +109,8 @@ export const projects: TProject[] = [
 		name: "Psycall PGY4 Scheduler",
 		type: "Scheduler App",
 		gitHubLink: "https://github.com/lbrown169/Medical-Resident-Scheduling",
-		iconCategory: "Server",
+		iconCategory: "Logic",
+		setting: "Senior Design Project",
 		subheading: "Resident Scheduling Platform Powered by Constraint-Based Scheduling",
 		techStacks: {
 			listInfo: ["ASP.NET Core", "Entity Framework Core", "Docker", "MySQL Server", "SwaggerHub"],
@@ -158,6 +161,7 @@ export const projects: TProject[] = [
 		name: "Florida Semiconductor Engine Digital Marketplace",
 		type: "Full-Stack",
 		iconCategory: "Web",
+		setting: "Professional Work",
 		subheading: "Multi-organization platform for asset discovery and management",
 		techStacks: {
 			listInfo: [
@@ -207,6 +211,7 @@ export const projects: TProject[] = [
 		name: "Pantrify",
 		type: "Full-Stack",
 		gitHubLink: "https://github.com/XutaoG/pantrify",
+		setting: "Solo Development",
 		iconCategory: "Web",
 		subheading: "Web application that simplifies recipe storage, organization, and discovery.",
 		techStacks: {
@@ -253,6 +258,7 @@ export const projects: TProject[] = [
 		type: "Full-Stack",
 		gitHubLink: "https://github.com/XutaoG/portfolio",
 		iconCategory: "Creative",
+		setting: "Solo Development",
 		subheading: "Full-stack portfolio platform built to highlight personal and professional growth.",
 		techStacks: {
 			listInfo: ["React TypeScript", "Express.js", "MongoDB", "Vercel & Render", "GoDaddy", "Cloudinary"],
@@ -285,7 +291,8 @@ export const projects: TProject[] = [
 		name: "DevFusion",
 		type: "Web + Mobile Application",
 		gitHubLink: "https://github.com/Gersh01/Dev-Fusion",
-		iconCategory: "Creative",
+		iconCategory: "Team",
+		setting: "Team Project",
 		subheading: "Project collaboration platform that connects developers through shared projects and ideas.",
 		techStacks: {
 			listInfo: ["React", "Express.js", "MongoDB", "Heroku", "GoDaddy", "Flutter"],
@@ -329,7 +336,8 @@ export const projects: TProject[] = [
 		name: "WeatherWing",
 		type: "Front-end",
 		gitHubLink: "https://github.com/XutaoG/weather-forecast-app",
-		iconCategory: "Web",
+		iconCategory: "Creative",
+		setting: "Solo Development",
 		subheading: "Interactive weather dashboard powered by real-time climate data.",
 		techStacks: {
 			listInfo: ["React", "TypeScript", "Redux Toolkit Query", "Recharts", "Tailwindcss", "tomorrow.io"],

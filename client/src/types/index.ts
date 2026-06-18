@@ -14,7 +14,8 @@ export type TProject = {
 	id: string;
 	name: string;
 	type: string;
-	iconCategory: "Web" | "Server" | "Simulation" | "Creative";
+	iconCategory: "Web" | "Logic" | "Game" | "Creative" | "Team";
+	setting: string;
 	gitHubLink?: string;
 	subheading: string;
 	techStacks: TProjectSectionInfo;
