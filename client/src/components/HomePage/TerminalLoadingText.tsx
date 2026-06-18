@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TerminalLine } from "../Common/TerminalLine";
 
 export interface TerminalLoadingTextProps {
@@ -20,9 +20,11 @@ export const TerminalLoadingText = ({
 		["system ready, welcome to my world"],
 	];
 
-	if (linesCompleted >= terminalLines.length && !isTerminalLoadingComplete) {
-		terminalLoadingCompleted();
-	}
+	useEffect(() => {
+		if (linesCompleted >= terminalLines.length && !isTerminalLoadingComplete) {
+			terminalLoadingCompleted();
+		}
+	}, [linesCompleted, isTerminalLoadingComplete, terminalLoadingCompleted, terminalLines.length]);
 
 	const terminalLinesElements = terminalLines.map((line, i) => {
 		return (
