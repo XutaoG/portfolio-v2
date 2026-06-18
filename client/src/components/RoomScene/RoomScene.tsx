@@ -74,7 +74,7 @@ export const RoomScene = () => {
 		sceneContextState?.setIsLoading(false);
 	}, [scene, sceneContextState]);
 
-	useFrame(({ camera }, delta) => {
+	useFrame(({ camera, invalidate }, delta) => {
 		// Check if camera is within the room (XZ distance from origin < 4.5)
 		const xzDist = camera.position.x ** 2 + camera.position.z ** 2;
 		const insideRoomRadius = 4.5;
@@ -120,17 +120,21 @@ export const RoomScene = () => {
 		}
 
 		// Animate room scale pop-in and spin on first load
-		// Only start animating when FPS >= 30
-		if (initAnimProgressRef.current < 1 && 1 / delta >= 30) {
-			initAnimProgressRef.current = Math.min(initAnimProgressRef.current + delta * 0.5, 1);
-			const eased = easeOutCubic(initAnimProgressRef.current);
-			sceneGroupRef.current?.scale.setScalar(eased);
-			if (sceneGroupRef.current) {
-				sceneGroupRef.current.rotation.y = (1 - eased) * Math.PI * 2;
+		if (initAnimProgressRef.current < 1) {
+			// Only advance animation when FPS >= 30, but always request the next frame
+			if (1 / delta >= 30) {
+				initAnimProgressRef.current = Math.min(initAnimProgressRef.current + delta * 0.5, 1);
+				const eased = easeOutCubic(initAnimProgressRef.current);
+				sceneGroupRef.current?.scale.setScalar(eased);
+				if (sceneGroupRef.current) {
+					sceneGroupRef.current.rotation.y = (1 - eased) * Math.PI * 2;
+				}
+				if (initAnimProgressRef.current >= 1) {
+					sceneState.introAnimDone = true;
+				}
 			}
-			if (initAnimProgressRef.current >= 1) {
-				sceneState.introAnimDone = true;
-			}
+			// Keep requesting frames
+			invalidate();
 		}
 	});
 

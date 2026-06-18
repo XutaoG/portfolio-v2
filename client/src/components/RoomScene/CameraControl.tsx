@@ -5,7 +5,7 @@ import { Fragment } from "react/jsx-runtime";
 import * as THREE from "three";
 import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "../../routes";
 import { degToRad, lerp } from "three/src/math/MathUtils.js";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { CAMERA_INITIAL_POSITION, ORBIT_TARGET } from "../../data/constants";
 import { sceneState } from "../../data/sceneState";
 import { SceneStateContext } from "../../context";
@@ -66,6 +66,7 @@ export const CameraControl = () => {
 	const mouseTargetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 	const enableParallaxRef = useRef(false);
 	const parallaxCameraTargetRef = useRef<THREE.Vector3>(ORBIT_TARGET);
+	const parallaxFinalTargetRef = useRef<THREE.Vector3>(ORBIT_TARGET.clone());
 
 	const orbitControlsRef = useRef<ComponentRef<typeof OrbitControls> | null>(null);
 	const lastViewStateRef = useRef({ width: 0, height: 0, cameraId: -1 });
@@ -74,6 +75,15 @@ export const CameraControl = () => {
 	const topLevelPath = location.pathname.split("/")[1];
 
 	const { isLoading } = useContext(SceneStateContext)!;
+	const invalidate = useThree((state) => state.invalidate);
+
+	useEffect(() => {
+		if (orbitControlsRef.current) {
+			const triggerFrame = () => invalidate();
+			orbitControlsRef.current.addEventListener("change", triggerFrame);
+			return () => orbitControlsRef.current?.removeEventListener("change", triggerFrame);
+		}
+	}, [invalidate]);
 
 	useEffect(() => {
 		pendingCamTransitionRef.current = true;
@@ -96,7 +106,9 @@ export const CameraControl = () => {
 			pendingCamTransitionRef.current = false;
 			camTransitionConfigRef.current = null;
 		}
-	}, [topLevelPath]);
+
+		invalidate();
+	}, [topLevelPath, invalidate]);
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
@@ -104,6 +116,7 @@ export const CameraControl = () => {
 				x: (e.clientX / window.innerWidth) * 2 - 1,
 				y: (e.clientY / window.innerHeight) * 2 - 1,
 			};
+			invalidate();
 		};
 
 		if (!isLoading) {
@@ -112,7 +125,7 @@ export const CameraControl = () => {
 
 			return () => window.removeEventListener("mousemove", handleMouseMove);
 		}
-	}, [isLoading]);
+	}, [invalidate, isLoading]);
 
 	useFrame(({ camera, size }, delta) => {
 		if (!(camera instanceof THREE.PerspectiveCamera)) {
@@ -147,6 +160,9 @@ export const CameraControl = () => {
 
 			pendingCamTransitionRef.current = false;
 			camTransitionConfigRef.current = null;
+
+			// Start camera transition -> invalidate
+			invalidate();
 			return;
 		}
 
@@ -164,7 +180,10 @@ export const CameraControl = () => {
 			camera.lookAt(lerpedLookAt);
 			camera.updateProjectionMatrix();
 
-			if (camTransition.progress >= 1) {
+			// if camera has not finish transitioning -> invalidate
+			if (camTransition.progress < 1) {
+				invalidate();
+			} else {
 				// Enable orbit controls if transitioning to outside the room after transition animation is finished
 				if (orbitControlsRef.current && camTransition.toOrbit) {
 					orbitControlsRef.current.enabled = true;
@@ -190,8 +209,14 @@ export const CameraControl = () => {
 				.addScaledVector(right, mouseTargetRef.current.x * PARALLAX_STRENGTH)
 				.addScaledVector(new THREE.Vector3(0, 1, 0), -mouseTargetRef.current.y * PARALLAX_STRENGTH * 0.4);
 
+			parallaxFinalTargetRef.current.copy(target);
 			parallaxCameraTargetRef.current.lerp(target, Math.min(delta * PARALLAX_LERP_SPEED, 1));
 			camera.lookAt(parallaxCameraTargetRef.current);
+
+			// If camera has not reach parallax final target -> invalidate
+			if (parallaxCameraTargetRef.current.distanceToSquared(parallaxFinalTargetRef.current) > 1e-5) {
+				invalidate();
+			}
 		}
 
 		// Adjust camera configuration based on canvas size

@@ -45,7 +45,7 @@ export const RoomCanvas = () => {
 				<Canvas
 					camera={{ position: CAMERA_INITIAL_POSITION, fov: 30 }}
 					shadows={{ type: THREE.PCFShadowMap }}
-					frameloop={isResizing ? "never" : "always"}
+					frameloop={isResizing ? "never" : "demand"}
 					gl={{
 						toneMapping: THREE.ACESFilmicToneMapping,
 						toneMappingExposure: 1.15,
