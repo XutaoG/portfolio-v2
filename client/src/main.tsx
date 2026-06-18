@@ -4,35 +4,56 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 import { App } from "./App";
-import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage";
-import { SkillsPage } from "./pages/SkillsPage";
-import { ProjectPage } from "./pages/ProjectPage";
-import { ContactPage } from "./pages/ContactPage";
-import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
 import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
-import { NotFoundPage } from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		Component: App,
 		children: [
-			{ index: true, Component: HomePage },
-			{ path: ABOUT_ROUTE, Component: AboutPage },
-			{ path: SKILLS_ROUTE, Component: SkillsPage },
+			{
+				index: true,
+				lazy: { Component: async () => (await import("./pages/HomePage")).HomePage },
+			},
+			{
+				path: ABOUT_ROUTE,
+				lazy: {
+					Component: async () => (await import("./pages/AboutPage")).AboutPage,
+				},
+			},
+			{
+				path: SKILLS_ROUTE,
+				lazy: {
+					Component: async () => (await import("./pages/SkillsPage")).SkillsPage,
+				},
+			},
 			{
 				path: PROJECTS_ROUTE,
-				Component: ProjectPage,
+				lazy: {
+					Component: async () => (await import("./pages/ProjectPage")).ProjectPage,
+				},
 				children: [
 					{
 						path: ":projectId",
-						Component: ProjectInformation,
+						lazy: {
+							Component: async () =>
+								(await import("./components/ProjectsPage/ProjectInformation")).ProjectInformation,
+						},
 					},
 				],
 			},
-			{ path: CONTACT_ROUTE, Component: ContactPage },
-			{ path: "*", Component: NotFoundPage },
+			{
+				path: CONTACT_ROUTE,
+				lazy: {
+					Component: async () => (await import("./pages/ContactPage")).ContactPage,
+				},
+			},
+			{
+				path: "*",
+				lazy: {
+					Component: async () => (await import("./pages/NotFoundPage")).NotFoundPage,
+				},
+			},
 		],
 	},
 ]);
