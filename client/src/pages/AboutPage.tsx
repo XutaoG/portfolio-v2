@@ -78,7 +78,7 @@ export const AboutPage = () => {
 			{/* Basic info */}
 			<div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8">{aboutMePanels}</div>
 
-			<div className="grid grid-cols-1 lg:grid-cols-2 max-h-none lg:max-h-full gap-4 sm:gap-8 h-96 overflow-hidden">
+			<div className="grid grid-cols-1 lg:grid-cols-2 max-h-none lg:max-h-full gap-4 sm:gap-8 h-148 lg:h-96 overflow-hidden">
 				{/* My story */}
 				<TerminalWindowPanel title="My Story" command="whoami" className="max-h-96 lg:max-h-none">
 					<p className="text-content/80">
