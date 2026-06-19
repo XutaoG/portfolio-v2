@@ -6,7 +6,7 @@ export const NotFoundPage = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-full gap-6 text-center">
+		<div className="flex flex-col items-center justify-center min-h-full gap-6 text-center pointer-events-auto">
 			<Helmet>
 				<title>404 Not Found — Xutao Gao</title>
 				<meta

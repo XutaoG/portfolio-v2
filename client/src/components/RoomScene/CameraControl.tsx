@@ -249,7 +249,6 @@ export const CameraControl = () => {
 				minPolarAngle={degToRad(10)}
 				maxPolarAngle={degToRad(80)}
 				target={ORBIT_TARGET}
-				domElement={document.body}
 			/>
 		</Fragment>
 	);

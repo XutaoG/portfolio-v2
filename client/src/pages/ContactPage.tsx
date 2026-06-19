@@ -17,7 +17,7 @@ import { socialLinks } from "../data/socialLinks";
 
 export const ContactPage = () => {
 	return (
-		<div className="flex flex-col gap-6 sm:gap-10 min-h-full items-center">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full items-center pointer-events-auto">
 			<Helmet>
 				<title>Contact — Xutao Gao</title>
 				<meta

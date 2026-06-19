@@ -23,7 +23,7 @@ export const ProjectPage = () => {
 	}, [isAnyProjectSelected, isLg]);
 
 	return (
-		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end pointer-events-auto">
 			<Helmet>
 				<title>Projects — Xutao Gao</title>
 				<meta

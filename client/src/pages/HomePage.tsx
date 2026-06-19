@@ -11,7 +11,7 @@ export const HomePage = () => {
 	const [isTerminalLoadingCompleted, setIsTerminalLoadingCompleted] = useState(false);
 
 	return (
-		<div className="flex flex-col items-start justify-between gap-8 sm:gap-24 min-h-full">
+		<div className="w-fit flex flex-col items-start justify-between gap-8 sm:gap-24 min-h-full pointer-events-auto">
 			<Helmet>
 				<title>Xutao Gao</title>
 				<meta

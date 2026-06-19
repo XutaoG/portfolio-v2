@@ -34,7 +34,7 @@ export const AboutPage = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end">
+		<div className="flex flex-col gap-6 sm:gap-10 min-h-full justify-end pointer-events-auto">
 			<Helmet>
 				<title>About — Xutao Gao</title>
 				<meta

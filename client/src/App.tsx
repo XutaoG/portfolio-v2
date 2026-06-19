@@ -63,7 +63,7 @@ export const App = () => {
 					</motion.div>
 				</AnimatePresence>
 			</PageContainer>
-			<div className="fixed top-0 left-0 h-screen w-screen bg-base -z-10" id="canvas-container">
+			<div className="fixed top-0 left-0 h-screen w-screen bg-base" id="canvas-container">
 				{isKnownRoute && (
 					<Fragment>
 						{RoomCanvas && <RoomCanvas />}

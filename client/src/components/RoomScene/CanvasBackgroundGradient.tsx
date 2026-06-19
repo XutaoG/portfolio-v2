@@ -11,7 +11,8 @@ export const CanvasBackgroundGradient = () => {
 	return (
 		<div
 			className={twMerge(
-				`absolute inset-0 transition-opacity duration-300 opacity-0 ${showBackgroundGradient && "opacity-100"}`,
+				`absolute inset-0 transition-opacity duration-300 opacity-0 pointer-events-none 
+				${showBackgroundGradient && "opacity-100"} `,
 			)}
 		>
 			<div className="relative size-full">
