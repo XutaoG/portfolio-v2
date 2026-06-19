@@ -33,9 +33,9 @@ const SCENE_UP_SHIFT = 0.1;
 const PARALLAX_STRENGTH = 1;
 const PARALLAX_LERP_SPEED = 1;
 
-const REFERENCE_SIZE = 1500;
-const CAMERA_MIN_ZOOM = 0.6;
-const CAMERA_MAX_ZOOM = 1.2;
+const REFERENCE_SIZE = 1000;
+const CAMERA_MIN_ZOOM = 0.7;
+const CAMERA_MAX_ZOOM = 1.25;
 
 const easeInOutCubic = (t: number): number => {
 	return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
