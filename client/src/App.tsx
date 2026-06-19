@@ -38,6 +38,10 @@ export const App = () => {
 	const isKnownRoute = knownRoutes.has(topLevelPath);
 	const [navState, setNavState] = useState({ prevPath: topLevelPath, direction: 1 });
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [topLevelPath]);
+
 	if (navState.prevPath !== topLevelPath) {
 		const prevIndex = navOrder.indexOf(navState.prevPath);
 		const currIndex = navOrder.indexOf(topLevelPath);
