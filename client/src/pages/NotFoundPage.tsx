@@ -8,7 +8,7 @@ export const NotFoundPage = () => {
 	return (
 		<div className="flex flex-col items-center justify-center min-h-full gap-6 text-center pointer-events-auto">
 			<Helmet>
-				<title>404 Not Found — Xutao Gao</title>
+				<title>404 — Xutao Gao</title>
 				<meta
 					name="description"
 					content="The page you're looking for doesn't exist or has been moved. Return to Home page."

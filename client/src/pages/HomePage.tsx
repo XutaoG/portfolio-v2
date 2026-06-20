@@ -13,7 +13,7 @@ export const HomePage = () => {
 	return (
 		<div className="w-fit flex flex-col items-start justify-between gap-8 sm:gap-24 min-h-full pointer-events-auto">
 			<Helmet>
-				<title>Xutao Gao</title>
+				<title>Home - Xutao Gao</title>
 				<meta
 					name="description"
 					content="Xutao Gao — Software Engineer, Builder, Problem Solver. Explore a portfolio of full-stack, cloud, and interactive 3D web projects."
