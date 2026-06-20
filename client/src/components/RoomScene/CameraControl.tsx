@@ -29,7 +29,7 @@ const CAM_ROUTE_CONFIG: { [key: string]: { position: THREE.Vector3; lookAt: THRE
 	},
 };
 const SCENE_RIGHT_SHIFT = 0.2;
-const SCENE_UP_SHIFT = 0.1;
+const SCENE_UP_SHIFT = 0.15;
 const PARALLAX_STRENGTH = 1;
 const PARALLAX_LERP_SPEED = 1;
 

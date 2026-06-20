@@ -3,10 +3,14 @@ import { SceneStateContext } from "../../context";
 import { useLocation } from "react-router";
 import { useProgress } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
+import { HOME_ROUTE } from "../../routes";
+import { ArrowsOutCardinalIcon } from "@phosphor-icons/react";
+import { useMinWidth } from "../../hooks/useMinWidth";
 
 export const SceneBackgroundGradient = () => {
 	const location = useLocation();
 	const topLevelPath = location.pathname.split("/")[1];
+	const isMd = useMinWidth("md");
 
 	const { progress } = useProgress();
 	const sceneStateContext = useContext(SceneStateContext)!;
@@ -22,7 +26,7 @@ export const SceneBackgroundGradient = () => {
 				/>
 			)}
 			<AnimatePresence>
-				{sceneStateContext.isLoading && topLevelPath === "" && (
+				{sceneStateContext.isLoading && topLevelPath === HOME_ROUTE && (
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
@@ -34,6 +38,21 @@ export const SceneBackgroundGradient = () => {
 						<div className="border-2 border-primary rounded-sm h-10 w-64 flex p-2 overflow-hidden">
 							<div className="loading-bar-pattern h-full" style={{ width: `${Math.round(progress)}%` }} />
 						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+			<AnimatePresence>
+				{!sceneStateContext.isLoading && topLevelPath === HOME_ROUTE && isMd && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.3, ease: "easeOut" }}
+						className="absolute top-4/5 left-3/5 -translate-1/2 z-10 text-lg py-0.5 px-1 rounded-sm 
+						bg-base/5 backdrop-blur-sm flex gap-2 items-center pointer-events-none"
+					>
+						<ArrowsOutCardinalIcon size={24} weight="bold" />
+						Drag to explore
 					</motion.div>
 				)}
 			</AnimatePresence>
