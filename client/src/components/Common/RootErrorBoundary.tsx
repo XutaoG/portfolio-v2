@@ -1,8 +1,15 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useRouteError } from "react-router";
+import * as Sentry from "@sentry/react";
+import { useEffect } from "react";
 import { Button } from "./Button";
 
 export const RootErrorBoundary = () => {
 	const navigate = useNavigate();
+	const error = useRouteError();
+
+	useEffect(() => {
+		Sentry.captureException(error);
+	}, [error]);
 
 	return (
 		<div className="flex flex-col gap-6 sm:gap-10 items-center justify-center bg-base min-h-screen">

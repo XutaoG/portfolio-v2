@@ -13,6 +13,12 @@ import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation
 import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { RootErrorBoundary } from "./components/Common/RootErrorBoundary";
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+	dsn: import.meta.env.VITE_SENTRY_DSN,
+	tracesSampleRate: 0,
+});
 
 const router = createBrowserRouter([
 	{
