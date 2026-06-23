@@ -12,11 +12,13 @@ import { ContactPage } from "./pages/ContactPage";
 import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
 import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { RootErrorBoundary } from "./components/Common/RootErrorBoundary";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		Component: App,
+		ErrorBoundary: RootErrorBoundary,
 		children: [
 			{ index: true, Component: HomePage },
 			{ path: ABOUT_ROUTE, Component: AboutPage },
