@@ -12,8 +12,8 @@ import { ContactPage } from "./pages/ContactPage";
 import { ProjectInformation } from "./components/ProjectsPage/ProjectInformation";
 import { ABOUT_ROUTE, CONTACT_ROUTE, PROJECTS_ROUTE, SKILLS_ROUTE } from "./routes";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { RootErrorBoundary } from "./components/Common/RootErrorBoundary";
 import * as Sentry from "@sentry/react";
+import { RootErrorBoundaryPage } from "./pages/RootErrorBoundaryPage";
 
 Sentry.init({
 	dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		Component: App,
-		ErrorBoundary: RootErrorBoundary,
+		ErrorBoundary: RootErrorBoundaryPage,
 		children: [
 			{ index: true, Component: HomePage },
 			{ path: ABOUT_ROUTE, Component: AboutPage },
