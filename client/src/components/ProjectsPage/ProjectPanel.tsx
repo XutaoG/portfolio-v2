@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { PROJECTS_ROUTE } from "../../routes";
 import { useMinWidth } from "../../hooks/useMinWidth";
 import { ProjectTypeIcon } from "./ProjectTypeIcon";
+import { ImageIcon } from "@phosphor-icons/react";
 
 interface ProjectPanelProps {
 	project: TProject;
@@ -94,9 +95,10 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 					className="rounded-lg shrink-0 aspect-video object-fill"
 				/>
 				<p
-					className="absolute right-2 bottom-2 size-6 border border-content/20 
-					rounded-md bg-base/40 content-center text-center font-medium"
+					className="absolute right-2 bottom-2 py-0.5 px-1 border border-content/20 
+					rounded-md bg-base/40 content-center text-center font-medium flex gap-1 items-center"
 				>
+					<ImageIcon size={20} weight="fill" />
 					{project.imageLinks.count}
 				</p>
 			</div>
@@ -110,7 +112,9 @@ export const ProjectPanel = ({ useCard, project }: ProjectPanelProps) => {
 
 			<div className="flex justify-between items-center gap-12">
 				{/* Tech stacks */}
-				<p className="truncate min-w-0 text-content/80 text-sm">{project.techStacks.listInfo?.join(", ")}</p>
+				<p className="truncate min-w-0 text-content/80 text-sm">
+					<span className="font-medium">&gt;_</span> {project.techStacks.listInfo?.join(", ")}
+				</p>
 				{/* Project setting */}
 				<div className="text-nowrap self-end border border-content/20 px-2 py-1 text-sm rounded-lg bg-neutral">
 					{project.setting}
