@@ -48,11 +48,14 @@ export const NavBar = () => {
 				transition={{ duration: 0.3, ease: "easeOut" }}
 			>
 				<div className="flex justify-between items-center pb-2 border-b border-content/20">
-					<p className="font-semibold h-8">
-						://
-						<TypeAnimation className="text-primary" sequence={["xutaogao.com"]} speed={30} />
-						<span className="ml-6 text-primary">&gt;_</span>
-					</p>
+					<div className="flex gap-4 items-center h-8">
+						<img src="logo-transparent-bg-white.svg" alt="Site Logo" className="w-7" />
+						<p className="font-semibold">
+							://
+							<TypeAnimation className="text-primary" sequence={["xutaogao.com"]} speed={30} />
+							<span className="ml-6 text-primary">&gt;_</span>
+						</p>
+					</div>
 					<div className="gap-8 hidden md:flex">
 						<NavButton to={`/${HOME_ROUTE}`} text="HOME" />
 						<NavButton to={`/${ABOUT_ROUTE}`} text="ABOUT" />
