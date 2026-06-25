@@ -52,7 +52,7 @@ export const RoomCanvas = () => {
 						outputColorSpace: THREE.SRGBColorSpace,
 					}}
 				>
-					<Environment preset="studio" environmentIntensity={0.12} />
+					<Environment files="studio-env.hdr" environmentIntensity={0.12} />
 					<CameraControl />
 					<RoomScene />
 					<Preload all />
