@@ -144,7 +144,7 @@ export const SkillsPage = () => {
 				<TerminalWindowPanel title="In Progress" command="inprogress" className="grow">
 					<div className="flex flex-col justify-between items-center gap-6">
 						<div className="h-24 flex items-center">
-							<img alt="certification logo" src="logos/aws-logo.svg" className="h-24" />
+							<img alt="certification logo" src="/logos/aws-logo.svg" className="h-24" />
 						</div>
 						<p className="grow font-medium text-center max-w-60 text-content/80">
 							AWS Certified DevOps Engineer Professional

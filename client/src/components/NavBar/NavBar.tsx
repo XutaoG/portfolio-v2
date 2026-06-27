@@ -49,7 +49,7 @@ export const NavBar = () => {
 			>
 				<div className="flex justify-between items-center pb-2 border-b border-content/20">
 					<div className="flex gap-4 items-center h-8">
-						<img src="logo-transparent-bg-white.svg" alt="Site Logo" className="w-7" />
+						<img src="/logo-transparent-bg-white.svg" alt="Site Logo" className="w-7" />
 						<p className="font-semibold">
 							://
 							<TypeAnimation className="text-primary" sequence={["xutaogao.com"]} speed={30} />
