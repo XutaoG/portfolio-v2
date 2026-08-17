@@ -6,8 +6,9 @@ import { PrimaryPanel } from "../components/Common/PrimaryPanel";
 import { TerminalWindowPanel } from "../components/Common/TerminalWindowPanel";
 import { SKILLS_ROUTE } from "../routes";
 import { PageTransitionLink } from "../components/Common/PageTransitionLink";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { basicInfoData } from "../data/aboutMe";
+import { MultiPagePanel } from "../components/Common/MultiPagePanel";
 
 export const AboutPage = () => {
 	const aboutMePanels = useMemo(() => {
@@ -17,18 +18,26 @@ export const AboutPage = () => {
 					<div className="hidden sm:block">{aboutMe.icon}</div>
 					{aboutMe.title}
 				</div>
-				<div className="grow flex flex-col gap-3">
-					<p className="font-medium">{aboutMe.heading}</p>
-					<p className="text-content/70">{aboutMe.subHeading}</p>
-				</div>
-				{aboutMe.ending && (
-					<p
-						className={`hidden sm:block font-semibold text-sm 
-						${aboutMe.type === "work-status" ? "text-success" : "text-primary"}`}
-					>
-						{aboutMe.ending}
-					</p>
-				)}
+				<MultiPagePanel className="grow min-h-24 xs:min-h-32" infoStyles="flex flex-col gap-4 xs:gap-6">
+					{aboutMe.info.map((info) => {
+						return (
+							<Fragment>
+								<div className="grow flex flex-col gap-3">
+									<p className="font-medium">{info.heading}</p>
+									<p className="text-content/70">{info.subHeading}</p>
+								</div>
+								{info.ending && (
+									<p
+										className={`hidden sm:block font-semibold text-sm 
+										${aboutMe.type === "work-status" ? "text-success" : "text-primary"}`}
+									>
+										{info.ending}
+									</p>
+								)}
+							</Fragment>
+						);
+					})}
+				</MultiPagePanel>
 			</PrimaryPanel>
 		));
 	}, []);

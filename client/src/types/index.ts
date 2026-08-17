@@ -40,9 +40,11 @@ export type TBasicInfo = {
 	type: "education" | "work-status" | "work-history" | "location";
 	icon: ReactNode;
 	title: string;
-	heading: string;
-	subHeading: string;
-	ending?: string;
+	info: {
+		heading: string;
+		subHeading: string;
+		ending?: string;
+	}[];
 };
 
 export type TSkill = {
